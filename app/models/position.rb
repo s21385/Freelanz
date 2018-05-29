@@ -1,6 +1,6 @@
 class Position < ApplicationRecord
   belongs_to :project
-  has_many :user_positions
+  has_many :user_positions, dependent: :destroy
   validates :name, presence: :true
   validates :rate_cents, presence: :true, numericality: { only_integer: true }
   validates :status, presence: :true
