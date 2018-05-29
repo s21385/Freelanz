@@ -1,0 +1,5 @@
+<h3>Group name:<%= " " %><%= @group.name %></h3>
+<p>Description:<%= " " %><%= @group.description %></p>
+<p>Total members:<%= " " %><%= @group.group_memberships.count %></p>
+
+<%= link_to 'Back to groups list', groups_path %>
