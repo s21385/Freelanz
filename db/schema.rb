@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_202045) do
+ActiveRecord::Schema.define(version: 2018_05_29_205933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_202045) do
     t.string "short_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["discussionable_type", "discussionable_id"], name: "index_discussions_on_discussionable_type_and_discussionable_id"
   end
 
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_202045) do
     t.bigint "discussion_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["discussion_id"], name: "index_messages_on_discussion_id"
   end
 
