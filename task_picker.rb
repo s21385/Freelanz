@@ -3,4 +3,4 @@ def task_picker
   team.sample
 end
 
-
+p "And the winner is #{task_picker}"
