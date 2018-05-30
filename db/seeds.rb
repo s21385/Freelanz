@@ -69,6 +69,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       status = ["Pending", "Accepted", "Rejected"]
       first_skill = pro_langs.sample
+
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
       position = Position.create!(
@@ -116,3 +117,6 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
   end
 end
   puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
+
+end
+

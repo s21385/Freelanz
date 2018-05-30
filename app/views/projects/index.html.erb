@@ -1,7 +1,7 @@
 <% if @user %>
 
   <% @projects.each do |project| %>
-    <%= link_to project.name, user_project_path(@user, project) %>
+    <%= link_to project.name, project_path(project) %>
     <%= project.short_description %>
     <%= project.description %>
     <%= project.deadline %>
@@ -20,7 +20,7 @@
 
 <% end %>
 
- <h4><%= link_to "Back to your projects list", user_projects_path(@user) %></h4>
+ <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
 
 <h4><%= link_to "Back to complete projects List", projects_path %></h4>
 

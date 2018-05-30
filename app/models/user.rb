@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :discussions
   has_many :messages
   has_many :ratings
+  has_many :positions, through: :user_positions
+
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true
