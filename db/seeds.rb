@@ -118,5 +118,3 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 end
   puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
 
-end
-
