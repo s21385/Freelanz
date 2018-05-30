@@ -13,11 +13,11 @@ before_action :set_project, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-    @user = User.find(params[:user_id])
+    @project = Project.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @project = Project.find(params[:id])
   end
 
   def create
@@ -40,7 +40,7 @@ before_action :set_project, only: [:show, :edit, :update, :destroy]
   end
 
   def destroy
-    @user = User.find(params[:user_id])
+    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
   end
