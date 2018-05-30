@@ -1,0 +1,20 @@
+<% if @user != nil %>
+
+  <%= simple_form_for [@user, @group] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  <h4><%= link_to "Back to group List", user_groups_path(@user) %></h4>
+
+<% else %>
+
+  <%= simple_form_for(@group) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% raise %>
+    <% end %>
+  <h4><%= link_to "Back to group List", groups_path %></h4>
+
+<% end %>

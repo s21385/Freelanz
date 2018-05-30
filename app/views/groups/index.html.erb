@@ -1,6 +1,17 @@
-<% @groups.each do |group| %>
-  <%= link_to group.name, user_group_path(@user, group) %>
-  <%= group.description %>
+<% if @user %>
+
+  <% @groups.each do |group| %>
+        <%= link_to group.name, user_group_path(@user, group) %>
+    <%= group.description %>
+  <% end %>
+  <%= link_to 'Create a new group', new_user_group_path(@user) %>
+
+<% else %>
+  <% @groups.each do |group| %>
+        <%= link_to group.name, new_user_session_path %>
+    <%= group.description %>
+  <% end %>
+
 <% end %>
 
 <%= link_to 'List of projects', projects_path %>
