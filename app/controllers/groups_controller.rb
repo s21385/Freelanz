@@ -34,7 +34,6 @@ before_action :set_group, only: [:show, :edit, :update, :destroy]
     @user = User.find(params[:user_id])
     @group = Group.find(params[:id])
     @group.update(group_params)
-    raise
     redirect_to user_group_path(@user, @group)
   end
 

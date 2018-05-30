@@ -6,6 +6,7 @@
   <% end %>
   <%= link_to 'Create a new group', new_user_group_path(@user) %>
 
+
 <% else %>
   <% @groups.each do |group| %>
         <%= link_to group.name, new_user_session_path %>
@@ -15,3 +16,7 @@
 <% end %>
 
 <%= link_to 'List of projects', projects_path %>
+
+<h4><%= link_to "Home", root_path %></h4>
+
+

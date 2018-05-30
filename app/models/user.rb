@@ -10,13 +10,13 @@ class User < ApplicationRecord
   has_many :projects
   has_many :discussions
   has_many :messages
-
+  has_many :ratings
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true
   validates :email, presence: :true, uniqueness: :true
-  validates :linkedin_account, uniqueness: :true
-  validates :facebook_account, uniqueness: :true
-  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Programmer"] }
+  validates :linkedin_account, uniqueness: :true, allow_nil: :true
+  validates :facebook_account, uniqueness: :true, allow_nil: :true
+  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
 
 end

@@ -1,7 +1,27 @@
-<% @projects.each do |project| %>
-  <%= link_to project.name, project_path(project) %>
-  <%= project.short_description %>
-  <%= project.description %>
-  <%= project.deadline %>
-  <%= project.start_date %>
+<% if @user %>
+
+  <% @projects.each do |project| %>
+    <%= link_to project.name, user_project_path(@user, project) %>
+    <%= project.short_description %>
+    <%= project.description %>
+    <%= project.deadline %>
+    <%= project.start_date %>
+  <% end %>
+
+<% else %>
+
+  <% @projects.each do |project| %>
+    <%= link_to project.name, project_path(project) %>
+    <%= project.short_description %>
+    <%= project.description %>
+    <%= project.deadline %>
+    <%= project.start_date %>
+  <% end %>
+
 <% end %>
+
+ <h4><%= link_to "Back to your projects list", user_projects_path(@user) %></h4>
+
+<h4><%= link_to "Back to complete projects List", projects_path %></h4>
+
+<h4><%= link_to "Home", root_path %></h4>

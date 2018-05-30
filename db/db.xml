@@ -37,7 +37,7 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="388" y="309" name="users">
+</datatypes><table x="628" y="349" name="users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -68,12 +68,6 @@
 <row name="facebook_account" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="leader_rating" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="collaborator_rating" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <row name="github_account" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
@@ -84,10 +78,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="1122" y="108" name="discussions">
+<table x="1310" y="153" name="discussions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="discusionable_type" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
@@ -103,7 +101,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="905" y="120" name="groups">
+<table x="1075" y="138" name="groups">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -117,7 +115,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1201" y="387" name="projects">
+<table x="1538" y="387" name="projects">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -144,7 +142,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="668" y="86" name="group_memberships">
+<table x="839" y="176" name="group_memberships">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -166,7 +164,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="894" y="482" name="positions">
+<table x="1256" y="425" name="positions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -199,7 +197,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1362" y="111" name="messages">
+<table x="1597" y="227" name="messages">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -210,11 +208,15 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="discussions" row="id" />
 </row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="645" y="494" name="user_positions">
+<table x="961" y="452" name="user_positions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -233,6 +235,28 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><comment>Expended daily compensation.</comment>
 </row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="372.45452880859375" y="448.36363220214844" name="ratings">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="rater" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="ratee" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="ratee_type" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="rating" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
