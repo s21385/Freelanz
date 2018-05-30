@@ -1,10 +1,13 @@
 <h3>Group name:<%= " " %><%= @group.name %></h3>
 <p>Description:<%= " " %><%= @group.description %></p>
 <p>Total members:<%= " " %><%= @group.group_memberships.count %></p>
-
 <%= link_to 'Delete the group', user_group_path(@user), method: :delete,
       data: { confirm: "Are you sure?" } %>
+
+<%= link_to 'Edit the group', edit_user_group_path(@user) %>
 
 <%= link_to 'Create a new group', new_user_group_path(@user) %>
 
 <%= link_to 'Back to groups list', groups_path %>
+
+<h4><%= link_to "Home", root_path %></h4>

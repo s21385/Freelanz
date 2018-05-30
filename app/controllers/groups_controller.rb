@@ -17,6 +17,7 @@ before_action :set_group, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
+    @user = User.find(params[:user_id])
   end
 
   def create

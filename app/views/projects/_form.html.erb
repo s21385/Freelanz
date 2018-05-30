@@ -1,0 +1,12 @@
+  <%= simple_form_for [@user, @project] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :short_description %>
+    <%= f.input :description %>
+    <%= f.input :start_date %>
+    <%= f.input :deadline %>
+
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  <h4><%= link_to "Back to your projects list", user_projects_path(@user) %></h4>
+
+<h4><%= link_to "Back to complete projects List", projects_path %></h4>
