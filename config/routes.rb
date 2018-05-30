@@ -3,19 +3,20 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :projects, only: [:index, :show] do
-    resources :positions, except: [ :index, :show ] do
-      resources :user_positions, only: [ :create ]
-    end
+
+  resources :projects do
+    resources :positions, except: [ :index, :show ]
+    resources :ratings, only: [ :new, :create ]
   end
 
-  resources :user_positions, only: [ :update ]
+  resources :groups
 
-  # resources :groups, only: [:index]
-
-  # resources :users do
-  #   resources :projects
-  #   resources :groups
-  # end
+  resources :projects, only: [:index, :show] do
+    resources :positions, except: [ :index, :show ]      
+  end
+  
+  resources :positions, except: [ :index, :show ] do
+    resources :user_positions, only: [ :update, :create ]
+  end
 
 end
