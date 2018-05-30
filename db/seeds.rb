@@ -67,8 +67,9 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     puts 'creating fake Positions'
     4.times do
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
-      status = ["Pending", "Accepted", "Rejected"],
-      first_skill = pro_langs.sample,
+      status = ["Pending", "Accepted", "Rejected"]
+      first_skill = pro_langs.sample
+
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
       position = Position.create!(
@@ -114,5 +115,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     rate_cents: rate_cents
   )
   end
-  puts SEEDS COMPLETED
 end
+  puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
+
+end
+
