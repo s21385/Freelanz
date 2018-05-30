@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_171254) do
+ActiveRecord::Schema.define(version: 2018_05_30_222328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_05_30_171254) do
     t.bigint "project_id"
     t.string "name"
     t.integer "rate_cents"
-    t.string "status"
+    t.string "status", default: "Pending"
     t.string "first_skill"
     t.string "second_skill"
     t.string "third_skill"
@@ -79,12 +79,12 @@ ActiveRecord::Schema.define(version: 2018_05_30_171254) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "rater"
     t.string "ratee_type"
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.integer "rater_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 

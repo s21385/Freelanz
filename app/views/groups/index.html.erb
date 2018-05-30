@@ -1,15 +1,15 @@
 <% if @user %>
 
   <% @groups.each do |group| %>
-        <%= link_to group.name, user_group_path(@user, group) %>
+        <%= link_to group.name, group_path(group) %>
     <%= group.description %>
   <% end %>
-  <%= link_to 'Create a new group', new_user_group_path(@user) %>
+  <%= link_to 'Create a new group', new_group_path %>
 
 
 <% else %>
   <% @groups.each do |group| %>
-        <%= link_to group.name, new_user_session_path %>
+        <%= link_to group.name, new_session_path %>
     <%= group.description %>
   <% end %>
 

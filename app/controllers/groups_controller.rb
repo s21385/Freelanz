@@ -13,34 +13,34 @@ before_action :set_group, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-    @user = User.find(params[:user_id])
+    @user = current_user
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @user = current_user
   end
 
   def create
     @group = Group.new(group_params)
-    @user = User.find(params[:user_id])
+    @user = current_user
     if @group.save
-      redirect_to user_group_path(@user, @group)
+      redirect_to group_path(@user, @group)
     else
       render :new
     end
   end
 
   def update
-    @user = User.find(params[:user_id])
+    @user = current_user
     @group = Group.find(params[:id])
     @group.update(group_params)
-    redirect_to user_group_path(@user, @group)
+    redirect_to group_path(@user, @group)
   end
 
   def destroy
-      @user = User.find(params[:user_id])
+      @user = current_user
       @group.destroy
-      redirect_to user_groups_path(@user)
+      redirect_to groups_path(@user)
   end
 
   private

@@ -1,9 +1,9 @@
-  <%= simple_form_for [@user, @group] do |f| %>
+  <%= simple_form_for [@group] do |f| %>
     <%= f.input :name %>
     <%= f.input :description %>
 
     <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
-  <h4><%= link_to "Back to group list", user_groups_path(@user) %></h4>
+  <h4><%= link_to "Back to group list", groups_path(@user) %></h4>
 
   <h4><%= link_to "Home", root_path %></h4>

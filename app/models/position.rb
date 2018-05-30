@@ -5,6 +5,6 @@ class Position < ApplicationRecord
   validates :rate_cents, presence: :true, numericality: { only_integer: true }
   validates :status, presence: :true
   validates :first_skill, presence: :true
-  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Programmer"] }
+  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
 
 end
