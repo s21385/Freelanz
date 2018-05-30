@@ -36,7 +36,7 @@ class PositionsController < ApplicationController
   private
 
   def position_params
-    params.require(:position).permit(:name, :skill, :experience, :rate)
+    params.require(:position).permit(:name, :skill, :experience, :rate_cents)
   end
 
   def set_position
