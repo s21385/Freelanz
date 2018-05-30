@@ -5,6 +5,8 @@
 <%= link_to 'Delete the group', user_group_path(@user), method: :delete,
       data: { confirm: "Are you sure?" } %>
 
+<%= link_to 'Edit the group', edit_user_group_path(@user) %>
+
 <%= link_to 'Create a new group', new_user_group_path(@user) %>
 
 <%= link_to 'Back to groups list', groups_path %>
