@@ -1,7 +1,7 @@
 <% if @user %>
 
   <% @projects.each do |project| %>
-    <%= link_to project.name, user_project_path(@user, project) %>
+    <%= link_to project.name, project_path(project) %>
     <%= project.short_description %>
     <%= project.description %>
     <%= project.deadline %>
