@@ -42,7 +42,7 @@ before_action :find_leader_rating_count, only: [:show]
   end
 
   def destroy
-    @user = User.find(params[:user_id])
+    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
   end
