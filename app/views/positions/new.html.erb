@@ -4,9 +4,8 @@
   <%= f.input :first_skill %>
   <%= f.input :second_skill %>
   <%= f.input :third_skill %>
-  <%= f.input :status %>
-  <%= f.input :skill_level %>
-  <%= f.input :rate_cents %>
+  <%= f.input :status, collection: ["Open", "Filled"] %>
+  <%= f.input :skill_level, collection: ["Junior programmer", "Senior programmer", "Intermediate programmer"] %>
 
    <%= f.submit "Create Position", class: "btn btn-danger" %>
    <% end %>

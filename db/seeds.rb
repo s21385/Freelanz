@@ -27,7 +27,6 @@ url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages
   element["item"]["name"]
   end
 
-
 puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
@@ -41,7 +40,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     last_name: Faker::Name.last_name,
     photo: Faker::Placeholdit.image("50x50", 'gif', 'ffffff'),
     skill_level: skills.sample,
-    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
+    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address
+      .city},#{Faker::Address.postcode}"
   )
   puts "Created user: " + user.first_name + " " + user.last_name
 
@@ -65,9 +65,9 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
     # POSITIONS
     puts 'creating fake Positions'
-    4.times do
+    10.times do
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
-      status = ["Pending", "Accepted", "Rejected"]
+      status = ["Filled", "Open"]
       first_skill = pro_langs.sample
 
       # HAVE TO ADD $
@@ -104,8 +104,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # USER_POSITION
-  3.times do
-  status = ["Approved", "Denied", "Pending"]
+  10.times do
+  status = ["Open", "Closed", "Pending"]
   puts "Creating Fake User Positions"
   rate_cents = rand(5...40) * 500/100
   user_position = UserPosition.create!(

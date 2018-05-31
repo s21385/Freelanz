@@ -14,15 +14,14 @@ class PositionsController < ApplicationController
     @position = Position.new(position_params)
     @position.project = @project
     @position.save!
-
-    redirect_to project_position_path(@project, @position)
+    redirect_to project_path(@project)
   end
 
   def update
     @position = Position.find(params[:id])
     @position.update(position_params)
 
-    redirect_to position_path(@position)
+    redirect_to project_path(@project)
   end
 
   def destroy
