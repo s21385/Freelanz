@@ -1,3 +1,5 @@
+<h1>All Projects</h1>
+
 <% if @user %>
 
   <% @projects.each do |project| %>
@@ -25,4 +27,4 @@
 
 <h4><%= link_to "Create New Project", new_project_path %></h4>
 
-<h4><%= link_to "Home", root_path %></h4>
+<h4><%= link_to "Home", projects_path %></h4>
