@@ -7,6 +7,8 @@
     <%= project.deadline %>
     <%= project.start_date %>
   <% end %>
+ <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
+<h4><%= link_to "Back to complete projects List", projects_path %></h4>
 
 <% else %>
 
@@ -18,14 +20,9 @@
     <%= project.start_date %>
   <% end %>
 
+<h4><%= link_to "Back to complete projects List", projects_path %></h4>
 <% end %>
 
- <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
-
-<h4><%= link_to "Back to complete projects list", projects_path %></h4>
-
 <h4><%= link_to "Create New Project", new_project_path %></h4>
-
-<!-- <h4><%=# link_to "Edit Project", edit_project_path %></h4> -->
 
 <h4><%= link_to "Home", root_path %></h4>

@@ -1,5 +1,6 @@
 <h3>Name:<%= " " %><%= @project.name %></h3>
-<p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %><%= @project.user.last_name %></p>
+<p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
+  <%= @project.user.last_name %></p>
 <p>Project Leader Rating:<%= " " %><%= @leader_rating_count %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
 <p>Start date:<%= " " %><%= @project.start_date %></p>
@@ -12,12 +13,12 @@
 <% end %>
 
 
-<%= link_to 'Delete the project', project_path(@user), method: :delete,
+<%= link_to 'Delete the project', project_path, method: :delete,
       data: { confirm: "Are you sure?" } %>
 
-<%= link_to 'Edit the project', edit_project_path(@user) %>
+<%= link_to 'Edit the project', edit_project_path(@project) %>
 
-<%= link_to 'Create a new group', new_project_path(@user) %>
+<%= link_to 'Create a new project', new_project_path(@project) %>
 
  <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
 

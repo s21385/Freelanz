@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :messages
   has_many :ratings
   has_many :positions, through: :user_positions
+  has_many :projects
 
 
   validates :first_name, presence: :true
