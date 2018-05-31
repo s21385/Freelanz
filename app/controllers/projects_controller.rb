@@ -28,9 +28,16 @@ before_action :set_user
   end
 
   def create
+    # Issue is that we can only ever create one position
+    # form is not dynamic
     @project = Project.new(project_params)
     @project.user = @user
     if @project.save
+      @position = Position.new(position_params)
+      @position.project = @project
+      @position.status = "Open"
+      @position.save!
+
       redirect_to project_path(@project)
     else
       render :new
@@ -54,6 +61,10 @@ before_action :set_user
   def project_params
     params.require(:project).permit(:name, :short_description,
       :description, :deadline, :start_date)
+  end
+
+  def position_params
+    params.require(:position).permit(:name, :first_skill, :second_skill, :third_skill, :skill_level, :rate_cents)
   end
 
   def set_user

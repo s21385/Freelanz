@@ -6,7 +6,7 @@
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
 <p>Details:<%= " " %><%= @project.description %></p>
 
-<% @projects.position.each do |position| %>
+<% @project.positions.each do |position| %>
   <%= position.name %>
   <%= position.status %>
   <%= position.skill_level %>
@@ -28,4 +28,4 @@
 
 <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 
-<h4><%= link_to "Home", root_path %></h4>
+<h4><%= link_to "Home", projects_path %></h4>
