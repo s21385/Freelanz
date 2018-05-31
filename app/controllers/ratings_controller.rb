@@ -28,7 +28,8 @@ before_action :set_user
   end
 
   def set_rater_id
-    @rater_id = current_user.id
+    @user = current_user
+    @rater_id = @user.id
   end
 
   def set_ratee_type
