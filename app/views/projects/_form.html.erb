@@ -5,6 +5,15 @@
     <%= f.input :start_date %>
     <%= f.input :deadline %>
 
+    <%= text_field :position, :name %>
+    <%= text_field :position, :first_skill %>
+    <%= text_field :position, :second_skill %>
+    <%= text_field :position, :third_skill %>
+    <%= text_field :position, :skill_level %>
+    <%= text_field :position, :rate_cents %>
+    <br>
+    <br>
+
     <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
