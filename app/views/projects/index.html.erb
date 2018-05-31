@@ -1,36 +1,25 @@
-<h1>All Projects</h1>
 
-<% if @user %>
 
-  <% @projects.each do |project| %>
-    <%= link_to project.name, project_path(project) %>
-    <%= project.short_description %>
-    <%= project.description %>
-    <%= project.deadline %>
-    <%= project.start_date %>
-<<<<<<< Updated upstream
-    <%= project.positions %>
-=======
-    <br>
->>>>>>> Stashed changes
-    <br>
-  <% end %>
- <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
-<h4><%= link_to "Back to complete projects List", projects_path %></h4>
+<% @projects.each do |project| %>
+  <%= link_to project.name, project_path(project) %>
+  <%= project.short_description %>
+  <%= project.description %>
+  <%= project.deadline %>
+  <%= project.start_date %>
+
+  <%= project.positions %>
+
+<% end %>
+
+<% if !user_signed_in? || params[:all] %>
+
+  <h4><%= link_to "See your projects List", projects_path %></h4>
 
 <% else %>
+  <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 
-  <% @projects.each do |project| %>
-    <%= link_to project.name, project_path(project) %>
-    <%= project.short_description %>
-    <%= project.description %>
-    <%= project.deadline %>
-    <%= project.start_date %>
-  <% end %>
-
-<h4><%= link_to "Back to complete projects List", projects_path %></h4>
 <% end %>
 
 <h4><%= link_to "Create New Project", new_project_path %></h4>
 
-<h4><%= link_to "Home", projects_path %></h4>
+<h4><%= link_to "Home", root_path %></h4>

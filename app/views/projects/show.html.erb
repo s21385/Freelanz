@@ -1,16 +1,20 @@
 <h3>Name:<%= " " %><%= @project.name %></h3>
 <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
   <%= @project.user.last_name %></p>
-<p>Project Leader Rating:<%= " " %><%= @leader_rating_count %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
 <p>Start date:<%= " " %><%= @project.start_date %></p>
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
 <p>Details:<%= " " %><%= @project.description %></p>
 
-<%= simple_form_for [@project, @rating] do |f| %>
-  <%= f.input :rating, collection: 1..5 %>
-  <%= f.submit "Rate the Project Leader", class: "btn btn-primary" %>
+<% @projects.position.each do |position| %>
+  <%= position.name %>
+  <%= position.status %>
+  <%= position.skill_level %>
+  <%= position.first_skill %>
+  <%= position.second_skill %>
+  <%= position.third_skill %>
 <% end %>
+
 
 
 <%= link_to 'Delete the project', project_path, method: :delete,
@@ -18,10 +22,10 @@
 
 <%= link_to 'Edit the project', edit_project_path(@project) %>
 
-<%= link_to 'Create a new project', new_project_path(@project) %>
+<%= link_to 'Create a new project', new_project_path %>
 
- <h4><%= link_to "Back to your projects list", projects_path(@user) %></h4>
+ <h4><%= link_to "See your projects list", projects_path %></h4>
 
-<h4><%= link_to "Back to complete projects List", projects_path %></h4>
+<h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 
 <h4><%= link_to "Home", projects_path %></h4>

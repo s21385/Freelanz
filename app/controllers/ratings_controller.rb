@@ -8,15 +8,14 @@ before_action :set_user
   def create
     @rating = Rating.new(rating_params)
     set_leader_rating
-    raise
     @rating.save
-    redirect_to '/'
+    redirect_to project_path(@project)
   end
 
   private
 
   def rating_params
-    params.require(:rating).permit(:rater, :ratee_type, :rating)
+    params.require(:rating).permit(:rater_id, :ratee_type, :rating)
   end
 
   def set_user
@@ -29,7 +28,7 @@ before_action :set_user
 
   def set_rater_id
     @user = current_user
-    @rater_id = @user.id
+    @rater_id = @user
   end
 
   def set_ratee_type
