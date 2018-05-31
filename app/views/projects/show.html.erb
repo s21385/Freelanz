@@ -6,7 +6,7 @@
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
 <p>Details:<%= " " %><%= @project.description %></p>
 
-<% @projects.position.each do |position| %>
+<% @project.positions.each do |position| %>
   <%= position.name %>
   <%= position.status %>
   <%= position.skill_level %>
