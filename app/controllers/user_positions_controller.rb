@@ -5,12 +5,10 @@ class UserPositionsController < ApplicationController
     # When a user applies for a position
     # @user_position = UserPosition.all
     @position = Position.find(params[:position_id])
-    @user_position = UserPosition.new(user_position_params)
+    @user_position = UserPosition.new
     @user_position.user = current_user
     @user_position.position = @position
-    @user_positions.save
-
-    # redirect_to
+    @user_position.save
   end
 
   def update
@@ -25,7 +23,7 @@ class UserPositionsController < ApplicationController
   private
 
   def user_position_params
-    params.require(:user_position).permit(:status, :rate_cents)
+    params.require(:user_position).permit(:status, :rate_cent)
   end
 
   def set_user_position
