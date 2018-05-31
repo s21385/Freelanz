@@ -8,10 +8,8 @@ Rails.application.routes.draw do
     resources :ratings, only: [ :new, :create ]
   end
 
-  resources :groups
-
-  resources :projects, only: [:index, :show] do
-    resources :positions, except: [ :index, :show ]
+  resources :groups do
+    resources :discussions
   end
 
   resources :positions, except: [ :index, :show ] do
