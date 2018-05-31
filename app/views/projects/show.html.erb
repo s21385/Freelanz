@@ -1,5 +1,6 @@
 <h3>Name:<%= " " %><%= @project.name %></h3>
-<p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %><%= @project.user.last_name %></p>
+<p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
+  <%= @project.user.last_name %></p>
 <p>Project Leader Rating:<%= " " %><%= @leader_rating_count %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
 <p>Start date:<%= " " %><%= @project.start_date %></p>

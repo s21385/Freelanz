@@ -1,48 +1,42 @@
 class ProjectsController < ApplicationController
-# skip_before_action :authenticate_user!, only: [:index, :show]
+skip_before_action :authenticate_user!, only: [:index, :show]
 before_action :set_project, only: [:show, :edit, :update, :destroy]
+before_action :set_user
 before_action :find_leader_rating_count, only: [:show]
 
   def index
-    @user = current_user
     @projects = Project.all
   end
 
   def new
-    @user = current_user
     @project = Project.new
   end
 
   def show
     @rating = Rating.new
-    @user = current_user
   end
 
   def edit
-    @user = current_user
   end
 
   def create
     @project = Project.new(project_params)
-    @user = current_user
     @project.user = @user
     if @project.save
-      redirect_to project_path(@user, @project)
+      redirect_to project_path(@project)
     else
       render :new
     end
   end
 
   def update
-    @user = current_user
     @project.user = @user
     @project = Project.find(params[:id])
     @project.update(project_params)
-    redirect_to project_path(@user, @project)
+    redirect_to project_path(@project)
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     @project.destroy
     redirect_to projects_path
   end
@@ -50,7 +44,8 @@ before_action :find_leader_rating_count, only: [:show]
   private
 
   def project_params
-    params.require(:project).permit(:name, :short_description, :description, :deadline, :start_date)
+    params.require(:project).permit(:name, :short_description,
+      :description, :deadline, :start_date)
   end
 
   def set_user
@@ -79,7 +74,8 @@ before_action :find_leader_rating_count, only: [:show]
     set_user
     set_rater
     set_project
-    @leader_rating_count = Rating.where(user_id: "%#{@project.user_id}%" && "%#{@ratee_type}%" == "Project Leader").count
+    @leader_rating_count = Rating.where(user_id: "%#{@project.user_id}%" &&
+      "%#{@ratee_type}%" == "Project Leader").count
     if @leader_rating_count == nil
       @leader_rating_count = 0
     end
