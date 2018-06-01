@@ -1,8 +1,58 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1>Pages#home</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
+  <br>
+  <h2>My Projects</h2>
+    <div class="row">
+      <% @projects.each do |t| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card">
+            <h3><%= t.name %></h3>
+            <p><%= t.description %></p>
+            <% t.positions.each do |pos| %>
+              <p><%= pos.name %></p>
+            <% end %>
+            <h4><%= t.status %></h4>
 
-<%= link_to 'See the groups list', groups_path %>
-<%= link_to 'See the projects list', projects_path %>
+            <%= link_to "Details", project_path(t) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
 
 
+
+  <br>
+  <h2>Requests To My Projects</h2>
+
+      <% @projects.each do |t| %>
+      <div class="card">
+        <%= t.name %>
+        <%= t.description %>
+        <%= t.positions %>
+        <%= t.status %>
+
+        <%= link_to projects_path %>
+      </div>
+      <% end %>
+
+  <br>
+  <h2>My Requests</h2>
+
+      <% @projects.each do |t| %>
+      <div class="card">
+        <%= t.name %>
+        <%= t.description %>
+        <%= t.positions %>
+        <%= t.status %>
+
+        <%= link_to projects_path %>
+        </div>
+      <% end %>
+
+
+  <%= link_to 'See the groups list', groups_path %>
+  <%= link_to 'See the projects list', projects_path %>
+
+</div>
