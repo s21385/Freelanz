@@ -1,6 +1,9 @@
 class UserPositionsController < ApplicationController
   before_action :set_user_position
 
+  def show
+  end
+
   def create
     # When a user applies for a position
     # @user_position = UserPosition.all
@@ -11,12 +14,20 @@ class UserPositionsController < ApplicationController
     @user_position.save
   end
 
-  def update
-    # This is for changing the status of the user_position
-    # When a project own accepts or declines
+  def edit
+  end
 
-    # if
-    # end
+  def update
+    @position = Position.find(params[:position_id])
+    @user_position = UserPosition.find(params[:id])
+    if @user_position.status = "Accepted" || "In review"
+      @user_position.status = "Refused"
+    elsif @user_position.status = "Refused"
+      @user_position.status = "In review"
+    end
+    @user_position.status.sort
+    @user_position.update(project_params)
+
   end
 
 

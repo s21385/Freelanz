@@ -1,6 +1,11 @@
 class PositionsController < ApplicationController
   # before_action :set_position, only: [ :create, :destroy ]
 
+  def show
+    @project = Project.find(params[:project_id])
+    @position = Position.find(params[:id])
+  end
+
   def new
     @project = Project.find(params[:project_id])
     @position = Position.new
