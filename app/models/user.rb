@@ -1,3 +1,5 @@
+SKILL_LEVELS = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -13,12 +15,11 @@ class User < ApplicationRecord
   has_many :ratings
   has_many :positions, through: :user_positions
 
-
   validates :first_name, presence: :true
   validates :last_name, presence: :true
   validates :email, presence: :true, uniqueness: :true
-  validates :linkedin_account, uniqueness: :true, allow_nil: :true
-  validates :facebook_account, uniqueness: :true, allow_nil: :true
-  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
+  validates :linkedin_id, uniqueness: :true, allow_nil: :true
+  validates :github_id, uniqueness: :true, allow_nil: :true
 
+  validates :skill_level, allow_nil: :true, inclusion: { in: SKILL_LEVELS }
 end
