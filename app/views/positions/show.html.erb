@@ -1,0 +1,44 @@
+<h1>Project name:<%= " " %><b><%= @project.name %></b></h3>
+<p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
+  <%= @project.user.last_name %></p>
+<p>Description:<%= " " %><%= @project.short_description %></p>
+<p>Start date:<%= " " %><%= @project.start_date %></p>
+<p>Deadline:<%= " " %><%= @project.deadline %></p>
+<p>Details:<%= " " %><%= @project.description %></p>
+
+
+  <h2>Current applicants:</h2>
+  <% @position.user_positions.each do |application| %>
+    <h4>Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
+    <span id="status-<%= application.id %>"><%= link_to "#{application.status}", position_user_positions_path(application), method: :post, remote: :false %></span>
+  </h4>
+    <p>Skill level:<%= " " %><%= application.user.skill_level %></p>
+    <p>email: <%= " " %><%= application.user.email %>
+    <p>Phone: <%= " " %><%= application.user.phone %>
+    <p>Usual asking rate: <%= " " %><%= application.user.rate_cents %>
+    <% if application.user.linkedin_account %>
+      <p>LinkedIn: <%= " " %><%= application.user.linkedin_account %>
+    <% end %>
+    <% if application.user.facebook_account %>
+      <p>LinkedIn: <%= " " %><%= application.user.facebook_account %>
+    <% end %>
+    <% if application.user.github_account %>
+      <p>LinkedIn: <%= " " %><%= application.user.github_account %>
+    <% end %>
+  <% end %>
+
+
+<%= link_to 'Add a position', new_project_position_path(@project) %>
+
+<%= link_to 'Delete the project', project_path, method: :delete,
+      data: { confirm: "Are you sure?" } %>
+
+<%= link_to 'Edit the project', edit_project_path(@project) %>
+
+<h4><%= link_to "Project details", position_path(@project, @position) %></h4>
+
+<h4><%= link_to "See your projects", projects_path %></h4>
+
+<h4><%= link_to "See all projects", projects_path(all: true) %></h4>
+
+<h4><%= link_to "Home", root_path %></h4>

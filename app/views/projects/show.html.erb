@@ -13,7 +13,7 @@
 <% else %>
   <h2>Open positions:</h2>
   <% @project.positions.where(status: "Open").each do |position| %>
-    <h4>Name:<%= " " %><%= position.name %>
+    <h4>Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
     </%></h4>
     <p>Skill level required:<%= " " %><%= position.skill_level %></p>
 
@@ -27,20 +27,19 @@
    </p>
     <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
 
-      <% if position.user_positions.where(user_id: @current_user).count == 0 %>
+      <% if position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
         <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
       <% end %>
   <% end %>
 
 <% end %>
 
-
-<%= link_to 'Add a position', new_project_position_path(@project) %>
-
-<%= link_to 'Delete the project', project_path, method: :delete,
-      data: { confirm: "Are you sure?" } %>
-
-<%= link_to 'Edit the project', edit_project_path(@project) %>
+<% if @project.user == @user %>
+  <%= link_to 'Add a position', new_project_position_path(@project) %>
+  <%= link_to 'Delete the project', project_path, method: :delete,
+    data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Edit the project', edit_project_path(@project) %>
+<% end %>
 
  <h4><%= link_to "See your projects", projects_path %></h4>
 

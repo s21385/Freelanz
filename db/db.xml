@@ -138,6 +138,9 @@
 <row name="start_date" null="1" autoincrement="0">
 <datatype>DATE</datatype>
 <default>NULL</default></row>
+<row name="status" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -239,7 +242,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="372.45452880859375" y="448.36363220214844" name="ratings">
+<table x="372" y="448" name="ratings">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

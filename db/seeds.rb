@@ -51,6 +51,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
   # PROJECTS
   2.times do
+    statuses = ["Started", "Completed"]
     deadline = rand(Date.today+21...Date.today+730)
     project = Project.create!(
     user_id: user.id,
@@ -59,6 +60,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
+    status: statuses.sample,
     description: Faker::Job.title
     )
     puts "Project: #{project.name} created"
@@ -104,8 +106,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # USER_POSITION
-  10.times do
-  status = ["Open", "Closed", "Pending"]
+  100.times do
+  status = ["Accepted", "Refused", "In review"]
   puts "Creating Fake User Positions"
   rate_cents = rand(5...40) * 500/100
   user_position = UserPosition.create!(
