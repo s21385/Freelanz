@@ -6,7 +6,7 @@
     <div class="row">
       <% @projects.each do |t| %>
         <div class="col-xs-12 col-sm-4">
-          <div class="card">
+          <div class="card dashboard-card">
             <h3><%= t.name %></h3>
             <p><%= t.description %></p>
             <% t.positions.each do |pos| %>
@@ -25,31 +25,46 @@
 
   <br>
   <h2>Requests To My Projects</h2>
-
+    <div class="row">
       <% @projects.each do |t| %>
-      <div class="card">
-        <%= t.name %>
-        <%= t.description %>
-        <%= t.positions %>
-        <%= t.status %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card dashboard-card">
+            <h3><%= t.name %></h3>
 
-        <%= link_to projects_path %>
-      </div>
+
+
+            <p><%= t.description %></p>
+            <% t.positions.each do |pos| %>
+              <p> <%= pos.name %> </p>
+            <% end %>
+            <h4><%= t.status %></h4>
+
+            <%= link_to "Details", projects_path(t) %>
+          </div>
+        </div>
       <% end %>
+    </div>
+
+
 
   <br>
   <h2>My Requests</h2>
-
+    <div class="row">
       <% @projects.each do |t| %>
-      <div class="card">
-        <%= t.name %>
-        <%= t.description %>
-        <%= t.positions %>
-        <%= t.status %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card dashboard-card">
+            <h3><%= t.name %></h3>
+            <p><%= t.description %></p>
+            <% t.positions.each do |pos| %>
+              <p> <%= pos.name %> </p>
+            <% end %>
+            <h4><%= t.status %></h4>
 
-        <%= link_to projects_path %>
+            <%= link_to "Details", projects_path(t) %>
+          </div>
         </div>
       <% end %>
+    </div>
 
 
   <%= link_to 'See the groups list', groups_path %>

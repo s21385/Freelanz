@@ -18,6 +18,9 @@ class UserPositionsController < ApplicationController
   end
 
   def update
+    # This is for changing the status of the user_position
+    # When a project owner accepts or declines
+
     @position = Position.find(params[:position_id])
     @user_position = UserPosition.find(params[:id])
     if @user_position.status = "Accepted" || "In review"
@@ -27,7 +30,6 @@ class UserPositionsController < ApplicationController
     end
     @user_position.status.sort
     @user_position.update(project_params)
-
   end
 
 
