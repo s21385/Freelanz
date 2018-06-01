@@ -15,7 +15,7 @@ class UserPositionsController < ApplicationController
 
   def update
     # This is for changing the status of the user_position
-    # When a project own accepts or declines
+    # When a project owner accepts or declines
 
     # if
     # end
