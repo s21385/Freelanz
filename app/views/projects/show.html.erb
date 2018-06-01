@@ -1,4 +1,4 @@
-<h3>Name:<%= " " %><%= @project.name %></h3>
+<h1>Project name:<%= " " %><b><%= @project.name %></b></h3>
 <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
   <%= @project.user.last_name %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
@@ -6,25 +6,42 @@
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
 <p>Details:<%= " " %><%= @project.description %></p>
 
-<% @project.positions.each do |position| %>
-  <%= position.name %>
-  <%= position.status %>
-  <%= position.skill_level %>
-  <%= position.first_skill %>
-  <%= position.second_skill %>
-  <%= position.third_skill %>
+<% if @project.user == @user && @project.positions.count == 0 %>
+  <h2><%= link_to 'Add a position to this project', new_project_position_path(@project) %></h2>
+<% elsif @project.positions.where(status: "Open").count == 0 %>
+  <h2>There are no available positions for this project.</h2>
+<% else %>
+  <h2>Open positions:</h2>
+  <% @project.positions.where(status: "Open").each do |position| %>
+    <h4>Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
+    </%></h4>
+    <p>Skill level required:<%= " " %><%= position.skill_level %></p>
+
+    <p>Skills required: <%= " " %><%= position.first_skill %>
+    <% if position.second_skill && !position.third_skill %>
+      /<%= " " %><%= position.second_skill %>
+    <% elsif position.third_skill %>
+      /<%= " " %><%= position.second_skill %>
+      /<%= " " %><%= position.third_skill %>
+   <% end %>
+   </p>
+    <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+
+      <% if position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
+        <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
+      <% end %>
+  <% end %>
+
 <% end %>
 
+<% if @project.user == @user %>
+  <%= link_to 'Add a position', new_project_position_path(@project) %>
+  <%= link_to 'Delete the project', project_path, method: :delete,
+    data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Edit the project', edit_project_path(@project) %>
+<% end %>
 
-
-<%= link_to 'Delete the project', project_path, method: :delete,
-      data: { confirm: "Are you sure?" } %>
-
-<%= link_to 'Edit the project', edit_project_path(@project) %>
-
-<%= link_to 'Create a new project', new_project_path %>
-
- <h4><%= link_to "See your projects list", projects_path %></h4>
+ <h4><%= link_to "See your projects", projects_path %></h4>
 
 <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 

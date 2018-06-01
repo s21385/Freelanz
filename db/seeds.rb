@@ -27,7 +27,6 @@ url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages
   element["item"]["name"]
   end
 
-
 puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
@@ -41,7 +40,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     last_name: Faker::Name.last_name,
     photo: Faker::Placeholdit.image("50x50", 'gif', 'ffffff'),
     skill_level: skills.sample,
-    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
+    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address
+      .city},#{Faker::Address.postcode}"
   )
   puts "Created user: " + user.first_name + " " + user.last_name
 
@@ -51,6 +51,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
   # PROJECTS
   2.times do
+    statuses = ["Started", "Completed"]
     deadline = rand(Date.today+21...Date.today+730)
     project = Project.create!(
     user_id: user.id,
@@ -59,15 +60,16 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
+    status: statuses.sample,
     description: Faker::Job.title
     )
     puts "Project: #{project.name} created"
 
     # POSITIONS
     puts 'creating fake Positions'
-    4.times do
+    10.times do
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
-      status = ["Pending", "Accepted", "Rejected"]
+      status = ["Filled", "Open"]
       first_skill = pro_langs.sample
 
       # HAVE TO ADD $
@@ -104,8 +106,8 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # USER_POSITION
-  3.times do
-  status = ["Approved", "Denied", "Pending"]
+  100.times do
+  status = ["Accepted", "Refused", "In review"]
   puts "Creating Fake User Positions"
   rate_cents = rand(5...40) * 500/100
   user_position = UserPosition.create!(

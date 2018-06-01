@@ -28,6 +28,8 @@ before_action :set_user
   end
 
   def create
+    # Issue is that we can only ever create one position
+    # form is not dynamic
     @project = Project.new(project_params)
     @project.user = @user
     if @project.save

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_161513) do
+
+ActiveRecord::Schema.define(version: 2018_06_01_182153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,17 +76,21 @@ ActiveRecord::Schema.define(version: 2018_06_01_161513) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+<<<<<<< HEAD
     t.string "status"
+=======
+    t.string "status", default: "Started"
+>>>>>>> master
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "user_positions", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "position_id"
-    t.string "status", default: "Pending"
     t.integer "rate_cents", default: 1500
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "In review"
     t.index ["position_id"], name: "index_user_positions_on_position_id"
     t.index ["user_id"], name: "index_user_positions_on_user_id"
   end

@@ -1,6 +1,11 @@
 class PositionsController < ApplicationController
   # before_action :set_position, only: [ :create, :destroy ]
 
+  def show
+    @project = Project.find(params[:project_id])
+    @position = Position.find(params[:id])
+  end
+
   def new
     @project = Project.find(params[:project_id])
     @position = Position.new
@@ -12,17 +17,17 @@ class PositionsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @position = Position.new(position_params)
+    @position.status = "Open"
     @position.project = @project
     @position.save!
-
-    redirect_to project_position_path(@project, @position)
+    redirect_to project_path(@project)
   end
 
   def update
     @position = Position.find(params[:id])
     @position.update(position_params)
 
-    redirect_to position_path(@position)
+    redirect_to project_path(@project)
   end
 
   def destroy
@@ -34,7 +39,7 @@ class PositionsController < ApplicationController
   private
 
   def position_params
-    params.require(:position).permit(:name, :skill_level, :status, :first_skill, :rate_cents)
+    params.require(:position).permit(:name, :skill_level, :status, :first_skill,:second_skill,:third_skill, :rate_cents)
   end
 
   def set_position

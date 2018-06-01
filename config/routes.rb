@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :projects do
-    resources :positions, except: [ :index, :show ]
+    resources :positions, except: [ :index ]
     resources :ratings, only: [ :new, :create ]
   end
 
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :positions, except: [ :index, :show ] do
-    resources :user_positions, only: [ :update, :create ]
+    resources :user_positions, only: [ :update, :create, :show ]
   end
 
 end
