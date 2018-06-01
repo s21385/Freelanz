@@ -1,14 +1,9 @@
-
-
 <% @projects.each do |project| %>
   <%= link_to project.name, project_path(project) %>
   <%= project.short_description %>
   <%= project.description %>
   <%= project.deadline %>
   <%= project.start_date %>
-
-  <%= project.positions %>
-
 <% end %>
 
 <% if !user_signed_in? || params[:all] %>

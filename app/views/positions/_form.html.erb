@@ -1,0 +1,9 @@
+<%= simple_form_for [@project, @position] do |f|  %>
+  <%= f.input :name %>
+  <%= f.input :first_skill %>
+  <%= f.input :second_skill %>
+  <%= f.input :third_skill %>
+  <%= f.input :skill_level, collection: ["Junior programmer", "Senior programmer", "Intermediate programmer"] %>
+
+   <%= f.submit "Create Position", class: "btn btn-danger" %>
+   <% end %>
