@@ -2,6 +2,10 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:linkedin]
 
+  def home
+
+  end
+
   def linkedin
     headers = {
       "Host" => "www.linkedin.com",
