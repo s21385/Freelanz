@@ -1,4 +1,4 @@
-<h1>Project name:<%= " " %><b><%= @project.name %></b></h3>
+<h1><%= " " %><b><%= @project.name %></b></h3>
 <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
   <%= @project.user.last_name %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
@@ -6,12 +6,43 @@
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
 <p>Details:<%= " " %><%= @project.description %></p>
 
+<!-- If the the viewer is the owner of project but no positions yet. -->
+
 <% if @project.user == @user && @project.positions.count == 0 %>
   <h2><%= link_to 'Add a position to this project', new_project_position_path(@project) %></h2>
-<% elsif @project.positions.where(status: "Open").count == 0 %>
+
+<!-- If the the viewer is NOT the owner of project AND no positions yet. -->
+
+<% elsif @project.user != @user && @project.positions.count == 0 %>
   <h2>There are no available positions for this project.</h2>
+
+<!-- If the the viewer is the owner of project AND there are positions created. -->
+
+<% elsif @project.user == @user %>
+
+  <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
+    <% positions = 0 %>
+    <% @project.positions.where(status: "Open").each do |position| %>
+    <% positions += 1 %>
+      <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
+      </%></h4>
+      <p>Skill level required:<%= " " %><%= position.skill_level %></p>
+
+      <p>Skills required: <%= " " %><%= position.first_skill %>
+    <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+      /<%= " " %><%= position.second_skill %>
+    <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+      /<%= " " %><%= position.second_skill %>
+      /<%= " " %><%= position.third_skill %>
+   <% end %>
+      <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+    <% end %>
+
+<!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
+
 <% else %>
-  <h2>There are <%= @project.positions.count %> positions open for this <%= @project.name %> project:</h2>
+
+  <h2>There are <%= @project.positions.where(status: "Open").count %> positions open for the <%= @project.name %> project:</h2>
   <% positions = 0 %>
   <% @project.positions.where(status: "Open").each do |position| %>
   <% positions += 1 %>
@@ -20,23 +51,20 @@
     <p>Skill level required:<%= " " %><%= position.skill_level %></p>
 
     <p>Skills required: <%= " " %><%= position.first_skill %>
-    <% if position.second_skill && !position.third_skill %>
+    <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
       /<%= " " %><%= position.second_skill %>
-    <% elsif position.third_skill %>
+    <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
       /<%= " " %><%= position.second_skill %>
       /<%= " " %><%= position.third_skill %>
    <% end %>
    </p>
     <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
-
-
       <% if !user_signed_in? %>
         Please log in to apply.
       <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
         <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
       <% end %>
   <% end %>
-
 <% end %>
 
 <% if user_signed_in? && @project.user == @user %>
@@ -44,7 +72,9 @@
   <%= link_to 'Delete the project', project_path, method: :delete,
     data: { confirm: "Are you sure?" } %>
   <%= link_to 'Edit the project', edit_project_path(@project) %>
-<% elsif user_signed_in? && @project.user != @user %>
+  <h4><%= link_to "See your projects", projects_path %></h4>
+
+<% elsif user_signed_in? %>
  <h4><%= link_to "See your projects", projects_path %></h4>
 <% end %>
 
