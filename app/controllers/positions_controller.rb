@@ -4,6 +4,7 @@ class PositionsController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @position = Position.find(params[:id])
+    @user_positions = @position.user_positions
   end
 
   def new

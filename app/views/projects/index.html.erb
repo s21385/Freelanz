@@ -1,15 +1,27 @@
-<% @projects.each do |project| %>
-  <%= link_to project.name, project_path(project) %>
-  <%= project.short_description %>
-  <%= project.description %>
-  <%= project.deadline %>
-  <%= project.start_date %>
+<% if !user_signed_in? || params[:all] %>
+  <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
+<% elsif @projects.count == 1%>
+  <h2>Your have one <%= @projects.count %> project.</h2>
+<% else %>
+  <h2>You have a total of <%= @projects.count %> projects !</h2>
+<% end %>
+
+<% if @projects.count == 0 %>
+    You currently have no active projects on file.
+<% else %>
+  <% @projects.each do |project| %>
+    <%= link_to project.name, project_path(project) %>
+    <%= project.short_description %>
+    <%= project.description %>
+    <%= project.deadline %>
+    <%= project.start_date %>
+  <% end %>
 <% end %>
 
 <% if !user_signed_in? || params[:all] %>
 
   <h4><%= link_to "See your projects", projects_path %></h4>
-
+  <%= link_to 'See your job applications', user_positions_path %>
 <% else %>
   <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 

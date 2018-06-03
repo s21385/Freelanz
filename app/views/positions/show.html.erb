@@ -7,10 +7,12 @@
 <p>Details:<%= " " %><%= @project.description %></p>
 
 
-  <h2>Current applicants:</h2>
-  <% @position.user_positions.each do |application| %>
-    <h4>Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
-    <span id="status-<%= application.id %>"><%= link_to "#{application.status}", position_user_positions_path(application), method: :post, remote: :false %></span>
+  <h2>There are <%= @user_positions.count %> applicants for the <%= @position.name %> position:</h2>
+  <% positions = 0 %>
+  <% @user_positions.sort_by { |hsh| hsh[:status]}.each do |application| %>
+  <% positions += 1 %>
+    <h4><%= positions %> - Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
+        Status:<%= " " %><%= application.status %>
   </h4>
     <p>Skill level:<%= " " %><%= application.user.skill_level %></p>
     <p>email: <%= " " %><%= application.user.email %>
@@ -27,15 +29,14 @@
     <% end %>
   <% end %>
 
-
-<%= link_to 'Add a position', new_project_position_path(@project) %>
-
-<%= link_to 'Delete the project', project_path, method: :delete,
-      data: { confirm: "Are you sure?" } %>
-
-<%= link_to 'Edit the project', edit_project_path(@project) %>
-
-<h4><%= link_to "Project details", position_path(@project, @position) %></h4>
+<% if user_signed_in? %>
+  <%= link_to 'See your job applications', user_positions_path %>
+  <%= link_to 'Add a position', new_project_position_path(@project) %>
+  <%= link_to 'Delete the project', project_path, method: :delete,
+    data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Edit the project', edit_project_path(@project) %>
+  <%= link_to 'See your job applications', user_positions_path %>
+<% end %>
 
 <h4><%= link_to "See your projects", projects_path %></h4>
 

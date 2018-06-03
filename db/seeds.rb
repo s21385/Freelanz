@@ -40,8 +40,11 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     last_name: Faker::Name.last_name,
     photo: Faker::Placeholdit.image("50x50", 'gif', 'ffffff'),
     skill_level: skills.sample,
-    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address
-      .city},#{Faker::Address.postcode}"
+    phone: Faker::PhoneNumber.cell_phone,
+    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
+    github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
   puts "Created user: " + user.first_name + " " + user.last_name
 
@@ -98,6 +101,10 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    phone: Faker::PhoneNumber.cell_phone,
+    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
+    github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     # photo: "cloudinary_url"
     skill_level: skills.sample,
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
