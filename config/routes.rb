@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   end
 
   resources :positions, except: [ :index, :show ] do
-    resources :user_positions, only: [ :update, :create, :show ]
+    resources :user_positions, only: [ :update, :create, :show, :edit ]
   end
+
+  resources :user_positions, only: [ :index ]
 
 end
