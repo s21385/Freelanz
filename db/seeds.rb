@@ -2,9 +2,14 @@ require 'faker'
 require 'json'
 require 'open-uri'
 
-def get_path(image)
-  File.new(Rails.root.join("app/assets/images/logos/#{image}"))
+def get_path(logo)
+  File.new(Rails.root.join("app/assets/images/logos/#{logo}"))
 end
+
+def get_path1(image)
+  File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
+end
+
 
 Project.destroy_all
 Group.destroy_all
@@ -24,6 +29,7 @@ puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
 puts 'Creating fake users...'
+urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 10.times do
   user = User.create!(
@@ -31,10 +37,9 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    photo: Faker::Placeholdit.image("50x50", 'gif', 'ffffff'),
     skill_level: skills.sample,
     phone: Faker::PhoneNumber.cell_phone,
-    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
+    photo: get_path1(urls.sample),
     github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
@@ -76,21 +81,6 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     )
     puts "Group: #{group.name} created"
 
-      # GROUP MBMERSHIPS
-      puts 'creating GROUP MEMBERSHIPS'
-      (1..3).to_a.sample.times do
-        statuses = ["Pending", "Approved", "Approved"]
-        category = "Member"
-        group_membership = GroupMembership.create!(
-        status: statuses.sample,
-        category: category,
-        user_id: user.id,
-        group_id: group.id
-        )
-        puts " GROUP MEMBERSHIP created"
-      end
-
-
     # POSITIONS
     puts 'creating fake Positions'
     (2..7).to_a.sample.times do
@@ -118,14 +108,16 @@ end
 # USERS APPLICATIONS
 puts 'Creating 10 fake users...'
 skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
+urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+  "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    photo: get_path1(urls.sample),
     phone: Faker::PhoneNumber.cell_phone,
-    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
     github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     # photo: "cloudinary_url"
@@ -148,6 +140,19 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
   )
   end
 end
-
-puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
 end
+
+# GROUP MBMERSHIPS
+puts 'creating GROUP MEMBERSHIPS'
+(30..50).to_a.sample.times do
+  statuses = ["Pending", "Approved", "Approved"]
+  category = "Member"
+  group_membership = GroupMembership.create!(
+  status: statuses.sample,
+  category: category,
+  user_id: User.all.sample,
+  group_id: Group.all.sample
+  )
+  puts " GROUP MEMBERSHIP created"
+end
+puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
