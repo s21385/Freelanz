@@ -7,26 +7,28 @@
 <p>Details:<%= " " %><%= @project.description %></p>
 
 
-  <h2>There are <%= @user_positions.count %> applicants for the <%= @position.name %> position:</h2>
+  <p>Number of applicants:<%= " " %> <span id="cpt-<%= @position.id %>"><%= @position.user_positions.count %></span></p>
+   <% if @position.user_positions.where(user_id: @current_user).count == 0 && @position.project.user != @user %>
+        <span id="apply-<%= @position.id %>"><%= link_to "Apply", position_user_positions_path(@position), method: :post, remote: :true %></span>
+  <% end %>
   <% positions = 0 %>
-  <% @user_positions.sort_by { |hsh| hsh[:status]}.each do |application| %>
+  <% @user_positions.sort_by { |hsh| hsh[:status] }.each do |application| %>
   <% positions += 1 %>
-    <h4><%= positions %> - Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
-        Status:<%= " " %><%= application.status %>
-  </h4>
-    <p>Skill level:<%= " " %><%= application.user.skill_level %></p>
-    <p>email: <%= " " %><%= application.user.email %>
-    <p>Phone: <%= " " %><%= application.user.phone %>
-    <p>Usual asking rate: <%= " " %><%= application.user.rate_cents %>
-    <% if application.user.linkedin_account %>
-      <p>LinkedIn: <%= " " %><%= application.user.linkedin_account %>
-    <% end %>
-    <% if application.user.facebook_account %>
-      <p>LinkedIn: <%= " " %><%= application.user.facebook_account %>
-    <% end %>
-    <% if application.user.github_account %>
-      <p>LinkedIn: <%= " " %><%= application.user.github_account %>
-    <% end %>
+      <h4><%= positions %> - Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
+          Status:<%= " " %><%= application.status %></h4>
+      <p>Skill level:<%= " " %><%= application.user.skill_level %></p>
+      <p>email: <%= " " %><%= application.user.email %>
+      <p>Phone: <%= " " %><%= application.user.phone %>
+      <p>Usual asking rate: <%= " " %><%= application.user.rate_cents %>
+      <% if application.user.linkedin_account %>
+        <p>LinkedIn: <%= " " %><%= application.user.linkedin_account %>
+      <% end %>
+      <% if application.user.facebook_account %>
+        <p>LinkedIn: <%= " " %><%= application.user.facebook_account %>
+      <% end %>
+      <% if application.user.github_account %>
+        <p>LinkedIn: <%= " " %><%= application.user.github_account %>
+      <% end %>
   <% end %>
 
 <% if user_signed_in? %>

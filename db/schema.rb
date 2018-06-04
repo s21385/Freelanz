@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_182153) do
+ActiveRecord::Schema.define(version: 2018_06_04_004505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2018_06_01_182153) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -77,6 +79,16 @@ ActiveRecord::Schema.define(version: 2018_06_01_182153) do
     t.text "description"
     t.string "status", default: "Started"
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "rating"
+    t.bigint "user_id"
+    t.integer "rateable_id"
+    t.string "rateable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "user_positions", force: :cascade do |t|
@@ -119,9 +131,11 @@ ActiveRecord::Schema.define(version: 2018_06_01_182153) do
 
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
+  add_foreign_key "groups", "users"
   add_foreign_key "messages", "discussions"
   add_foreign_key "positions", "projects"
   add_foreign_key "projects", "users"
+  add_foreign_key "ratings", "users"
   add_foreign_key "user_positions", "positions"
   add_foreign_key "user_positions", "users"
 end

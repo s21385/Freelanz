@@ -15,12 +15,11 @@ class User < ApplicationRecord
   has_many :user_positions, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :discussions
-  has_many :messages
+  has_many :messages, dependent: :destroy
   has_many :positions, through: :user_positions
   has_many :projects
   has_many :positions, through: :projects
   has_many :user_positions, through: :positions
-
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true

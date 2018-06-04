@@ -3,6 +3,7 @@ require 'json'
 require 'open-uri'
 
 
+Group.destroy_all
 User.destroy_all
 Project.destroy_all
 Position.destroy_all
@@ -67,10 +68,33 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     description: Faker::Job.title
     )
     puts "Project: #{project.name} created"
+  # GROUPS
+  (1..5).to_a.sample.times do
+    group = Group.create!(
+    user_id: user.id,
+    name: Faker::Job.field,
+    description: Faker::Dune.quote
+    )
+    puts "Group: #{group.name} created"
+
+      # GROUP MBMERSHIPS
+      puts 'creating GROUP MEMBERSHIPS'
+      (1..3).to_a.sample.times do
+        statuses = ["Pending", "Approved", "Approved"]
+        category = "Member"
+        group_membership = GroupMembership.create!(
+        status: statuses.sample,
+        category: category,
+        user_id: user.id,
+        group_id: group.id
+        )
+        puts " GROUP MEMBERSHIP created"
+      end
+
 
     # POSITIONS
     puts 'creating fake Positions'
-    10.times do
+    (2..7).to_a.sample.times do
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       status = ["Filled", "Open"]
       first_skill = pro_langs.sample
@@ -113,7 +137,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # USER_POSITION
-  100.times do
+  30.times do
   status = ["Accepted", "Refused", "In review"]
   puts "Creating Fake User Positions"
   rate_cents = rand(5...40) * 500/100
@@ -125,5 +149,6 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
   )
   end
 end
-  puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
 
+puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
+end
