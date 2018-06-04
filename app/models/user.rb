@@ -1,4 +1,4 @@
-SKILL_LEVELS = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
+SKILL_LEVELS = ["Junior Programmer", "Intermediate Programmer", "Senior Programmer"]
 
 class User < ApplicationRecord
   mount_uploader :photo, PhotoUploader

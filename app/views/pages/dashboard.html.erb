@@ -32,7 +32,7 @@
             </div>
 
             <div class="project-card-footer">
-
+              sdfsdfsdf
             </div>
 
             <% link_to "Details", project_path(t) %>
@@ -62,6 +62,12 @@
       <% end %>
     </div>
 
-<%= render 'links' %>
+
+  <%= link_to 'See the groups list', groups_path %>
+  <%= link_to 'See the projects list', projects_path %>
+
+  <% if user_signed_in? %>
+    <%= link_to 'See your job applications', user_positions_path %>
+  <% end %>
 
 </div>
