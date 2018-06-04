@@ -26,7 +26,7 @@ class User < ApplicationRecord
   validates :last_name, presence: :true
   validates :email, presence: :true, uniqueness: :true
   validates :linkedin_id, uniqueness: :true, allow_nil: :true
-  validates :github_account, uniqueness: true, allow_nil: :true
+  validates :github_id, uniqueness: true, allow_nil: :true
   validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
 
   def full_name
