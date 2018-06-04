@@ -6,7 +6,7 @@
     </div>
 
     <div class="text-center">
-      <%= cl_image_tag(project.photo, width: 60, height: 60, crop: :fill) unless project.photo.file.nil? %>
+      <%= cl_image_tag(project.photo, height: 60, crop: :fill) unless project.photo.file.nil? %>
       <h3><%= project.name %></h3>
       <p><%= project.description %></p>
     </div>
