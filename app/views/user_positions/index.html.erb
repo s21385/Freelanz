@@ -5,10 +5,13 @@
   <% user_positions = 0 %>
   <% @user_positions.sort_by { |hsh| hsh[:status]}.each do |application| %>
   <% user_positions += 1 %>
+  <% nom =  application.position.project.user.first_name + (" ") + application.position.project.user.last_name %>
     <h4><%= user_positions %> - Position name:<%= " " %><%= application.position.name %></h4>
     <h5>Total applicants:<%= " " %><%= application.position.user_positions.count %></h5>
     <h5>Project:<%= " " %><%= application.position.project.name %></h5>
-    <h5>Project Leader:<%= " " %><%= application.position.project.user.first_name %><%= " " %><%= application.position.project.user.last_name %><%= " " %><%= application.position.project.user.email %><%= " " %><%= application.position.project.user.phone %></h5>
+    <h5>Project Leader:<%= " " %><%= link_to "#{nom}", user_path(application.position.project.user) %>
+
+      <%= " " %><%= application.position.project.user.email %><%= " " %><%= application.position.project.user.phone %></h5>
     <p>Job status:<%= " " %><%= application.position.status %></p>
     <p>First skill:<%= " " %><%= application.position.first_skill %></p>
     <p>Second skill:<%= " " %><%= application.position.second_skill %></p>
@@ -19,8 +22,4 @@
 
 <% end %>
 
-<h4><%= link_to "See your projects", projects_path %></h4>
-
-<h4><%= link_to "See all projects", projects_path(all: true) %></h4>
-
-<h4><%= link_to "Home", root_path %></h4>
+<%= render 'links' %>
