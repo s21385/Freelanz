@@ -13,7 +13,9 @@
             </div>
 
             <div class="text-center">
-              <%= image_tag "https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-256.png", width: 60 %>
+              <%# image_tag "https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-256.png", width: 60 %>
+              <%= cl_image_tag("https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-256.png",
+              width: 60, height: 60, crop: :fill) %>
               <h3><%= t.name %></h3>
               <p><%= t.description %></p>
             </div>
