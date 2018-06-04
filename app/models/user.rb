@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :messages
   has_many :positions, through: :user_positions
   has_many :projects
+  has_many :positions, through: :projects
+  has_many :user_positions, through: :positions
 
 
   validates :first_name, presence: :true
@@ -27,4 +29,7 @@ class User < ApplicationRecord
   validates :facebook_account, uniqueness: :true, allow_nil: :true
   validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
 
+  def full_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
 end
