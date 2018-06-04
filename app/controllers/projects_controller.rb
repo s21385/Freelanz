@@ -32,7 +32,7 @@ before_action :set_user
     # form is not dynamic
     @project = Project.new(project_params)
     @project.user = @user
-    if @project.save
+    if @project.save!
       redirect_to project_path(@project)
     else
       render :new
@@ -42,7 +42,7 @@ before_action :set_user
   def update
     @project.user = @user
     @project = Project.find(params[:id])
-    @project.update(project_params)
+    @project.update!(project_params)
     redirect_to project_path(@project)
   end
 
@@ -54,7 +54,7 @@ before_action :set_user
   private
 
   def project_params
-    params.require(:project).permit(:name, :short_description,
+    params.require(:project).permit(:name, :photo, :short_description,
       :description, :deadline, :start_date)
   end
 
