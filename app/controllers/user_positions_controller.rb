@@ -1,31 +1,42 @@
 class UserPositionsController < ApplicationController
-  before_action :set_user_position
+  before_action :set_user_position, except: :index
+
+  def show
+  end
+
+  def index
+    @user = current_user
+    @user_positions = UserPosition.where(user_id: @user)
+  end
 
   def create
     # When a user applies for a position
     # @user_position = UserPosition.all
     @position = Position.find(params[:position_id])
-    @user_position = UserPosition.new(user_position_params)
+    @user_position = UserPosition.new
     @user_position.user = current_user
     @user_position.position = @position
-    @user_positions.save
+    @user_position.save
+  end
 
-    # redirect_to
+  def edit
   end
 
   def update
+    # @project = Project.find(params[:project_id])
     # This is for changing the status of the user_position
-    # When a project own accepts or declines
+    # When a project owner accepts or declines
 
-    # if
-    # end
+    @position = Position.find(params[:position_id])
+    @user_position = UserPosition.find(params[:id])
+    @user_position.update(project_params)
   end
 
 
   private
 
   def user_position_params
-    params.require(:user_position).permit(:status, :rate_cents)
+    params.require(:user_position).permit(:status, :rate_cent)
   end
 
   def set_user_position

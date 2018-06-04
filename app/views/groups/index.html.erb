@@ -1,22 +1,16 @@
-<% if @user %>
-
+<% if user_signed_in? %>
   <% @groups.each do |group| %>
-        <%= link_to group.name, group_path(group) %>
+    <%= link_to group.name, group_path(group) %>
     <%= group.description %>
   <% end %>
+
   <%= link_to 'Create a new group', new_group_path %>
-
-
 <% else %>
   <% @groups.each do |group| %>
-        <%= link_to group.name, new_session_path %>
+    <%= link_to group.name, group_path(group) %>
     <%= group.description %>
   <% end %>
-
 <% end %>
 
-<%= link_to 'List of projects', projects_path %>
-
-<h4><%= link_to "Home", root_path %></h4>
-
+<%= render "indexlinks" %>
 

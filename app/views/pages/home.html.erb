@@ -1,6 +1,87 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1>Pages#home</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
+  <br>
+  <h2>My Projects</h2>
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card dashboard-card">
+            <div class="project-card-header">
+              <div><%= project.created_at.strftime("%m/%d/%Y") %></div>
+              <div>STATUS<%# project.status %></div>
+            </div>
 
-<%= link_to 'See the groups list', groups_path %>
-<%= link_to 'See the projects list', projects_path %>
+            <div class="text-center">
+              <%# image_tag "https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-256.png", width: 60 %>
+              <%= cl_image_tag(project.photo, width: 60, height: 60, crop: :fill) unless project.photo.file.nil? %>
+              <h3><%= project.name %></h3>
+              <p><%= project.description %></p>
+            </div>
 
+            <div class="project-card-footer">
+              <% project.positions.first(3).each do |pos| %>
+                <p><%= pos.name %></p>
+              <% end %>
+            </div>
+
+            <%= link_to "Details", project_path(project) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+
+
+  <br>
+  <h2>Requests To My Projects</h2>
+    <div class="row">
+      <% @user_positions.each do |t| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card dashboard-card">
+            <div class="project-card-header">
+              <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
+              <div>STATUS<%# t.status %></div>
+            </div>
+
+            <div class="text-center">
+              <h3><%= t.user.full_name %></h3>
+              <p><%= t.position.name %></p>
+              <p><%= t.user.skill_level %></p>
+            </div>
+
+            <div class="project-card-footer">
+
+            </div>
+
+            <% link_to "Details", project_path(t) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+
+  <br>
+  <h2>My Requests</h2>
+    <div class="row">
+      <% @projects.each do |t| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card dashboard-card">
+            <h3><%= t.name %></h3>
+            <p><%= t.description %></p>
+            <% t.positions.each do |pos| %>
+              <p> <%= pos.name %> </p>
+            <% end %>
+            <h4><%= t.status %></h4>
+
+            <%= link_to "Details", projects_path(t) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+<%= render 'links' %>
+
+</div>

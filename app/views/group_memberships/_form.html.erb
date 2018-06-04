@@ -1,0 +1,8 @@
+You are about to join the <%= @group.name %> group.
+
+Please confirm by pressing join group button below.
+
+<%= simple_form_for [@group, @group_membership] do |f|  %>
+
+   <%= f.submit "Join group", class: "btn btn-danger" %>
+<% end %>

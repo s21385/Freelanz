@@ -1,0 +1,8 @@
+.dashboard-card {
+  min-height: 335px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  padding: 10px;
+}
