@@ -1,3 +1,5 @@
+SKILL_LEVELS = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
+
 class User < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   # Include default devise modules. Others available are:
@@ -26,8 +28,8 @@ class User < ApplicationRecord
   validates :last_name, presence: :true
   validates :email, presence: :true, uniqueness: :true
   validates :linkedin_id, uniqueness: :true, allow_nil: :true
-  validates :github_id, uniqueness: true, allow_nil: :true
-  validates :skill_level, presence: :true, inclusion: { in: ["Junior programmer", "Senior programmer", "Intermediate programmer"] }
+  validates :github_id, uniqueness: :true, allow_nil: :true
+  validates :skill_level, allow_nil: :true, inclusion: { in: SKILL_LEVELS }
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
