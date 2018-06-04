@@ -62,12 +62,6 @@
       <% end %>
     </div>
 
-
-  <%= link_to 'See the groups list', groups_path %>
-  <%= link_to 'See the projects list', projects_path %>
-
-  <% if user_signed_in? %>
-    <%= link_to 'See your job applications', user_positions_path %>
-  <% end %>
+<%= render 'links' %>
 
 </div>

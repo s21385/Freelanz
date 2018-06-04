@@ -5,11 +5,11 @@ before_action :set_user
 # before_action :find_leader_rating_count, only: [:show]
 
   def index
-    if !user_signed_in? || params[:all]
+    # if !user_signed_in? || params[:all]
       @projects = Project.all
-    else
-      @projects = Project.where(user_id: @user)
-    end
+    # else
+    #   @projects = Project.where(user_id: @user)
+    # end
   end
 
   def index_all
