@@ -24,21 +24,7 @@
   <div class="row">
     <% @projects.each do |project| %>
       <div class="col-xs-12 col-sm-4">
-        <div class="card dashboard-card">
-          <div class="project-card-header">
-            <div><%= project.created_at.strftime("%m/%d/%Y") %></div>
-            <div>STATUS<%# project.status %></div>
-          </div>
-
-          <div class="text-center">
-            <%= cl_image_tag(project.photo, width: 60, height: 60, crop: :fill) unless project.photo.file.nil? %>
-            <h3><%= link_to project.name, project_path(project) %></h3>
-            <p><%= project.short_description %></p>
-            <p><%= project.description %></p>
-            <p><%= project.deadline %></p>
-            <p><%= project.start_date %></p>
-          </div>
-        </div>
+        <%= render "shared/project_card", project: project %>
       </div>
     <% end %>
   </div>

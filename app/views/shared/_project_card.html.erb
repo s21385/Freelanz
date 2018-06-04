@@ -1,0 +1,20 @@
+<%= link_to project_path(project) do %>
+  <div class="card">
+    <div class="project-card-header">
+      <p><%= project.created_at.strftime("%m/%d/%Y") %></p>
+      <p>STATUS<%# project.status %></p>
+    </div>
+
+    <div class="text-center">
+      <%= cl_image_tag(project.photo, width: 60, height: 60, crop: :fill) unless project.photo.file.nil? %>
+      <h3><%= project.name  %> </h3>
+      <p><%= project.short_description %></p>
+      <p><%= project.description %></p>
+      <p><%= project.deadline %></p>
+      <p><%= project.start_date %></p>
+    </div>
+    <div class="card-hover">
+      <p>More Info</p>
+    </div>
+  </div>
+<% end %>
