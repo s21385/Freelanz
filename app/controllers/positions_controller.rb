@@ -20,7 +20,7 @@ class PositionsController < ApplicationController
     @position = Position.new(position_params)
     @position.status = "Open"
     @position.project = @project
-    @position.save
+    @position.save!
     redirect_to project_path(@project)
   end
 
