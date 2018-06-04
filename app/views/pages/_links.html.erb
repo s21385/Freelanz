@@ -1,0 +1,13 @@
+<div>
+  <% if user_signed_in? %>
+    <p><%= link_to "User page", user_path(current_user) %></p>
+  <% end %>
+
+    <p><%= link_to 'See all groups', groups_path %></p>
+    <p><%= link_to 'See all projects', projects_path %></p>
+
+    <% if user_signed_in? %>
+      <p><%= link_to 'See your job applications', user_positions_path %></p>
+    <% end %>
+
+</div>

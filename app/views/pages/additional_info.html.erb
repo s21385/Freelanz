@@ -1,0 +1,16 @@
+<h1>Welcome <%= current_user.first_name %>,</h1>
+<p>Please complete your profile</p>
+
+<div class="container">
+
+
+  <%= simple_form_for @user, url: additional_info_update_path, method: :put do |f| %>
+  <%= f.input :skill_level, label: 'Your skill level please', error: 'Skill is mandatory, please choose one one', collection: SKILL_LEVELS %>
+
+  <%= f.button :submit, "Update" %>
+  <% end %>
+
+
+
+</div>
+

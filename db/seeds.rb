@@ -2,23 +2,20 @@ require 'faker'
 require 'json'
 require 'open-uri'
 
+def get_path(logo)
+  File.new(Rails.root.join("app/assets/images/logos/#{logo}"))
+end
+
+def get_path1(image)
+  File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
+end
+
 
 Project.destroy_all
 Group.destroy_all
 UserPosition.destroy_all
 Position.destroy_all
 User.destroy_all
-
-
-# Group_membership.destroy_all
-# Goup.destroy_all
-# Discussion.destroy_all
-# Message.destroy_all
-
-# UPLOAD LOCAL FILES
-# def get_path(image)
-#   File.new(Rails.root.join("app/assets/images/tux_pictures/#{image}"))
-# end
 
 # PROGRAMMING LANGUAGES EXTRACTED
 url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.json'
@@ -31,7 +28,8 @@ url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages
 puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
-puts 'Creating fake users...'
+puts 'CREATING USERS'
+urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 10.times do
   user = User.create!(
@@ -39,24 +37,26 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    photo: Faker::Placeholdit.image("50x50", 'gif', 'ffffff'),
     skill_level: skills.sample,
     phone: Faker::PhoneNumber.cell_phone,
-    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
-    github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
-    linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    photo: get_path1(urls.sample),
+    github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    linkedin_id: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
-  puts "Created user: " + user.first_name + " " + user.last_name
+  puts "CREATED user.first_name + " " + user.last_name"
 
-  puts "creating fake projects"
-
-
+  puts "CREATING PROJECTS"
 
   # PROJECTS
+  urls = ["1.png", "2.png", "3.png", "4.png",
+    "5.png", "6.png",
+    "9.png", "10.png", "11.png"]
+    posn = 0
   2.times do
     statuses = ["Started", "Completed"]
     deadline = rand(Date.today+21...Date.today+730)
+    photos = [""]
     project = Project.create!(
     user_id: user.id,
     name: Faker::Job.field,
@@ -65,9 +65,11 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
     status: statuses.sample,
+    photo: get_path(urls.sample),
     description: Faker::Job.title
     )
-    puts "Project: #{project.name} created"
+
+    puts "Project project.name created"
   # GROUPS
   (1..5).to_a.sample.times do
     group = Group.create!(
@@ -75,25 +77,24 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     name: Faker::Job.field,
     description: Faker::ChuckNorris.fact
     )
-    puts "Group: #{group.name} created"
+    puts "Group: group.name created"
 
-      # GROUP MBMERSHIPS
-      puts 'creating GROUP MEMBERSHIPS'
-      (1..3).to_a.sample.times do
-        statuses = ["Pending", "Approved", "Approved"]
-        category = "Member"
-        group_membership = GroupMembership.create!(
-        status: statuses.sample,
-        category: category,
-        user_id: user.id,
-        group_id: group.id
-        )
-        puts " GROUP MEMBERSHIP created"
-      end
-
+    # GROUP MEMBERSHIPS
+    puts 'creating GROUP MEMBERSHIPS'
+    (3..5).to_a.sample.times do
+      statuses = ["Pending", "Approved", "Approved"]
+      category = "Member"
+      group_membership = GroupMembership.create!(
+      status: statuses.sample,
+      category: category,
+      user: User.all.sample,
+      group_id: group.id
+      )
+      puts " GROUP MEMBERSHIP created"
+    end
 
     # POSITIONS
-    puts 'creating fake Positions'
+    puts 'CREATING ON PROJECTS'
     (2..7).to_a.sample.times do
       skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       status = ["Filled", "Open"]
@@ -111,24 +112,26 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       third_skill: pro_langs.sample,
       skill_level: skill_level.sample
       )
-      puts " #{position.name} created"
+      puts "position.name created"
     end
   end
 end
 
 # USERS APPLICATIONS
-puts 'Creating 10 fake users...'
+puts 'CREATING 10 USERS...'
 skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
+urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+  "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    photo: get_path1(urls.sample),
     phone: Faker::PhoneNumber.cell_phone,
-    facebook_account: "www.facebook.com." + ('a'..'z').to_a.sample +  ('a'..'z').to_a.sample + ('a'..'z').to_a.sample + "." + ((1..1000).to_a.sample.to_s),
-    github_account: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
-    linkedin_account: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+    linkedin_id: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     # photo: "cloudinary_url"
     skill_level: skills.sample,
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
@@ -137,9 +140,9 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # USER_POSITION
-  30.times do
+  3.times do
   status = ["Accepted", "Refused", "In review"]
-  puts "Creating Fake User Positions"
+  puts "Creating User Positions"
   rate_cents = rand(5...40) * 500/100
   user_position = UserPosition.create!(
     user_id: user.id,
@@ -149,6 +152,6 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
   )
   end
 end
+end
 
 puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
-end

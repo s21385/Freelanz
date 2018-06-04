@@ -14,34 +14,19 @@
   <% positions = 0 %>
   <% @user_positions.sort_by { |hsh| hsh[:status] }.each do |application| %>
   <% positions += 1 %>
-      <h4><%= positions %> - Name:<%= " " %><%= application.user.first_name %><%= " " %><%= application.user.last_name %>
+  <% name = application.user.first_name + (" ") + application.user.last_name %>
+      <h4><%= positions %> - Name: <%= link_to "#{name}", user_path(application.user) %>
           Status:<%= " " %><%= application.status %></h4>
       <p>Skill level:<%= " " %><%= application.user.skill_level %></p>
       <p>email: <%= " " %><%= application.user.email %>
       <p>Phone: <%= " " %><%= application.user.phone %>
       <p>Usual asking rate: <%= " " %><%= application.user.rate_cents %>
-      <% if application.user.linkedin_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.linkedin_account %>
+      <% if application.user.linkedin_id %>
+        <p>LinkedIn: <%= " " %><%= application.user.linkedin_id %>
       <% end %>
-      <% if application.user.facebook_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.facebook_account %>
-      <% end %>
-      <% if application.user.github_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.github_account %>
+      <% if application.user.github_id %>
+        <p>LinkedIn: <%= " " %><%= application.user.github_id %>
       <% end %>
   <% end %>
 
-<% if user_signed_in? %>
-  <%= link_to 'See your job applications', user_positions_path %>
-  <%= link_to 'Add a position', new_project_position_path(@project) %>
-  <%= link_to 'Delete the project', project_path, method: :delete,
-    data: { confirm: "Are you sure?" } %>
-  <%= link_to 'Edit the project', edit_project_path(@project) %>
-  <%= link_to 'See your job applications', user_positions_path %>
-<% end %>
-
-<h4><%= link_to "See your projects", projects_path %></h4>
-
-<h4><%= link_to "See all projects", projects_path(all: true) %></h4>
-
-<h4><%= link_to "Home", root_path %></h4>
+<%= render 'links' %>
