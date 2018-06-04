@@ -21,7 +21,7 @@ before_action :set_user
   end
 
   def show
-    # @rating = Rating.new
+
   end
 
   def edit
