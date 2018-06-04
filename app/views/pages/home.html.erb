@@ -6,7 +6,7 @@
     <div class="row">
       <% @projects.each do |project| %>
         <div class="col-xs-12 col-sm-4">
-          <div class="card dashboard-card">
+          <div class="card">
             <div class="project-card-header">
               <div><%= project.created_at.strftime("%m/%d/%Y") %></div>
               <div>STATUS<%# project.status %></div>
@@ -39,7 +39,7 @@
     <div class="row">
       <% @user_positions.each do |t| %>
         <div class="col-xs-12 col-sm-4">
-          <div class="card dashboard-card">
+          <div class="card">
             <div class="project-card-header">
               <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
               <div>STATUS<%# t.status %></div>
@@ -68,7 +68,7 @@
     <div class="row">
       <% @projects.each do |t| %>
         <div class="col-xs-12 col-sm-4">
-          <div class="card dashboard-card">
+          <div class="card">
             <h3><%= t.name %></h3>
             <p><%= t.description %></p>
             <% t.positions.each do |pos| %>

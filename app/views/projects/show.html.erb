@@ -1,11 +1,18 @@
 <div class="container">
-  <h1><%= " " %><b><%= @project.name %></b></h3>
+  <div class="project-header">
+    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+    <div class="project-info">
+      <h1><b><%= @project.name %></b></h1>
+      <div class="start-end-dates">
+        <p>Start date:<%= " " %><%= @project.start_date %></p>
+        <p>Deadline:<%= " " %><%= @project.deadline %></p>
+      </div>
+    </div>
+  </div>
+
   <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
     <%= @project.user.last_name %></p>
-  <p><%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %></p>
   <p>Description:<%= " " %><%= @project.short_description %></p>
-  <p>Start date:<%= " " %><%= @project.start_date %></p>
-  <p>Deadline:<%= " " %><%= @project.deadline %></p>
   <p>Details:<%= " " %><%= @project.description %></p>
 
   <!-- If the the viewer is the owner of project but no positions yet. -->
