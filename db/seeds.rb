@@ -3,11 +3,11 @@ require 'json'
 require 'open-uri'
 
 
-Group.destroy_all
-User.destroy_all
 Project.destroy_all
-Position.destroy_all
+Group.destroy_all
 UserPosition.destroy_all
+Position.destroy_all
+User.destroy_all
 
 
 # Group_membership.destroy_all
@@ -73,7 +73,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     group = Group.create!(
     user_id: user.id,
     name: Faker::Job.field,
-    description: Faker::Dune.quote
+    description: Faker::ChuckNorris.fact
     )
     puts "Group: #{group.name} created"
 
