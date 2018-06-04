@@ -67,8 +67,12 @@
   <% end %>
 <% end %>
 
-<% if user_signed_in? && @project.user == @user %>
+<% if @project.user == @user && @project.positions.count != 0 %>
   <%= link_to 'Add a position', new_project_position_path(@project) %>
+<% end %>
+
+
+<% if user_signed_in? && @project.user == @user %>
   <%= link_to 'Delete the project', project_path, method: :delete,
     data: { confirm: "Are you sure?" } %>
   <%= link_to 'Edit the project', edit_project_path(@project) %>
@@ -76,6 +80,8 @@
 
 <% elsif user_signed_in? %>
  <h4><%= link_to "See your projects", projects_path %></h4>
+    <%= link_to 'See your job applications', user_positions_path %>
+
 <% end %>
 
 
