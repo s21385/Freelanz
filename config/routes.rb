@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :users, controllers: { sessions: 'users/sessions' }
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -18,5 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :user_positions, only: [ :index ]
+
+  resources :users, only: [:show]
 
 end
