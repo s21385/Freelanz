@@ -12,8 +12,6 @@
       <%= f.input :address %>
       <%= f.input :phone %>
       <%= f.input :rate_cents %>
-      <%= f.input :linkedin_id %>
-      <%= f.input :github_id %>
       <%= f.input :skill_level, collection: ["Junior programmer", "Senior programmer", "Intermediate programmer"] %>
       <%= f.input :email, required: true, autofocus: true %>
       <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
