@@ -44,11 +44,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 5px;
 }
 
 .project-card-footer {
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
 
   p {
     text-align: center;
