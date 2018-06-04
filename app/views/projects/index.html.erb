@@ -1,44 +1,62 @@
-<!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
-<% if !user_signed_in? || params[:all] %>
-  <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
+<div class="container">
 
-<!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
-<% elsif user_signed_in? && @projects.count == 1 %>
-  <h2>Your have one <%= @projects.count %> project on file.</h2>
+  <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
+  <% if !user_signed_in? || params[:all] %>
+    <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
 
-<!-- USER SIGNED IN THERE IS NO PROJECT : -->
-<% elsif  user_signed_in? && @projects.count == 0 %>
-  <h2>Your have no active project on file.</h2>
+  <!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
+  <% elsif user_signed_in? && @projects.count == 1 %>
+    <h2>Your have one <%= @projects.count %> project on file.</h2>
 
-<!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
-<% elsif user_signed_in? %>
-  <h2>You have a total of <%= @projects.count %> projects !</h2>
+  <!-- USER SIGNED IN THERE IS NO PROJECT : -->
+  <% elsif  user_signed_in? && @projects.count == 0 %>
+    <h2>Your have no active project on file.</h2>
 
-<!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
-<% else %>
-  <h2>You have a total of <%= @projects.count %> projects !</h2>
-<% end %>
+  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
+  <% elsif user_signed_in? %>
+    <h2>You have a total of <%= @projects.count %> projects !</h2>
 
-<% @projects.each do |project| %>
-    <%= link_to project.name, project_path(project) %>
-    <%= project.short_description %>
-    <%= project.description %>
-    <%= project.deadline %>
-    <%= project.start_date %>
+  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
+  <% else %>
+    <h2>You have a total of <%= @projects.count %> projects !</h2>
   <% end %>
 
-<% if !user_signed_in? || params[:all] %>
+  <div class="row">
+    <% @projects.each do |project| %>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card dashboard-card">
+          <div class="project-card-header">
+            <div><%= project.created_at.strftime("%m/%d/%Y") %></div>
+            <div>STATUS<%# project.status %></div>
+          </div>
 
-  <h4><%= link_to "See your projects", projects_path %></h4>
-<% else %>
-  <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
+          <div class="text-center">
+            <%= cl_image_tag(project.photo, width: 60, height: 60, crop: :fill) unless project.photo.file.nil? %>
+            <h3><%= link_to project.name, project_path(project) %></h3>
+            <p><%= project.short_description %></p>
+            <p><%= project.description %></p>
+            <p><%= project.deadline %></p>
+            <p><%= project.start_date %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<% end %>
 
-<% if user_signed_in? %>
-  <%= link_to 'See your job applications', user_positions_path %>
-<% end %>
+  <% if !user_signed_in? || params[:all] %>
 
-<h4><%= link_to "Create New Project", new_project_path %></h4>
+    <h4><%= link_to "See your projects", projects_path %></h4>
+  <% else %>
+    <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
 
-<h4><%= link_to "Home", root_path %></h4>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= link_to 'See your job applications', user_positions_path %>
+  <% end %>
+
+  <h4><%= link_to "Create New Project", new_project_path %></h4>
+
+  <h4><%= link_to "Home", root_path %></h4>
+
