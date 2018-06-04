@@ -2,23 +2,15 @@ require 'faker'
 require 'json'
 require 'open-uri'
 
+def get_path(image)
+  File.new(Rails.root.join("app/assets/images/logos/#{image}"))
+end
 
-Group.destroy_all
-User.destroy_all
 Project.destroy_all
-Position.destroy_all
+Group.destroy_all
 UserPosition.destroy_all
-
-
-# Group_membership.destroy_all
-# Goup.destroy_all
-# Discussion.destroy_all
-# Message.destroy_all
-
-# UPLOAD LOCAL FILES
-# def get_path(image)
-#   File.new(Rails.root.join("app/assets/images/tux_pictures/#{image}"))
-# end
+Position.destroy_all
+User.destroy_all
 
 # PROGRAMMING LANGUAGES EXTRACTED
 url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.json'
@@ -53,9 +45,14 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 
 
   # PROJECTS
+  urls = ["1.png", "2.png", "3.png", "4.png",
+    "5.png", "6.png",
+    "9.png", "10.png", "11.png"]
+    posn = 0
   2.times do
     statuses = ["Started", "Completed"]
     deadline = rand(Date.today+21...Date.today+730)
+    photos = [""]
     project = Project.create!(
     user_id: user.id,
     name: Faker::Job.field,
@@ -64,15 +61,17 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
     status: statuses.sample,
+    photo: get_path(urls.sample),
     description: Faker::Job.title
     )
+
     puts "Project: #{project.name} created"
   # GROUPS
   (1..5).to_a.sample.times do
     group = Group.create!(
     user_id: user.id,
     name: Faker::Job.field,
-    description: Faker::Dune.quote
+    description: Faker::ChuckNorris.fact
     )
     puts "Group: #{group.name} created"
 

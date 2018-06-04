@@ -18,13 +18,19 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :discussions
   has_many :messages, dependent: :destroy
-  has_many :positions, through: :user_positions
+  has_many :positions, through: :user_positions, dependent: :destroy
+  has_many :projects
+  has_many :positions, through: :projects, dependent: :destroy
+  has_many :user_positions, through: :positions, dependent: :destroy
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true
   validates :email, presence: :true, uniqueness: :true
   validates :linkedin_id, uniqueness: :true, allow_nil: :true
   validates :github_id, uniqueness: :true, allow_nil: :true
-
   validates :skill_level, allow_nil: :true, inclusion: { in: SKILL_LEVELS }
+
+  def full_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
 end

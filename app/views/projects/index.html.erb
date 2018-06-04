@@ -27,18 +27,4 @@
     <%= project.start_date %>
   <% end %>
 
-<% if !user_signed_in? || params[:all] %>
-
-  <h4><%= link_to "See your projects", projects_path %></h4>
-<% else %>
-  <h4><%= link_to "See all projects", projects_path(all: true) %></h4>
-
-<% end %>
-
-<% if user_signed_in? %>
-  <%= link_to 'See your job applications', user_positions_path %>
-<% end %>
-
-<h4><%= link_to "Create New Project", new_project_path %></h4>
-
-<h4><%= link_to "Home", root_path %></h4>
+<%= render 'indexlinks' %>
