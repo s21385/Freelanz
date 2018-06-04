@@ -121,9 +121,8 @@ ActiveRecord::Schema.define(version: 2018_06_04_004505) do
     t.string "address"
     t.string "phone"
     t.integer "rate_cents", default: 1500
-    t.string "linkedin_account"
-    t.string "facebook_account"
-    t.string "github_account"
+    t.string "linkedin_id"
+    t.string "github_id"
     t.string "skill_level"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
