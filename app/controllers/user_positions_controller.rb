@@ -1,7 +1,12 @@
 class UserPositionsController < ApplicationController
-  before_action :set_user_position
+  before_action :set_user_position, except: :index
 
   def show
+  end
+
+  def index
+    @user = current_user
+    @user_positions = UserPosition.where(user_id: @user)
   end
 
   def create
@@ -18,17 +23,12 @@ class UserPositionsController < ApplicationController
   end
 
   def update
+    # @project = Project.find(params[:project_id])
     # This is for changing the status of the user_position
     # When a project owner accepts or declines
 
     @position = Position.find(params[:position_id])
     @user_position = UserPosition.find(params[:id])
-    if @user_position.status = "Accepted" || "In review"
-      @user_position.status = "Refused"
-    elsif @user_position.status = "Refused"
-      @user_position.status = "In review"
-    end
-    @user_position.status.sort
     @user_position.update(project_params)
   end
 
