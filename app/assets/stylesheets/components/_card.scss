@@ -1,3 +1,22 @@
 .card {
   min-height: 200px;
 }
+
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-card-footer {
+  display: flex;
+  justify-content: space-around;
+
+  p {
+    text-align: center;
+    font-size: 16px;
+    color: rgb(50, 50, 50);
+    flex: 1;
+  }
+}
