@@ -21,14 +21,11 @@
       <p>email: <%= " " %><%= application.user.email %>
       <p>Phone: <%= " " %><%= application.user.phone %>
       <p>Usual asking rate: <%= " " %><%= application.user.rate_cents %>
-      <% if application.user.linkedin_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.linkedin_account %>
+      <% if application.user.linkedin_id %>
+        <p>LinkedIn: <%= " " %><%= application.user.linkedin_id %>
       <% end %>
-      <% if application.user.facebook_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.facebook_account %>
-      <% end %>
-      <% if application.user.github_account %>
-        <p>LinkedIn: <%= " " %><%= application.user.github_account %>
+      <% if application.user.github_id %>
+        <p>LinkedIn: <%= " " %><%= application.user.github_id %>
       <% end %>
   <% end %>
 
