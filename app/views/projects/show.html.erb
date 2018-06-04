@@ -1,6 +1,7 @@
 <h1><%= " " %><b><%= @project.name %></b></h3>
 <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
   <%= @project.user.last_name %></p>
+<p><%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %></p>
 <p>Description:<%= " " %><%= @project.short_description %></p>
 <p>Start date:<%= " " %><%= @project.start_date %></p>
 <p>Deadline:<%= " " %><%= @project.deadline %></p>
