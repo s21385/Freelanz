@@ -35,20 +35,25 @@
   <br>
   <h2>Requests To My Projects</h2>
     <div class="row">
-      <% @projects.each do |t| %>
+      <% @user_positions.each do |t| %>
         <div class="col-xs-12 col-sm-4">
           <div class="card dashboard-card">
-            <h3><%= t.name %></h3>
+            <div class="project-card-header">
+              <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
+              <div>STATUS<%# t.status %></div>
+            </div>
 
+            <div class="text-center">
+              <h3><%= t.user.name %></h3>
+              <p><%= t.position.name %></p>
+              <p><%= t.user.skill_level %></p>
+            </div>
 
+            <div class="project-card-footer">
 
-            <p><%= t.description %></p>
-            <% t.positions.each do |pos| %>
-              <p> <%= pos.name %> </p>
-            <% end %>
-            <h4><%= t.status %></h4>
+            </div>
 
-            <%= link_to "Details", projects_path(t) %>
+            <% link_to "Details", project_path(t) %>
           </div>
         </div>
       <% end %>
