@@ -1,31 +1,57 @@
-<h1><%= " " %><b><%= @project.name %></b></h3>
+<div class="container">
+  <div class="project-header">
+    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+    <div class="project-info">
+      <h1><b><%= @project.name %></b></h1>
+      <div class="start-end-dates">
+        <p>Start date:<%= " " %><%= @project.start_date %></p>
+        <p>Deadline:<%= " " %><%= @project.deadline %></p>
+      </div>
+    </div>
+  </div>
 
-<% name = @project.user.first_name + (" ") + @project.user.last_name %>
+  <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
+    <%= @project.user.last_name %></p>
+  <p>Description:<%= " " %><%= @project.short_description %></p>
+  <p>Details:<%= " " %><%= @project.description %></p>
 
-<p>Project Leader:<%= " " %><%= link_to "#{name}", user_path(@project.user) %></p>
+  <!-- If the the viewer is the owner of project but no positions yet. -->
 
-<p><%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %></p>
+  <% if @project.user == @user && @project.positions.count == 0 %>
+    <h2><%= link_to 'Add a position to this project', new_project_position_path(@project) %></h2>
 
-<p>Description:<%= " " %><%= @project.short_description %></p>
-<p>Start date:<%= " " %><%= @project.start_date %></p>
-<p>Deadline:<%= " " %><%= @project.deadline %></p>
-<p>Details:<%= " " %><%= @project.description %></p>
+  <!-- If the the viewer is NOT the owner of project AND no positions yet. -->
 
-<!-- If the the viewer is the owner of project but no positions yet. -->
+  <% elsif @project.user != @user && @project.positions.count == 0 %>
+    <h2>There are no available positions for this project.</h2>
 
-<% if @project.user == @user && @project.positions.count == 0 %>
-  <h2><%= link_to 'Add a position to this project', new_project_position_path(@project) %></h2>
+  <!-- If the the viewer is the owner of project AND there are positions created. -->
 
-<!-- If the the viewer is NOT the owner of project AND no positions yet. -->
+  <% elsif @project.user == @user %>
 
-<% elsif @project.user != @user && @project.positions.count == 0 %>
-  <h2>There are no available positions for this project.</h2>
+    <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
+      <% positions = 0 %>
+      <% @project.positions.where(status: "Open").each do |position| %>
+      <% positions += 1 %>
+        <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
+        </%></h4>
+        <p>Skill level required:<%= " " %><%= position.skill_level %></p>
 
-<!-- If the the viewer is the owner of project AND there are positions created. -->
+        <p>Skills required: <%= " " %><%= position.first_skill %>
+      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+        /<%= " " %><%= position.second_skill %>
+      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+        /<%= " " %><%= position.second_skill %>
+        /<%= " " %><%= position.third_skill %>
+     <% end %>
+        <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+      <% end %>
 
-<% elsif @project.user == @user %>
+  <!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
 
-  <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
+  <% else %>
+
+    <h2>There are <%= @project.positions.where(status: "Open").count %> positions open for the <%= @project.name %> project:</h2>
     <% positions = 0 %>
     <% @project.positions.where(status: "Open").each do |position| %>
     <% positions += 1 %>
@@ -34,42 +60,26 @@
       <p>Skill level required:<%= " " %><%= position.skill_level %></p>
 
       <p>Skills required: <%= " " %><%= position.first_skill %>
-    <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-      /<%= " " %><%= position.second_skill %>
-    <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-      /<%= " " %><%= position.second_skill %>
-      /<%= " " %><%= position.third_skill %>
-   <% end %>
+      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+        /<%= " " %><%= position.second_skill %>
+      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+        /<%= " " %><%= position.second_skill %>
+        /<%= " " %><%= position.third_skill %>
+     <% end %>
+     </p>
       <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+        <% if !user_signed_in? %>
+          Please log in to apply.
+        <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
+          <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
+        <% end %>
     <% end %>
-
-<!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
-
-<% else %>
-
-  <h2>There are <%= @project.positions.where(status: "Open").count %> positions open for the <%= @project.name %> project:</h2>
-  <% positions = 0 %>
-  <% @project.positions.where(status: "Open").each do |position| %>
-  <% positions += 1 %>
-    <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
-    </%></h4>
-    <p>Skill level required:<%= " " %><%= position.skill_level %></p>
-
-    <p>Skills required: <%= " " %><%= position.first_skill %>
-    <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-      /<%= " " %><%= position.second_skill %>
-    <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-      /<%= " " %><%= position.second_skill %>
-      /<%= " " %><%= position.third_skill %>
-   <% end %>
-   </p>
-    <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
-      <% if !user_signed_in? %>
-        Please log in to apply.
-      <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
-        <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
-      <% end %>
   <% end %>
-<% end %>
+
+  <% if @project.user == @user && @project.positions.count != 0 %>
+    <%= link_to 'Add a position', new_project_position_path(@project) %>
+  <% end %>
 
 <%= render 'showindex' %>
+</div>
+

@@ -1,30 +1,33 @@
-<!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
-<% if !user_signed_in? || params[:all] %>
-  <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
+<div class="container">
 
-<!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
-<% elsif user_signed_in? && @projects.count == 1 %>
-  <h2>Your have one <%= @projects.count %> project on file.</h2>
+  <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
+  <% if !user_signed_in? || params[:all] %>
+    <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
 
-<!-- USER SIGNED IN THERE IS NO PROJECT : -->
-<% elsif  user_signed_in? && @projects.count == 0 %>
-  <h2>Your have no active project on file.</h2>
+  <!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
+  <% elsif user_signed_in? && @projects.count == 1 %>
+    <h2>Your have one <%= @projects.count %> project on file.</h2>
 
-<!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
-<% elsif user_signed_in? %>
-  <h2>You have a total of <%= @projects.count %> projects !</h2>
+  <!-- USER SIGNED IN THERE IS NO PROJECT : -->
+  <% elsif  user_signed_in? && @projects.count == 0 %>
+    <h2>Your have no active project on file.</h2>
 
-<!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
-<% else %>
-  <h2>You have a total of <%= @projects.count %> projects !</h2>
-<% end %>
+  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
+  <% elsif user_signed_in? %>
+    <h2>You have a total of <%= @projects.count %> projects !</h2>
 
-<% @projects.each do |project| %>
-    <%= link_to project.name, project_path(project) %>
-    <%= project.short_description %>
-    <%= project.description %>
-    <%= project.deadline %>
-    <%= project.start_date %>
+  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
+  <% else %>
+    <h2>You have a total of <%= @projects.count %> projects !</h2>
   <% end %>
 
+  <div class="row">
+    <% @projects.each do |project| %>
+      <div class="col-xs-12 col-sm-4">
+        <%= render "shared/project_card", project: project %>
+      </div>
+    <% end %>
+  </div>
+
 <%= render 'indexlinks' %>
+
