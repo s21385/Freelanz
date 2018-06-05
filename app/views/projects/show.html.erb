@@ -72,13 +72,13 @@
         </p>
       </div>
       <div class="card-action">
-        <h4><%= position.rate_cents %>$ per day</h4>
+        <h5 class="position-rate"><%= position.rate_cents %>$ per day</h5>
         <% if !user_signed_in? %>
-          Please log in to apply.
+          <p>Please log in to apply.</p>
         <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
           <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply", id: "apply-#{position.id}"%>
           <% elsif position.project.user != @user %>
-            Already Applied
+            <p>Already Applied</p>
         <% end %>
       </div>
     </div>
