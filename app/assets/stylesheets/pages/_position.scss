@@ -2,20 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.img {
-
+  background-color: white;
+  padding: 30px;
+  margin: 30px 0;
 }
 
 .position-card-info {
-
+  flex-basis: 50%;
 }
 
 .card-skill-level {
-
+  flex-basis: 25%;
 }
 
 .card-action {
-
+  flex-basis: 25%;
 }
