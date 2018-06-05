@@ -1,9 +1,9 @@
 /* Main navbar */
 .navbar-wagon {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: black;
+  background: white;
   transition: all 0.3s ease;
-  height: 100px;
+  height: 90px;
   padding: 0px 30px;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@
 
 /* Logo */
 .navbar-wagon-brand img {
-  height: 100px;
+  height: 70px;
 
 
 }
@@ -57,7 +57,7 @@
 .navbar-wagon-dropdown-menu li > a {
   transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: #999999 !important;
+  color: rgba(68, 176, 193, 1) !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
@@ -66,7 +66,7 @@
 // Drop down menu items
 .navbar-wagon-dropdown-menu li > a:hover {
   background: transparent !important;
-  color: black !important;
+  color: rgba(46, 112, 122, 1) !important;
 }
 
 .navbar-wagon-dropdown-menu:before {
@@ -84,10 +84,21 @@
 }
 
 .dropdown > i {
-    color: white;
+    color: black;
 
     &:hover {
       color: gray;
     }
   }
 
+.btn-primary {
+  background-color: rgba(68,176,193, 0.5) !important;
+}
+
+.btn-primary:hover{
+  background-color: rgba(68,176,193, 1) !important;
+}
+
+.padopt {
+  padding: 0px 8px;
+}
