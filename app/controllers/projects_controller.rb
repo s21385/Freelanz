@@ -6,7 +6,7 @@ before_action :set_user
 
   def index
     # if !user_signed_in? || params[:all]
-      @projects = Project.all
+      @projects = Project.where(status: "Started")
     # else
     #   @projects = Project.where(user_id: @user)
     # end

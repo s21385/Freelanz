@@ -25,6 +25,21 @@ url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages
   element["item"]["name"]
   end
 
+
+PROJECT_NAME = ["Freelancing Contract", "Recurring Work", "Project for Startup",
+  "Navi ltd.", "Vasanth Project", "Poutine Startup", "La Gare", "Le Wagon Mtl",
+  "Huge Project", "Small job", "Martin's Poutine", "MG's Code School", "Alex Mr. Tickett",
+  "Brett's Filmy", "Simon's Rocket", "Agape's Piggy Bank"]
+
+JOBS_DESCRIPTIONS = ["Senior Programmer", "Team Leader", "Junior Programmer", "Intern",
+  "Intermediate Programmer", "Ruby Programmer", "Front End Programmer", "Back End Programmer",
+  "Database Expert", "SEO Expert", "Node Programmer", "Javascript Programmer", "React",
+  "Network Programmer", "Analyst Programmer", "Software Developper", ".Net Programmer",
+  "C++ Programmer", "Change Catalyst", "3D Programmer"]
+
+PROJECT_DESC1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
+PROJECT_DESC2 = ["Review", "Integration", "Upgrades", "Implementation"]
+
 puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
@@ -50,9 +65,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
   # PROJECTS
   urls = ["1.png", "2.png", "3.png", "4.png","5.png", "6.png",
     "9.png", "10.png", "11.png"]
-  project_names1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
-  project_names2 = ["Review", "Integration", "Upgrades", "Implementation"]
-  project_name = project_names1.sample + " " + project_names2.sample
+
     posn = 0
 
   2.times do
@@ -61,14 +74,14 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
     photos = [""]
     project = Project.create!(
     user_id: user.id,
-    name: project_name,
+    name: PROJECT_NAME.sample,
     short_description: pro_langs.sample,
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
     status: statuses.sample,
     photo: get_path(urls.sample),
-    description: Faker::Job.title
+    description: PROJECT_DESC1.sample + " " + PROJECT_DESC2.sample,
     )
 
     puts "Project project.name created"
@@ -103,12 +116,9 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
 
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
-      project_names1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
-      project_names2 = ["Review", "Integration", "Upgrades", "Implementation"]
-      project_name = project_names1.sample + " " + project_names2.sample
       position = Position.create!(
       project: project,
-      name: project_name,
+      name: JOBS_DESCRIPTIONS.sample,
       rate_cents: rate_cents,
       status: status.sample,
       first_skill: first_skill,
