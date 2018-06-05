@@ -13,7 +13,7 @@
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= cl_image_tag @user.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%= cl_image_tag @user.try(:photo), class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <!-- PATH MISSING BECAUSE ITS NOT IN ROUTES  -->
@@ -23,7 +23,7 @@
             </li>
             <li>
               <!-- PATH MISSING BECAUSE ITS NOT IN ROUTES  -->
-              <%= link_to user_path(@user) do %>
+              <%= link_to "path" do %>
                 <i class="fas fa-tachometer-alt"> Dashboard</i>
               <% end %>
             </li>
