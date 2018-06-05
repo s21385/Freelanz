@@ -1,16 +1,24 @@
 <div class="container">
   <div class="project-header" >
-    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
     <div class="project-info">
-      <h1><b><%= @project.name %></b></h1>
-      <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
+      <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+      <div>
+        <h1><b><%= @project.name %></b></h1>
+        <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
+      </div>
     </div>
+    <% if @project.user == current_user %>
+      <div class="btn-add-position">
+        <%= link_to new_project_position_path(@project) do %>
+          <i class="fas fa-plus-circle"></i>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
     <%= @project.user.last_name %></p>
-  <p>Description:<%= " " %><%= @project.short_description %></p>
-  <p>Details:<%= " " %><%= @project.description %></p>
+  <p><%= @project.description %></p>
 
   <!-- If the the viewer is the owner of project but no positions yet. -->
 
@@ -26,12 +34,13 @@
 
   <% elsif @project.user == @user %>
 
-    <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
+    <h2>You Have <%= @project.positions.count %> Positions Open: </h2>
       <% @project.positions.where(status: "Open").each do |position| %>
         <div class="position-card">
           <div class="position-card-info">
             <h4><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
             </%></h4>
+            <p> <%= position.description %> </p>
           </div>
           <div class="card-skill-level">
             <p>Skill Level<%= " " %><%= position.skill_level %></p>
@@ -52,7 +61,7 @@
 
   <% else %>
 
-    <h2>There are <%= @project.positions.where(status: "Open").count %> positions open for the <%= @project.name %> project:</h2>
+    <h2>There Are <%= @project.positions.where(status: "Open").count %> Positions Open</h2>
 
     <% @project.positions.where(status: "Open").each do |position| %>
 
