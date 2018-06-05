@@ -17,7 +17,7 @@
 
       <%= f.input :linkedin_id %>
       <%= f.input :github_id %>
-      <%= f.input :skill_level, collection: User::SKILL_LEVELS %>
+      <%= f.input :skill_level, collection: User::SKILL_LEVEL %>
       <%= f.input :email, required: true, autofocus: true %>
       <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
       <%= f.input :password_confirmation, required: true %>

@@ -4,7 +4,6 @@ class Position < ApplicationRecord
   validates :name, presence: :true
   validates :status, presence: :true, inclusion: { in: ["Filled", "Open"] }
   validates :first_skill, presence: :true
-  validates :skill_level, presence: :true, inclusion: { in: ["Junior Programmer",
-    "Intermediate Programmer", "Senior Programmer"] }
+  validates :skill_level, presence: :true, inclusion: { in: User::SKILL_LEVEL }
 
 end
