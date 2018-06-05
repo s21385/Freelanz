@@ -1,11 +1,21 @@
 <div class="container">
   <div class="project-header" >
-    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
     <div class="project-info">
+    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+    <div>
       <h1><b><%= @project.name %></b></h1>
       <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
     </div>
   </div>
+  <% if @project.user == current_user %>
+      <div class="btn-add-position">
+        <%= link_to new_project_position_path(@project) do %>
+          <i class="fas fa-plus-circle"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
   <p><%= @project.short_description %></p>
   <p><%= @project.description %></p>
 
