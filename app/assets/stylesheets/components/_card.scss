@@ -28,11 +28,13 @@
       position: absolute;
       top: 0;
       border-radius: 5px;
+      border-bottom: 6px solid black;
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: black;
-      opacity: 0.8;
+      background: radial-gradient(rgba(10,10,10,0.9), rgba(100,100,100,0.5));
+      // background-color: grey;
+      opacity: 0.95;
       display: flex;
       justify-content: center;
       align-items: center;
