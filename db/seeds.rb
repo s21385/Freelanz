@@ -48,17 +48,20 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
   puts "CREATING PROJECTS"
 
   # PROJECTS
-  urls = ["1.png", "2.png", "3.png", "4.png",
-    "5.png", "6.png",
+  urls = ["1.png", "2.png", "3.png", "4.png","5.png", "6.png",
     "9.png", "10.png", "11.png"]
+  project_names1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
+  project_names2 = ["Review", "Integration", "Upgrades", "Implementation"]
+  project_name = project_names1.sample + " " + project_names2.sample
     posn = 0
+
   2.times do
     statuses = ["Started", "Completed"]
     deadline = rand(Date.today+21...Date.today+730)
     photos = [""]
     project = Project.create!(
     user_id: user.id,
-    name: Faker::Job.field,
+    name: project_name,
     short_description: pro_langs.sample,
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
@@ -100,9 +103,12 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
 
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
+      project_names1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
+      project_names2 = ["Review", "Integration", "Upgrades", "Implementation"]
+      project_name = project_names1.sample + " " + project_names2.sample
       position = Position.create!(
       project: project,
-      name: Faker::Job.field,
+      name: project_name,
       rate_cents: rate_cents,
       status: status.sample,
       first_skill: first_skill,
