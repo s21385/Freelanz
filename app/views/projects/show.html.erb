@@ -6,11 +6,8 @@
       <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
     </div>
   </div>
-
-  <p>Project Leader:<%= " " %><%= @project.user.first_name %><%= " " %>
-    <%= @project.user.last_name %></p>
-  <p>Description:<%= " " %><%= @project.short_description %></p>
-  <p>Details:<%= " " %><%= @project.description %></p>
+  <p><%= @project.short_description %></p>
+  <p><%= @project.description %></p>
 
   <!-- If the the viewer is the owner of project but no positions yet. -->
 
@@ -30,8 +27,9 @@
       <% @project.positions.where(status: "Open").each do |position| %>
         <div class="position-card">
           <div class="position-card-info">
-            <h4><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
+            <h4><%= position.name %>
             </%></h4>
+            <p> <%= position.description %> </p>
           </div>
           <div class="card-skill-level">
             <p>Skill Level<%= " " %><%= position.skill_level %></p>
@@ -58,8 +56,8 @@
 
     <div class="position-card">
       <div class="position-card-info">
-        <h4><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %></%></h4>
-        <p>Your role is to code .Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......</p>
+        <h4><%= position.name %></%></h4>
+        <p> <%= position.description %> </p>
       </div>
       <div class="card-skill-level">
         <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
