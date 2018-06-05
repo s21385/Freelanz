@@ -14,7 +14,6 @@
 .navbar-wagon-brand img {
   height: 70px;
 
-
 }
 
 /* User Avatar */
@@ -100,5 +99,15 @@
 }
 
 .padopt {
-  padding: 0px 8px;
+  a {
+    padding: 0px 8px;
+    color: rgba(68, 176, 193, 1) ;
+
+    &:hover {
+    color: rgba(46, 112, 122, 1);
+
+    }
+  }
 }
+
+
