@@ -5,10 +5,12 @@
   background-color: white;
   padding: 30px;
   margin: 30px 0;
+  min-height: 225px;
 }
 
 .position-card-info {
   flex-basis: 50%;
+  padding: 0px 130px 0px 0px;
 }
 
 .card-skill-level {
@@ -17,6 +19,7 @@
 
 .card-action {
   flex-basis: 25%;
+  text-align: center;
 }
 
 .btn-apply {
