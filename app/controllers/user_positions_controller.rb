@@ -1,5 +1,5 @@
 class UserPositionsController < ApplicationController
-  before_action :set_user_position, except: :index
+  before_action :set_user_position, except: [:index, :create]
 
   def show
   end
@@ -24,12 +24,11 @@ class UserPositionsController < ApplicationController
 
   def update
     # @project = Project.find(params[:project_id])
+    # @position = Position.find(params[:position_id])
     # This is for changing the status of the user_position
     # When a project owner accepts or declines
-
-    @position = Position.find(params[:position_id])
-    @user_position = UserPosition.find(params[:id])
-    @user_position.update(project_params)
+    @user_position.update(user_position_params)
+    redirect_to dashboard_path
   end
 
 
@@ -40,6 +39,6 @@ class UserPositionsController < ApplicationController
   end
 
   def set_user_position
-    @position = Position.find(params[:position_id])
+    @user_position = UserPosition.find(params[:id])
   end
 end
