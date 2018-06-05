@@ -1,8 +1,10 @@
+
 <h3 style="text-align: center">Create a new position</h3>
 <div class="form_freelanz positions">
   <%= simple_form_for [@project, @position] do |f|  %>
     <%= f.input :name %>
     <%= f.input :description %>
+
     <%= f.input :first_skill %>
     <%= f.input :second_skill %>
     <%= f.input :third_skill %>
@@ -11,3 +13,4 @@
      <%= f.submit "Create Position", class: "btn btn-primary" %>
   <% end %>
 </div>
+
