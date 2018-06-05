@@ -18,7 +18,7 @@ Position.destroy_all
 User.destroy_all
 
 # PROGRAMMING LANGUAGES EXTRACTED
-url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.json'
+url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.JSON'
   pl_data_extracted = open(url).read
   pl_data = JSON.parse(pl_data_extracted)
   pro_langs = pl_data["itemListElement"].map do | element |

@@ -1,10 +1,12 @@
 .project-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .project-info {
-  margin-left: 25px;
+  display: flex;
+  align-items: center;
 }
 
 .start-end-dates {
@@ -13,6 +15,9 @@
   // align-items: center;
 }
 
+.project-title{
+  margin-left: 50px;
+}
 // .plus-button {
 //   align-self; flex-end;
 // }

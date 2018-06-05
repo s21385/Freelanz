@@ -2,7 +2,7 @@
   <div class="project-header" >
     <div class="project-info">
     <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
-    <div>
+    <div class="project-title">
       <h1><b><%= @project.name %></b></h1>
       <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
     </div>
@@ -33,7 +33,7 @@
 
   <% elsif @project.user == @user %>
 
-    <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
+    <h2>You Have <%= @project.positions.count %> Open Positions</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
         <div class="position-card">
           <div class="position-card-info">
@@ -68,10 +68,13 @@
       <div class="position-card-info">
         <h4><%= position.name %></%></h4>
         <p> <%= position.description %> </p>
+        <p id="cpt-<%= position.id %>"> <%= position.user_positions.count %></p>
       </div>
       <div class="card-skill-level">
         <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
-        <p> <b>Skills Required</b> <br> <%= " " %><%= position.first_skill %>
+        <p> <b>Skills Required</b> <br> <%= " " %>
+          <%= image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
+          <%= position.first_skill %>
           <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
             /<%= " " %><%= position.second_skill %>
           <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
@@ -85,7 +88,9 @@
         <% if !user_signed_in? %>
           <p>Please log in to apply.</p>
         <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
-          <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply", id: "apply-#{position.id}"%>
+            <div id="apply-<%= position.id %>">
+              <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply" %>
+            </div>
           <% elsif position.project.user != @user %>
             <p>Already Applied</p>
         <% end %>
