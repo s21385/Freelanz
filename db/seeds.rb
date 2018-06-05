@@ -69,7 +69,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
     posn = 0
 
   2.times do
-    statuses = ["Started", "Completed"]
+    statuses = ["Started", "Started", "Started", "Started","Completed"]
     deadline = rand(Date.today+21...Date.today+730)
     photos = [""]
     project = Project.create!(
