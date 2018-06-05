@@ -1,7 +1,4 @@
 <div class="container">
-  <h1>Pages#home</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
-  <br>
   <h2>My Projects</h2>
     <div class="row">
       <% @projects.each do |project| %>
@@ -22,7 +19,7 @@
           <div class="card">
             <div class="project-card-header">
               <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
-              <div>STATUS<%# t.status %></div>
+              <div><%= t.status %></div>
             </div>
 
             <div class="text-center">
@@ -32,7 +29,14 @@
             </div>
 
             <div class="project-card-footer">
-
+              <% if t.status == "In review" %>
+              <div class="btn btn-success">
+                  <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
+                </div>
+                <div class="btn btn-danger">>
+                  <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
+                </div>
+              <% end %>
             </div>
 
             <% link_to "Details", project_path(t) %>
@@ -62,6 +66,12 @@
       <% end %>
     </div>
 
-<%= render 'links' %>
+
+  <%= link_to 'See the groups list', groups_path %>
+  <%= link_to 'See the projects list', projects_path %>
+
+  <% if user_signed_in? %>
+    <%= link_to 'See your job applications', user_positions_path %>
+  <% end %>
 
 </div>

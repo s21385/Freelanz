@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
   root to: 'projects#index'
+  get "dashboard", to: "pages#dashboard", as: "dashboard"
   get "pages/linkedin_callback", to: "pages#linkedin", as: "linkedin"
   get "pages/additional_info", to: "pages#additional_info", as: "additional_info"
   devise_scope :user do
@@ -23,10 +24,10 @@ Rails.application.routes.draw do
   end
 
   resources :positions, except: [ :index, :show ] do
-    resources :user_positions, only: [ :update, :create, :show, :edit ]
+    resources :user_positions, only: [ :create, :show, :edit ]
   end
 
-  resources :user_positions, only: [ :index ]
+  resources :user_positions, only: [ :index, :update ]
 
   resources :users, only: [:show]
 

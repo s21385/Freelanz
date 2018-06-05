@@ -2,9 +2,10 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def home
+  def dashboard
     @projects = current_user.projects
     @user_positions = current_user.user_positions if current_user.present?
+    @user = current_user
   end
 
   def linkedin

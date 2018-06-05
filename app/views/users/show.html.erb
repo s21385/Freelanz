@@ -1,7 +1,73 @@
-<p><%= cl_image_tag @user.photo, height: 120, crop: :fill %></p>
-<p><%= @user.first_name %><%= @user.last_name %></p>
-<p><%= @user.email %></p>
-<p><%= @user.phone %></p>
-<p><%= @user.skill_level %></p>
+<div class="container">
+  <h1>Pages#home</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
+  <br>
+  <h2>My Projects</h2>
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= render "shared/project_card", project: project %>
+        </div>
+      <% end %>
+    </div>
 
-<%= render 'links' %>
+
+
+
+  <br>
+  <h2>Requests To My Projects</h2>
+    <div class="row">
+      <% @user_positions.each do |t| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card">
+            <div class="project-card-header">
+              <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
+              <div>STATUS<%# t.status %></div>
+            </div>
+
+            <div class="text-center">
+              <h3><%= t.user.full_name %></h3>
+              <p><%= t.position.name %></p>
+              <p><%= t.user.skill_level %></p>
+            </div>
+
+            <div class="project-card-footer">
+              sdfsdfsdf
+            </div>
+
+            <% link_to "Details", project_path(t) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+
+  <br>
+  <h2>My Requests</h2>
+    <div class="row">
+      <% @projects.each do |t| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card">
+            <h3><%= t.name %></h3>
+            <p><%= t.description %></p>
+            <% t.positions.each do |pos| %>
+              <p> <%= pos.name %> </p>
+            <% end %>
+            <h4><%= t.status %></h4>
+
+            <%= link_to "Details", projects_path(t) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+  <%= link_to 'See the groups list', groups_path %>
+  <%= link_to 'See the projects list', projects_path %>
+
+  <% if user_signed_in? %>
+    <%= link_to 'See your job applications', user_positions_path %>
+  <% end %>
+
+</div>
