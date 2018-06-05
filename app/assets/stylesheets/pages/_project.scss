@@ -1,12 +1,13 @@
 .project-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-// .project-info {
-//   display: flex;
-//   justify-content: flex-start;
-// }
+.project-info {
+  display: flex;
+  align-items: center;
+}
 
 .start-end-dates {
   display: flex;
