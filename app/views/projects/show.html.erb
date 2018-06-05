@@ -52,32 +52,45 @@
   <% else %>
 
     <h2>There are <%= @project.positions.where(status: "Open").count %> positions open for the <%= @project.name %> project:</h2>
+
     <% positions = 0 %>
     <% @project.positions.where(status: "Open").each do |position| %>
     <% positions += 1 %>
-      <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
-      </%></h4>
-      <p>Skill level required:<%= " " %><%= position.skill_level %></p>
 
-      <p>Skills required: <%= " " %><%= position.first_skill %>
-      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-        /<%= " " %><%= position.second_skill %>
-      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-        /<%= " " %><%= position.second_skill %>
-        /<%= " " %><%= position.third_skill %>
-     <% end %>
-     </p>
-      <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+    <div class="position-card">
+      <%= cl_image_tag(@project.photo, height: 60, crop: :fill) unless @project.photo.file.nil? %>
+      <div class="position-card-info">
+        <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %></%></h4>
+        <p>Your role is to code .Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......</p>
+      </div>
+      <div class="card-skill-level">
+        <p>Skill level required:<%= " " %><%= position.skill_level %></p>
+        <p>Skills required: <%= " " %><%= position.first_skill %>
+          <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+            /<%= " " %><%= position.second_skill %>
+          <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+            /<%= " " %><%= position.second_skill %>
+            /<%= " " %><%= position.third_skill %>
+          <% end %>
+        </p>
+      </div>
+      <div class="card-action">
+        <h4><%= position.rate_cents %>$ per day</h4>
         <% if !user_signed_in? %>
           Please log in to apply.
         <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
           <span id="apply-<%= position.id %>"><%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true %></span>
         <% end %>
+      </div>
+    </div>
+
+
+
     <% end %>
   <% end %>
 
   <% if @project.user == @user && @project.positions.count != 0 %>
-    <%= link_to 'Add a position', new_project_position_path(@project) %>
+    <%= link_to 'Add a Position', new_project_position_path(@project) %>
   <% end %>
 
 <%= render 'showindex' %>

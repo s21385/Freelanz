@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  SKILL_LEVELS = ["Junior Programmer", "Intermediate Programmer", "Senior Programmer"]
+  SKILL_LEVELS = ["Junior programmer", "Intermediate programmer", "Senior programmer"]
 
   mount_uploader :photo, PhotoUploader
   # Include default devise modules. Others available are:
