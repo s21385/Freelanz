@@ -1,8 +1,7 @@
-<div class="container">
-
+<div class="container" >
   <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
   <% if !user_signed_in? || params[:all] %>
-    <h2>Freelanz has a total of <%= @projects.count %> projects !</h2>
+    <h2>Freelanz has a total of <%= @projects.count %> projects.</h2>
 
   <!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
   <% elsif user_signed_in? && @projects.count == 1 %>
@@ -14,19 +13,18 @@
 
   <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
   <% elsif user_signed_in? %>
-    <h2>You have a total of <%= @projects.count %> projects !</h2>
-
-  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
-  <% else %>
-    <h2>You have a total of <%= @projects.count %> projects !</h2>
+    <h2>You have a total of <%= @projects.count %> projects.</h2>
   <% end %>
 
-  <div class="row">
-    <% @projects.each do |project| %>
-      <div class="col-xs-12 col-sm-4">
-        <%= render "shared/project_card", project: project %>
-      </div>
-    <% end %>
+  <div style="padding-top: 30px">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= render "shared/project_card", project: project %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
 
 <%= render 'indexlinks' %>
