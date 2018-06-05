@@ -15,7 +15,7 @@
   <!-- If the the viewer is the owner of project but no positions yet. -->
 
   <% if @project.user == @user && @project.positions.count == 0 %>
-    <h2><%= link_to 'Add Position', new_project_position_path(@project) %></h2>
+    <h2><%= link_to 'Add Position', new_project_position_path(@project.id) %></h2>
 
   <!-- If the the viewer is NOT the owner of project AND no positions yet. -->
 
@@ -27,23 +27,27 @@
   <% elsif @project.user == @user %>
 
     <h2>You have <%= @project.positions.count %> positions for the <%= @project.name %> project:</h2>
-      <% positions = 0 %>
       <% @project.positions.where(status: "Open").each do |position| %>
-      <% positions += 1 %>
-        <h4><%= positions %> - Name:<%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
-        </%></h4>
-        <p>Skill Level<%= " " %><%= position.skill_level %></p>
-
-        <p>Skills required <%= " " %><%= position.first_skill %>
-      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-        /<%= " " %><%= position.second_skill %>
-      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-        /<%= " " %><%= position.second_skill %>
-        /<%= " " %><%= position.third_skill %>
-     <% end %>
-        <p>Number of applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+        <div class="position-card">
+          <div class="position-card-info">
+            <h4><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %>
+            </%></h4>
+          </div>
+          <div class="card-skill-level">
+            <p>Skill Level<%= " " %><%= position.skill_level %></p>
+            <p>Skills Required <%= " " %><%= position.first_skill %>
+            <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+              /<%= " " %><%= position.second_skill %>
+            <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+              /<%= " " %><%= position.second_skill %>
+              /<%= " " %><%= position.third_skill %>
+            <% end %>
+          </div>
+          <div class="card-action">
+            <p>Number of Applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+          </div>
+        </div>
       <% end %>
-
   <!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
 
   <% else %>
@@ -54,7 +58,7 @@
 
     <div class="position-card">
       <div class="position-card-info">
-        <h4><%= positions %><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %></%></h4>
+        <h4><%= " " %><%= link_to "#{position.name}", project_position_path(@project, position) %></%></h4>
         <p>Your role is to code .Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......Your role is to code ......</p>
       </div>
       <div class="card-skill-level">
@@ -89,5 +93,5 @@
     <%= link_to 'Add a Position', new_project_position_path(@project) %>
   <% end %>
 
-<%= render 'showindex' %>
+ <!-- render 'showindex' -->
 </div>
