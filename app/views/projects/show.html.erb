@@ -2,11 +2,8 @@
   <div class="project-header" >
     <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
     <div class="project-info">
-      <h1>Project name: <b><%= @project.name %></b></h1>
-    </div>
-    <div class="start-end-dates">
-      <p>Start date:<%= " " %><%= @project.start_date %></p>
-      <p>Deadline:<%= " " %><%= @project.deadline %></p>
+      <h1><b><%= @project.name %></b></h1>
+      <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
     </div>
   </div>
 
