@@ -30,14 +30,13 @@ puts "STARTING SEEDING PROCEDURES"
 # USERS CREATING PROJECT
 puts 'CREATING USERS'
 urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
-skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
     password: "password123",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    skill_level: skills.sample,
+    skill_level: User::SKILL_LEVEL.sample,
     phone: Faker::PhoneNumber.cell_phone,
     photo: get_path1(urls.sample),
     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
@@ -96,7 +95,6 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
     # POSITIONS
     puts 'CREATING ON PROJECTS'
     (2..7).to_a.sample.times do
-      skill_level = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       status = ["Filled", "Open"]
       first_skill = pro_langs.sample
 
@@ -110,7 +108,7 @@ skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
       first_skill: first_skill,
       second_skill: pro_langs.sample,
       third_skill: pro_langs.sample,
-      skill_level: skill_level.sample
+      skill_level: User::SKILL_LEVEL.sample
       )
       puts "position.name created"
     end
@@ -119,7 +117,6 @@ end
 
 # USERS APPLICATIONS
 puts 'CREATING 10 USERS...'
-skills = ["Junior programmer", "Senior programmer", "Intermediate programmer"]
 urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
   "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 10.times do
@@ -133,7 +130,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     linkedin_id: "www.linkedin.com/in/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     # photo: "cloudinary_url"
-    skill_level: skills.sample,
+    skill_level: User::SKILL_LEVEL.sample,
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
   puts "Created user: " + user.first_name + " " + user.last_name
