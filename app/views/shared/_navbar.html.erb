@@ -19,7 +19,7 @@
     <!-- Avatar with dropdown menu -->
 <div class="navbar-wagon-item">
     <div class="dropdown">
-      <%= cl_image_tag @user.try(:photo), class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+      <%= cl_image_tag current_user.try(:photo), class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
           <!-- PATH MISSING BECAUSE ITS NOT IN ROUTES  -->
