@@ -40,7 +40,7 @@
                 <div class="btn btn-success">
                     <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
                   </div>
-                  <div class="btn btn-danger">>
+                  <div class="btn btn-danger">
                     <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
                   </div>
                 <% end %>
