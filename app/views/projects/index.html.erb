@@ -1,6 +1,17 @@
 <div id="info-banner">
   <h3>DEDICATED TO FREELANCER COLLABORATION</h3>
 </div>
+  <div id="job-search">
+    <%= form_tag projects_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        id: "query-freelanz",
+        placeholder: "SEARCH PROJECTS"
+      %>
+    <% end %>
+  </div>
+
 
 <div class="container" >
   <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->

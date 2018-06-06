@@ -1,4 +1,7 @@
 class Position < ApplicationRecord
+  include PgSearch
+  multisearchable against: [ :name ]
+
   belongs_to :project
   has_many :user_positions, dependent: :destroy
   validates :name, presence: :true
