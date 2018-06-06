@@ -57,7 +57,10 @@ class PagesController < ApplicationController
   end
 
   def additional_info
+    if current_user.skill_level.nil?
     @user = current_user
+    else
+    redirect_to dashboard_path
   end
 
   # def position
