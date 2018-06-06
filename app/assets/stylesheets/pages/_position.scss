@@ -46,3 +46,27 @@
   font-size: 20px;
   margin-bottom: 60px;
 }
+
+.request-status {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 17px;
+  padding: 4px 21px;
+  margin-left: 249px;
+
+  &.accepted {
+    background-color: green;
+    color: white;
+  }
+
+  &.pending {
+    background-color: #ECB100;
+    color: black;
+  }
+
+  &.declined {
+    background-color: red;
+    color: white;
+  }
+}
