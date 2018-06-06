@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/show'
+
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
   root to: 'projects#index'
@@ -29,6 +29,6 @@ Rails.application.routes.draw do
 
   resources :user_positions, only: [ :index, :update ]
 
-  get "users/show/:id", to: "users#show", as: "show"
+  get "users/show/:id", to: "users#show", as: "users_show"
 
 end
