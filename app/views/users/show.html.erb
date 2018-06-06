@@ -14,9 +14,11 @@
   <h4>Asking rate: <%=  current_user.rate_cents %></h4>
   <h4>Github ID: <%=  current_user.github_id %></h4>
   <h4>Skill Level: <%=  current_user.skill_level %></h4>
+  <%= raise %>
   <%  if !current_user.linkedin_id.nil? %>
     <div><%= link_to "Linkedin Profile Page", current_user.linkedin_profile_url, target: "_blank", class: "btn btn-primary" %></div>
   <% else  %>
+
   <% end %>
 
 
