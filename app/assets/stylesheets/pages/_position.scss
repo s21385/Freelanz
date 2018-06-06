@@ -23,6 +23,18 @@
   text-align: center;
 }
 
+.btn-success {
+  a:link {
+    color: white;
+  }
+}
+
+.btn-danger {
+  a:link {
+    color: white;
+  }
+}
+
 .btn-apply {
   background-color: #27AE60;
   text-decoration: none;
@@ -33,4 +45,30 @@
 .position-rate {
   font-size: 20px;
   margin-bottom: 60px;
+}
+
+.request-status {
+  // position: absolute;
+  // top: 0px;
+  // left: 0px;
+  margin-top: -23px;
+  margin-right: -11px;
+  font-size: 17px;
+  padding: 4px 21px;
+  // margin-left: 249px;
+
+  &.accepted {
+    background-color: green;
+    color: white;
+  }
+
+  &.pending {
+    background-color: #ECB100;
+    color: black;
+  }
+
+  &.declined {
+    background-color: red;
+    color: white;
+  }
 }

@@ -20,7 +20,13 @@
             <div class="card">
               <div class="project-card-header">
                 <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
-                <div><%= t.status %></div>
+                <% if t.status == "Refused" %>
+                  <div class="request-status declined"><%= t.status %></div>
+                <% elsif t.status == "Accepted" %>
+                  <div class="request-status accepted"><%= t.status %></div>
+                <% else %>
+                  <div class="request-status pending"><%= t.status %></div>
+                <% end %>
               </div>
 
               <div class="text-center">
@@ -34,7 +40,7 @@
                 <div class="btn btn-success">
                     <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
                   </div>
-                  <div class="btn btn-danger">>
+                  <div class="btn btn-danger">
                     <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
                   </div>
                 <% end %>
@@ -51,22 +57,71 @@
 
   <br>
   <h2>My Requests</h2>
-    <div class="row">
-      <% @my_requests.each do |t| %>
-        <% t = t.position %>
+    <div class="row dashboard-user-positions">
+      <% @my_requests.each do |user_position| %>
+      <% position = user_position.position %>
+
+        <div class="position-card">
+          <% if user_position.status == "Refused" %>
+            <div class="request-status-dashboard declined"><%= user_position.status %></div>
+          <% elsif user_position.status == "Accepted" %>
+            <div class="request-status-dashboard accepted"><%= user_position.status %></div>
+          <% else %>
+            <div class="request-status-dashboard pending"><%= user_position.status %></div>
+          <% end %>
+
+          <div class="logo">
+            <%= cl_image_tag(position.project.photo, height: 60, crop: :fill) unless position.project.photo.file.nil? %>
+          </div>
+
+          <div class="position-card-info">
+            <h4><%= position.name %></%></h4>
+            <p> <%= position.description %> </p>
+            <p id="cpt-<%= position.id %>"> Applicants: <%= position.user_positions.count %></p>
+          </div>
+
+          <div class="card-skill-level">
+            <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
+            <p> <b>Skills Required</b> <br> <%= " " %>
+              <%= image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
+              <%= position.first_skill %>
+              <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+                /<%= " " %><%= position.second_skill %>
+              <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+                /<%= " " %><%= position.second_skill %>
+                /<%= " " %><%= position.third_skill %>
+              <% end %>
+            </p>
+          </div>
+
+          <div class="card-action">
+            <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
+            <% if !user_signed_in? %>
+              <p>Please log in to apply.</p>
+            <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
+              <div id="apply-<%= position.id %>">
+                <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply" %>
+              </div>
+            <% elsif position.project.user != @user %>
+              <p>Already Applied</p>
+            <% end %>
+          </div>
+        </div>
+
+<!--         <%# t = t.position %>
         <div class="col-xs-12 col-sm-4">
           <div class="card">
             <div class="project-card-header">
 
             </div>
-            <h3><%= t.name %></h3>
-            <p><%= t.description %></p>
+            <h3><%#= t.name %></h3>
+            <p><%#= t.description %></p>
 
-            <h4><%= t.status %></h4>
+            <h4><%#= t.status %></h4>
 
-            <%= link_to "Details", projects_path(t) %>
+            <%#= link_to "Details", projects_path(t) %>
           </div>
-        </div>
+        </div> -->
       <% end %>
     </div>
 

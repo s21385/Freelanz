@@ -5,6 +5,26 @@
     }
   }
 
+.request-status {
+  padding: 10px 40px;
+
+  &.accepted {
+    background-color: green;
+    color: white;
+  }
+
+  &.pending {
+    background-color: yellow;
+    color: black;
+  }
+
+  &.declined {
+    background-color: red;
+    color: white;
+  }
+
+}
+
 .card {
   height: 335px;
   display: flex;
