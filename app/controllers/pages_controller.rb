@@ -61,6 +61,7 @@ class PagesController < ApplicationController
     @user = current_user
     else
     redirect_to dashboard_path
+    end
   end
 
   # def position
