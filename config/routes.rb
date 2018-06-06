@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "dashboard", to: "pages#dashboard", as: "dashboard"
   get "pages/linkedin_callback", to: "pages#linkedin", as: "linkedin"
   get "pages/additional_info", to: "pages#additional_info", as: "additional_info"
+  get "projects/index_specific", to: "projects#index_specific", as: "index_specific"
   devise_scope :user do
     put 'users/additional_info_update', to: "registrations#additional_info_update", as: "additional_info_update"
   end
