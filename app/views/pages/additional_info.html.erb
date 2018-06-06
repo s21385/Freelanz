@@ -9,7 +9,7 @@
   <%= simple_form_for @user, url: additional_info_update_path, method: :put do |f| %>
   <%= f.input :skill_level, label: 'Your skill level please', error: 'Skill is mandatory, please choose one one', collection: User::SKILL_LEVEL %>
 
-  <%= f.button :submit, "Update" %>
+  <%= f.button :submit, "Update",  class: "btn btn-primary" %>
   <% end %>
 
 </div>

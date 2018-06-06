@@ -17,13 +17,20 @@ UserPosition.destroy_all
 Position.destroy_all
 User.destroy_all
 
-# PROGRAMMING LANGUAGES EXTRACTED
-url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.JSON'
-  pl_data_extracted = open(url).read
-  pl_data = JSON.parse(pl_data_extracted)
-  pro_langs = pl_data["itemListElement"].map do | element |
-  element["item"]["name"]
-  end
+# # PROGRAMMING LANGUAGES EXTRACTED
+# url = 'https://raw.githubusercontent.com/scienceai/list-of-programming-languages/master/data/data.JSON'
+#   pl_data_extracted = open(url).read
+#   pl_data = JSON.parse(pl_data_extracted)
+#   pro_langs = pl_data["itemListElement"].map do | element |
+#   element["item"]["name"]
+#   end
+
+pro_langs = ["Android", "AngularJS", "AWS", "Backbone.js", "C", "C++", "C#", "CoffeeScript",
+"Clojure", "CommonLisp", "CSS", "Design Pattern", "Django", "Erlang", "Flask",
+"Git", "Go", "Groovy", "Haskell", "HTTP API Design", "HTML", "iOS", "JSON",
+"Java", "Javascript", "jQuery", "Kotlin", "Makefile", "Objective-C", "Perl",
+"PHP", "Python", "R", "React", "Redux", "Ruby", "Ruby on Rails", "Rust", "Sass","Scala",
+"Shell", "SpringFramework", "Swift", "SQL", "Unreal Engine", "Vimscript", "Vue.js", "XML"]
 
 
 PROJECT_NAME = ["Freelancing Contract", "Recurring Work", "Project for Startup",
