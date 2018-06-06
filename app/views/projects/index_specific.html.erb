@@ -1,0 +1,27 @@
+
+
+<div class="container" >
+  <h3>My Projects</h3>
+  <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
+  <% if !user_signed_in? || params[:all] %>
+
+  <!-- USER SIGNED IN & THERE IS ONLY ONE PROJECT : -->
+  <% elsif user_signed_in? && @projects.count == 1 %>
+
+  <!-- USER SIGNED IN THERE IS NO PROJECT : -->
+  <% elsif  user_signed_in? && @projects.count == 0 %>
+
+  <!-- USER SIGNED IN & THERE ARE MORE THAN ONE PROJECT : -->
+  <% elsif user_signed_in? %>
+  <% end %>
+
+  <div style="padding-top: 30px">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="col-xs-12 col-sm-4">
+          <%= render "shared/project_card", project: project %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

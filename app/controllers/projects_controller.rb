@@ -12,8 +12,9 @@ before_action :set_user
     end
   end
 
-  def index_all
-    @projects = Project.all
+  def index_specific
+    # @projects = Project.all
+    @projects = Project.all.where(user_id: current_user)
   end
 
   def new
