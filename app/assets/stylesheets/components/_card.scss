@@ -5,6 +5,11 @@
     }
   }
 
+  .project-description {
+    margin: 0 20px;
+    text-align: justify;
+  }
+
 .request-status {
   padding: 10px 40px;
 
@@ -29,9 +34,10 @@
   height: 335px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   box-shadow: 0.5px 2px 3px 3px rgba(0,0,0,0.2);
   padding: 10px;
-  background-color: rgba(200, 200, 200, 0.1);
+  background-color: rgba(230, 230, 230, 0.1);
   margin-bottom: 20px;
   border-radius: 5px;
   position: relative;
