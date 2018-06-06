@@ -14,34 +14,36 @@
   <br>
   <h2>Requests To My Projects</h2>
     <div class="row">
-      <% @user_positions.each do |t| %>
-        <div class="col-xs-12 col-sm-4">
-          <div class="card">
-            <div class="project-card-header">
-              <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
-              <div><%= t.status %></div>
-            </div>
+      <% @projects.each do |p| %>
+        <% p.user_positions.each do |t| %>
+          <div class="col-xs-12 col-sm-4">
+            <div class="card">
+              <div class="project-card-header">
+                <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
+                <div><%= t.status %></div>
+              </div>
 
-            <div class="text-center">
-              <h3><%= t.user.full_name %></h3>
-              <p><%= t.position.name %></p>
-              <p><%= t.user.skill_level %></p>
-            </div>
+              <div class="text-center">
+                <h3><%= t.user.full_name %></h3>
+                <p><%= p.name %></p>
+                <p><%= t.user.skill_level %></p>
+              </div>
 
-            <div class="project-card-footer">
-              <% if t.status == "In review" %>
-              <div class="btn btn-success">
-                  <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
-                </div>
-                <div class="btn btn-danger">>
-                  <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
-                </div>
-              <% end %>
-            </div>
+              <div class="project-card-footer">
+                <% if t.status == "In review" %>
+                <div class="btn btn-success">
+                    <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
+                  </div>
+                  <div class="btn btn-danger">>
+                    <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
+                  </div>
+                <% end %>
+              </div>
 
-            <% link_to "Details", project_path(t) %>
+              <% link_to "Details", project_path(t) %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
 
@@ -50,14 +52,16 @@
   <br>
   <h2>My Requests</h2>
     <div class="row">
-      <% @projects.each do |t| %>
+      <% @my_requests.each do |t| %>
+        <% t = t.position %>
         <div class="col-xs-12 col-sm-4">
           <div class="card">
+            <div class="project-card-header">
+
+            </div>
             <h3><%= t.name %></h3>
             <p><%= t.description %></p>
-            <% t.positions.each do |pos| %>
-              <p> <%= pos.name %> </p>
-            <% end %>
+
             <h4><%= t.status %></h4>
 
             <%= link_to "Details", projects_path(t) %>
@@ -67,11 +71,5 @@
     </div>
 
 
-  <%= link_to 'See the groups list', groups_path %>
-  <%= link_to 'See the projects list', projects_path %>
-
-  <% if user_signed_in? %>
-    <%= link_to 'See your job applications', user_positions_path %>
-  <% end %>
 
 </div>

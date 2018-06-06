@@ -29,6 +29,6 @@ Rails.application.routes.draw do
 
   resources :user_positions, only: [ :index, :update ]
 
-  resources :users, only: [:show]
+  get "users/show/:id", to: "users#show", as: "show"
 
 end
