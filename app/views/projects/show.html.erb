@@ -20,14 +20,8 @@
   <p><%= @project.short_description %></p>
   <p><%= @project.description %></p>
 
-  <!-- If the the viewer is the owner of project but no positions yet. -->
 
-  <% if @project.user == @user && @project.positions.count == 0 %>
-    <h2><%= link_to 'Add Position', new_project_position_path(@project.id) %></h2>
-
-  <!-- If the the viewer is NOT the owner of project AND no positions yet. -->
-
-  <% elsif @project.user != @user && @project.positions.count == 0 %>
+  <% if @project.positions.count == 0 %>
     <h2>There are no available positions for this project.</h2>
 
   <!-- If the the viewer is the owner of project AND there are positions created. -->
@@ -35,86 +29,12 @@
   <% elsif @project.user == @user %>
     <h2>You Have <%= @project.positions.count %> Open Positions</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
-        <div class="position-card">
-          <div class="position-card-info">
-            <h4><%= position.name %>
-            </%></h4>
-            <p> <%= position.description %> </p>
-          </div>
-          <div class="card-skill-level">
-            <p>Skill Level<%= " " %><%= position.skill_level %></p>
-            <p>Skills Required <%= " " %><%= position.first_skill %>
-            <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-              /<%= " " %><%= position.second_skill %>
-            <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-              /<%= " " %><%= position.second_skill %>
-              /<%= " " %><%= position.third_skill %>
-            <% end %>
-          </div>
-          <div class="card-action">
-            <% if @project.user == current_user %>
-              <div>
-                <%= link_to edit_project_path(@project) do %>
-                  <i class="far fa-edit"></i>
-                <% end %>
-              </div>
-            <% end %>
-            <% if @project.user == current_user %>
-              <div>
-                <%= link_to new_project_position_path(@project) do %>
-                  <i class="far fa-trash-alt"></i>
-                <% end %>
-              </div>
-            <% end %>
-            <p>Number of Applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
-          </div>
-        </div>
+        <%= render "project_position_card", position: position %>
       <% end %>
-  <!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
-
   <% else %>
-
     <h2>There Are <%= @project.positions.where(status: "Open").count %> Positions Open</h2>
-
     <% @project.positions.where(status: "Open").each do |position| %>
-
-    <div class="position-card">
-      <div class="position-card-info">
-        <h4><%= position.name %></%></h4>
-        <p> <%= position.description %> </p>
-        <p id="cpt-<%= position.id %>"> <%= position.user_positions.count %></p>
-      </div>
-      <div class="card-skill-level">
-        <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
-        <p> <b>Skills Required</b> <br> <%= " " %>
-          <%= image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
-          <%= position.first_skill %>
-          <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-            /<%= " " %><%= position.second_skill %>
-          <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-            /<%= " " %><%= position.second_skill %>
-            /<%= " " %><%= position.third_skill %>
-          <% end %>
-        </p>
-      </div>
-      <div class="card-action">
-        <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
-        <% if !user_signed_in? %>
-          <p>Please log in to apply.</p>
-        <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
-            <div id="apply-<%= position.id %>">
-              <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply" %>
-            </div>
-          <% elsif position.project.user != @user %>
-            <p>Already Applied</p>
-        <% end %>
-      </div>
-    </div>
-
-
-
+      <%= render "project_position_card", position: position %>
     <% end %>
   <% end %>
-
- <!-- render 'showindex' -->
 </div>
