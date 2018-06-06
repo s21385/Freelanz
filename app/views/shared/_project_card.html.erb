@@ -13,12 +13,14 @@
       <div class="text-center">
         <%= cl_image_tag(project.photo, height: 60, crop: :fill) unless project.photo.file.nil? %>
         <h4><%= project.name %></h4>
-        <p><%= project.description %></p>
+        <p class="ellipsis"><%= project.description %></p>
       </div>
 
       <div class="project-card-footer">
         <% project.positions.first(3).each do |pos| %>
+        <div>
           <p><%= pos.name %></p>
+        </div>
         <% end %>
       </div>
 
