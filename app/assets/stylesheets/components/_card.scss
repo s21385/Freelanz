@@ -9,7 +9,7 @@
   height: 335px;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+  box-shadow: 0.5px 2px 3px 3px rgba(0,0,0,0.2);
   padding: 10px;
   background-color: rgba(200, 200, 200, 0.1);
   margin-bottom: 20px;
@@ -28,7 +28,6 @@
       position: absolute;
       top: 0;
       border-radius: 5px;
-      border-bottom: 10px solid black;
       bottom: 0;
       left: 0;
       right: 0;
