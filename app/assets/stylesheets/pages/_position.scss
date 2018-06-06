@@ -48,12 +48,14 @@
 }
 
 .request-status {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+  // position: absolute;
+  // top: 0px;
+  // left: 0px;
+  margin-top: -23px;
+  margin-right: -11px;
   font-size: 17px;
   padding: 4px 21px;
-  margin-left: 249px;
+  // margin-left: 249px;
 
   &.accepted {
     background-color: green;

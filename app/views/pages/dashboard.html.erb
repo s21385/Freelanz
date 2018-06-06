@@ -63,11 +63,11 @@
 
         <div class="position-card">
           <% if user_position.status == "Refused" %>
-            <div class="request-status declined"><%= user_position.status %></div>
+            <div class="request-status-dashboard declined"><%= user_position.status %></div>
           <% elsif user_position.status == "Accepted" %>
-            <div class="request-status accepted"><%= user_position.status %></div>
+            <div class="request-status-dashboard accepted"><%= user_position.status %></div>
           <% else %>
-            <div class="request-status pending"><%= user_position.status %></div>
+            <div class="request-status-dashboard pending"><%= user_position.status %></div>
           <% end %>
 
           <div class="logo">
