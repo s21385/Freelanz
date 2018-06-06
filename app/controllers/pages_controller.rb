@@ -1,11 +1,10 @@
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:dashboard]
 
   def dashboard
     @projects = current_user.projects
-    @user_positions = current_user.user_positions if current_user.present?
-    @user = current_user
+    @my_requests = current_user.user_positions
   end
 
   def linkedin

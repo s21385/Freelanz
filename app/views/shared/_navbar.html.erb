@@ -23,7 +23,7 @@
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
           <!-- PATH MISSING BECAUSE ITS NOT IN ROUTES  -->
-          <%= link_to "path" do %>
+          <%= link_to users_show_path(current_user) do %>
             <i class="fa fa-user"> Profile</i>
           <% end %>
         </li>
@@ -50,7 +50,7 @@
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
-          <%= link_to "path" do %>
+          <%= link_to users_show_path(current_user) do %>
             <i class="fa fa-user"> Profile</i>
           <% end %>
         </li>

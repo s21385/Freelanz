@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   has_many :discussions, as: :discussionable, dependent: :destroy
   has_many :messages, through: :discussions
   has_many :positions, dependent: :destroy
+  has_many :user_positions, through: :positions
 
   validates :name, presence: :true
   validates :short_description, presence: :true
