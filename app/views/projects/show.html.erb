@@ -54,7 +54,7 @@
           <div class="card-action">
             <% if @project.user == current_user %>
               <div>
-                <%= link_to new_project_position_path(@project) do %>
+                <%= link_to edit_project_path(@project) do %>
                   <i class="far fa-edit"></i>
                 <% end %>
               </div>

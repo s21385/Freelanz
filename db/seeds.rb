@@ -145,7 +145,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
-    password: "password123",
+    password: "123456",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     photo: get_path1(urls.sample),
