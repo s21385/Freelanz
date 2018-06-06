@@ -52,7 +52,22 @@
             <% end %>
           </div>
           <div class="card-action">
+            <% if @project.user == current_user %>
+              <div>
+                <%= link_to new_project_position_path(@project) do %>
+                  <i class="far fa-edit"></i>
+                <% end %>
+              </div>
+            <% end %>
+            <% if @project.user == current_user %>
+              <div>
+                <%= link_to new_project_position_path(@project) do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </div>
+            <% end %>
             <p>Number of Applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
+          </div>
           </div>
         </div>
       <% end %>
