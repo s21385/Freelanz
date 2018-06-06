@@ -43,10 +43,18 @@ class PagesController < ApplicationController
     results = JSON.parse(response.body)
     user = User.find_by(linkedin_id: results["id"])
 
+
       if user.nil?
       # OR CREATE A NEW USER
       # USED GITHUB COLUMN FOR LINKED IN PROFILE PAGE JUST AS A TEST TO SEE VIEW
-        user = User.create!(email: results["emailAddress"], linkedin_id: results["id"], password: Devise.friendly_token[0,20], first_name: results["firstName"], last_name: results["lastName"], linkedin_photo: results["pictureUrl"])
+        user = User.create!(
+          email: results["emailAddress"],
+          linkedin_id: results["id"],
+          password: Devise.friendly_token[0,20],
+          first_name: results["firstName"],
+          last_name: results["lastName"],
+          linkedin_photo: results["pictureUrl"],
+          linkedin_profile_url: results["publicProfileUrl"])
       end
       # results["publicProfileUrl"] for Linkedin public profile
 

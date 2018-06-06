@@ -28,11 +28,11 @@
             "navbar-wagon-menu", "data-toggle" => "dropdown" %>
         <% end %>
 
-        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+
 
           <% if user_signed_in? %>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <!-- PATH MISSING BECAUSE ITS NOT IN ROUTES  -->
               <%= link_to users_show_path(current_user.id) do %>
                 <i class="fa fa-user"> Profile</i>
             </li>
