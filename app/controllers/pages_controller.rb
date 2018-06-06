@@ -48,7 +48,7 @@ class PagesController < ApplicationController
       if user.nil?
       # OR CREATE A NEW USER
       # USED GITHUB COLUMN FOR LINKED IN PROFILE PAGE JUST AS A TEST TO SEE VIEW
-        user = User.create!(email: results["emailAddress"], linkedin_id: results["id"], password: Devise.friendly_token[0,20], first_name: results["firstName"], last_name: results["lastName"], photo: results["pictureUrl"], github_id: results["publicProfileUrl"])
+        user = User.create!(email: results["emailAddress"], linkedin_id: results["id"], password: Devise.friendly_token[0,20], first_name: results["firstName"], last_name: results["lastName"], linkedin_photo: results["pictureUrl"])
       end
       # results["publicProfileUrl"] for Linkedin public profile
 
