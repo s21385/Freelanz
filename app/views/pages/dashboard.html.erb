@@ -70,10 +70,14 @@
             <div class="request-status pending"><%= user_position.status %></div>
           <% end %>
 
+          <div class="logo">
+            <%= cl_image_tag(position.project.photo, height: 60, crop: :fill) unless position.project.photo.file.nil? %>
+          </div>
+
           <div class="position-card-info">
             <h4><%= position.name %></%></h4>
             <p> <%= position.description %> </p>
-            <p id="cpt-<%= position.id %>"> <%= position.user_positions.count %></p>
+            <p id="cpt-<%= position.id %>"> Applicants: <%= position.user_positions.count %></p>
           </div>
 
           <div class="card-skill-level">
