@@ -1,0 +1,24 @@
+<div class="container">
+   <h3>My Profile</h3>
+  <%  if current_user.linkedin_id.nil? %>
+    <div><%= image_tag  current_user.photo, class: "avatar" %></div>
+  <% else  %>
+    <%= cl_image_tag current_user.linkedin_photo, class: "avatar"%>
+  <% end %>
+  <h4>Name: <%=  current_user.first_name + " " + current_user.last_name %></h4>
+  <h4>Joined on: <%=  current_user.created_at %></h4>
+  <h4>Profile last modified: <%=  current_user.updated_at %></h4>
+
+  <h4>Address: <%=  current_user.address %></h4>
+  <h4>Phone contact: <%=  current_user.phone %></h4>
+  <h4>Asking rate: <%=  current_user.rate_cent %></h4>
+  <h4>Github ID: <%=  current_user.github_id %></h4>
+  <h4>Skill Level: <%=  current_user.skill_level %></h4>
+  <%  if !current_user.linkedin_id.nil? %>
+    <div><%= link_to  current_user.linkedin_url %></div>
+  <% else  %>
+
+  <% end %>
+
+
+
