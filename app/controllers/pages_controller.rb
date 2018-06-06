@@ -42,7 +42,6 @@ class PagesController < ApplicationController
 
     response = http.request(request)
     results = JSON.parse(response.body)
-
     user = User.find_by(linkedin_id: results["id"])
 
       if user.nil?
