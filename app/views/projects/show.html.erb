@@ -4,7 +4,7 @@
 
     <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
     <div class="project-title">
-      <h1><b><%= @project.name %></b></h1>
+      <h1><%= @project.name %></h1>
       <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
     </div>
   </div>

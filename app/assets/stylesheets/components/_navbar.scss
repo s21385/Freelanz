@@ -125,27 +125,22 @@
 }
 
 #job-search {
-  width: 500px;
-  padding-right: 0px;
-  position: absolute;
-  right: 595px;
-  top: 175px;
+  // width: 500px;
+  // padding-right: 0px;
+  // position: absolute;
+  // right: 595px;
+  // top: 175px;
   }
 
 #query-freelanz {
   background-color: white;
-  box-shadow: inset 0px 0px 2px black;
-  border: solid 0.5px;
-  border-color: black;
   text-align: center;
   font-family: 'Raleway', cursive;
-  color: rgba(0,0,0,1);
-  border-radius: 5px;
-  margin-left: 120px;
-  &:hover{
-    box-shadow: inset 0px 0px 10px #53adbd;
-    color: black;
-  }
+  color: black;
+  padding: 29px 0;
+  border: 1px solid #5dadbf;
+  text-align: left;
+  padding-left: 35px;
 }
 
 
