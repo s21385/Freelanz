@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     body = {
       "grant_type" => "authorization_code",
       "code" => params[:code],
-      "redirect_uri" => "http://#{ENV["LINKED_IN_NEW"]}/pages/linkedin_callback",
+      "redirect_uri" => "http://#{ENV['LINKED_IN_NEW']}/pages/linkedin_callback",
       "client_id" => "#{ENV['LINKEDIN_CLIENT_ID']}",
       "client_secret" => "#{ENV['LINKEDIN_SECRET_ID']}"
     }
