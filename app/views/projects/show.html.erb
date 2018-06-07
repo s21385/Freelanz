@@ -27,7 +27,7 @@
   <!-- If the the viewer is the owner of project AND there are positions created. -->
 
   <% elsif @project.user == @user %>
-    <h2>You Have <%= @project.positions.count %> Open Positions</h2>
+    <h2>You Have <%= @project.positions.count %> Open Position(s)</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
         <%= render "project_position_card", position: position %>
       <% end %>
