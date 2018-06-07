@@ -1,0 +1,41 @@
+<div class="position-card">
+  <div class="position-card-info">
+    <h4><%= position.name %></%></h4>
+    <p> <%= position.description %> </p>
+  </div>
+  <div class="card-skill-level">
+    <p> Experience <%= position.skill_level %></p>
+    <p> Skills Required </p>
+      <%# image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
+       <p> <%= position.first_skill %>
+      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
+        / <%= position.second_skill %>
+      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
+        / <%= position.second_skill %>
+        / <%= position.third_skill %>
+      <% end %></p>
+  </div>
+  <div class="card-action">
+    <% if @project.user == current_user %>
+      <div class="icons">
+        <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
+        <%= link_to edit_project_position_path(@project, position) do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+        <%= link_to project_position_path(@project, position), method: :delete do %>
+          <i class="far fa-trash-alt"></i>
+        <% end %>
+      </div>
+    <% else %>
+      <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
+      <% if position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
+        <div id="apply-<%= position.id %>">
+          <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply" %>
+        </div>
+      <% elsif position.project.user != @user %>
+        <p>Already Applied</p>
+      <% end %>
+    <% end %>
+     <p><i class="fas fa-user-alt"></i> <%= position.user_positions.count %></p>
+  </div>
+</div>

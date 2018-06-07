@@ -13,6 +13,8 @@ class PositionsController < ApplicationController
   end
 
   def edit
+    @project = Project.find(params[:project_id])
+    @position = Position.find(params[:id])
   end
 
   def create
@@ -25,6 +27,7 @@ class PositionsController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project_id])
     @position = Position.find(params[:id])
     @position.update(position_params)
 
@@ -32,7 +35,9 @@ class PositionsController < ApplicationController
   end
 
   def destroy
-    @project = @position.project
+    @project = Project.find(params[:project_id])
+    @position = Position.find(params[:id])
+
     @position.destroy
     redirect_to project_path(@project)
   end

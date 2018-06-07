@@ -1,5 +1,6 @@
 class UserPositionsController < ApplicationController
   before_action :set_user_position, except: [:index, :create]
+  before_action :authenticate_user!, only: [:create]
 
   def show
   end
