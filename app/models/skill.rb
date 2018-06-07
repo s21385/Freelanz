@@ -1,5 +1,5 @@
 class Skill < ApplicationRecord
-  has_many :first_skills, dependent: :destroy
-  has_many :second_skills, dependent: :destroy
-  has_many :third_skills, dependent: :destroy
+  belongs_to :first_skill
+  belongs_to :second_skill
+  belongs_to :third_skill
 end

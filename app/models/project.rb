@@ -20,7 +20,7 @@ class Project < ApplicationRecord
   pg_search_scope :global_search,
     against: [ :name ],
     associated_against: {
-      positions: [ :name, :first_skill, :second_skill, :third_skill, :skill_level ]
+      positions: [ :name, :skill_level ]
     },
     using: {
       tsearch: { prefix: true }

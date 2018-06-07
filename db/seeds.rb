@@ -10,11 +10,14 @@ def get_path1(image)
   File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
 end
 
-
+Skill.destroy_all
+FirstSkill.destroy_all
+SecondSkill.destroy_all
+ThirdSkill.destroy_all
+Position.destroy_all
 Project.destroy_all
 Group.destroy_all
 UserPosition.destroy_all
-Position.destroy_all
 User.destroy_all
 
 # # PROGRAMMING LANGUAGES EXTRACTED
@@ -41,8 +44,6 @@ COMPANY_NAMES = ["Le Wagon", "Ubisoft", "CGI", "Microsoft", "SAP", "Oracle", "Li
   "Busbud", "Milo", "Nestready", "Koolicar", "Chronogolf", "Shopify", "Tesla", "Autodesk",
   "Github", "Matrox", "Cimpl", "ESignLive", "SurMesur", "SweetIQ", "Private project",
   "Private project", "Private project", "Private project", "Private project", "Private project"]
-
-grades = { "Jane Doe" => 10, "Jim Doe" => 6 }
 
 BACKEND_SKILLS = {
   "Ruby" => "Ruby picture",
@@ -79,37 +80,7 @@ FRONT_END_SKILLS = {
   "Sass" => "Sass picture"
 }
 
-def skills
-  backend_skill_names = []
-  frontend_skill_names = []
-  mobile_skill_names = []
-  BACKEND_SKILLS.each do |name, logo|
-    backend_skill_names += [name]
-  end
-  FRONT_END_SKILLS.each do |name, logo|
-    frontend_skill_names += [name]
-  end
-  MOBILE_SKILLS.each do |name, logo|
-    mobile_skill_names += [name]
-  end
-  skill_names = backend_skill_names + frontend_skill_names + mobile_skill_names
-end
-
-def skill_pictures
-  backend_skill_pics = []
-  frontend_skill_pics = []
-  mobile_skill_pics = []
-  BACKEND_SKILLS.each do |name, logo|
-    backend_skill_pics += [logo]
-  end
-  FRONT_END_SKILLS.each do |name, logo|
-    frontend_skill_pics += [logo]
-  end
-  MOBILE_SKILLS.each do |name, logo|
-    mobile_skill_pics += [logo]
-  end
-  skill_pics = backend_skill_pics + frontend_skill_pics + mobile_skill_pics
-end
+ALL_SKILLS = BACKEND_SKILLS.merge(FRONT_END_SKILLS).merge(MOBILE_SKILLS)
 
 JOBS_DESCRIPTIONS = ["Senior Programmer", "Team Leader", "Junior Programmer", "Intern",
   "Intermediate Programmer", "Ruby Programmer", "Front End Programmer", "Back End Programmer",
@@ -117,14 +88,37 @@ JOBS_DESCRIPTIONS = ["Senior Programmer", "Team Leader", "Junior Programmer", "I
   "Network Programmer", "Analyst Programmer", "Software Developper", ".Net Programmer",
   "C++ Programmer", "Change Catalyst", "3D Programmer"]
 
-PROJECT_DESC1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code", "Elastic Search" ]
+PROJECT_DESC1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code",
+  "Elastic Search" ]
+
 PROJECT_DESC2 = ["Review", "Integration", "Upgrades", "Implementation"]
+
+def skill_names
+  all_skill_names = []
+  ALL_SKILLS.each do |name, logo|
+    all_skill_names += [name]
+  end
+  return all_skill_names
+end
+
+def skill_pictures
+  all_skill_logos = []
+  ALL_SKILLS.each do |name, logo|
+    all_skill_logos += [logo]
+  end
+  return all_skill_logos
+end
+
 
 puts "STARTING SEEDING PROCEDURES"
 
 # USERS CREATING PROJECT
+
 puts 'CREATING USERS'
-urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
+
+urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+  "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
+
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
@@ -142,18 +136,12 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
   puts "CREATING PROJECTS"
 
   # PROJECTS
+
   urls = ["1.png", "2.png", "3.png", "4.png","5.png", "6.png",
     "9.png", "10.png", "11.png"]
 
     posn = 0
 
-
-  SKILLS.each do |skill|
-    skill = Skill.create(
-    skill: skills.sample,
-    photo: skill_pictures
-      )
-  end
 
   2.times do
     statuses = ["Started", "Started", "Started", "Started","Completed"]
@@ -163,7 +151,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
     user_id: user.id,
     name: PROJECT_NAMES.sample,
     company_name: COMPANY_NAMES.sample,
-    short_description: SKILLS.sample,
+    short_description: "Short description",
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
@@ -200,7 +188,6 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
     puts 'CREATING ON PROJECTS'
     (2..7).to_a.sample.times do
       status = ["Filled", "Open"]
-      first_skill = SKILLS.sample
 
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
@@ -217,6 +204,78 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg", 
     end
   end
 end
+
+# CREATING SKILLS
+
+puts "CREATING SKILLS"
+
+
+
+
+  FRONT_END_SKILLS.each do |name, logo|
+    skill = Skill.create(
+    skill: name,
+    photo: logo
+      )
+      (3..5).to_a.sample do
+        FirstSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        SecondSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        ThirdSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+      end
+  end
+
+  BACKEND_SKILLS.each do |name, logo|
+    skill = Skill.create(
+    skill: name,
+    photo: logo
+      )
+      (3..5).to_a.sample do
+        FirstSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        SecondSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        ThirdSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+      end
+  end
+
+  MOBILE_SKILLS.each do |name, logo|
+    skill = Skill.create(
+    skill: name,
+    photo: logo
+      )
+      (3..5).to_a.sample do
+        FirstSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        SecondSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+        ThirdSkill.create(
+          position: Position.all.sample,
+          skill: skill
+          )
+      end
+  end
+
+puts "FINISHED CREATING SKILLS"
 
 # USERS APPLICATIONS
 puts 'CREATING 10 USERS...'

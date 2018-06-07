@@ -1,5 +1,4 @@
 class SecondSkill < ApplicationRecord
-  belongs_to :skill
+  has_one :skill
   belongs_to :position
-
 end
