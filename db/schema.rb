@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_194356) do
+ActiveRecord::Schema.define(version: 2018_06_06_231955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["discussionable_type", "discussionable_id"], name: "index_discussions_on_discussionable_type_and_discussionable_id"
+  end
+
+  create_table "first_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_first_skills_on_position_id"
+    t.index ["skill_id"], name: "index_first_skills_on_skill_id"
   end
 
   create_table "group_memberships", force: :cascade do |t|
@@ -68,9 +77,6 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
     t.string "name"
     t.integer "rate_cents"
     t.string "status", default: "Pending"
-    t.string "first_skill"
-    t.string "second_skill"
-    t.string "third_skill"
     t.string "skill_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,6 +95,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
     t.text "description"
     t.string "status", default: "Started"
     t.string "photo"
+    t.string "company_name"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -100,6 +107,31 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "second_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_second_skills_on_position_id"
+    t.index ["skill_id"], name: "index_second_skills_on_skill_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "skill"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "third_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_third_skills_on_position_id"
+    t.index ["skill_id"], name: "index_third_skills_on_skill_id"
   end
 
   create_table "user_positions", force: :cascade do |t|
@@ -140,6 +172,8 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "first_skills", "positions"
+  add_foreign_key "first_skills", "skills"
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "users"
@@ -147,6 +181,10 @@ ActiveRecord::Schema.define(version: 2018_06_06_194356) do
   add_foreign_key "positions", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "ratings", "users"
+  add_foreign_key "second_skills", "positions"
+  add_foreign_key "second_skills", "skills"
+  add_foreign_key "third_skills", "positions"
+  add_foreign_key "third_skills", "skills"
   add_foreign_key "user_positions", "positions"
   add_foreign_key "user_positions", "users"
 end

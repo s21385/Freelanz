@@ -1,0 +1,2 @@
+class AddCompanyNameToProject < ApplicationRecord
+end
