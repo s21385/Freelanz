@@ -8,7 +8,7 @@
     <div class="request-status-dashboard pending"><%= user_position.status %></div>
   <% end %>
 
-  <div class="flex">
+  <div class="flex position-info">
     <div class="logo">
       <%= cl_image_tag(position.project.photo, height: 60, crop: :fill) unless position.project.photo.file.nil? %>
     </div>
