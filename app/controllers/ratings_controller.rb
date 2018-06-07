@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-before_filter :find_rater
+before_action :find_rater
 
   def new
     @rating = Rating.new

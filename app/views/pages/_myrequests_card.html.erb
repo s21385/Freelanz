@@ -23,7 +23,7 @@
   <div class="card-skill-level">
     <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
     <p> <b>Skills Required</b> <br> <%= " " %>
-      <%= image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
+      <!-- <%= image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %> -->
       <%= position.first_skill %>
       <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
         /<%= " " %><%= position.second_skill %>

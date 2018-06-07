@@ -1,7 +1,7 @@
 
 <div class="container">
   <div id="linkedin_signup">
-   <h2><%= link_to " Sign up with linkedin", "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=#{ENV['LINKEDIN_CLIENT_ID']}&redirect_uri=http://localhost:3000/pages/linkedin_callback&state=987654321&scope=r_basicprofile r_emailaddress", class: "fab fa-linkedin"%></h2>
+   <h2><%= link_to " Sign up with linkedin", "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=#{ENV['LINKEDIN_CLIENT_ID']}&redirect_uri=http://#{ENV['LINKED_IN_NEW']}/pages/linkedin_callback&state=987654321&scope=r_basicprofile r_emailaddress", class: "fab fa-linkedin"%></h2>
 
   </div>
 <!--
