@@ -10,10 +10,12 @@ def get_path1(image)
   File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
 end
 
+def get_path2(logo)
+  File.new(Rails.root.join("app/assets/images/logos/comp_logos/#{logo}"))
+end
+
+PositionSkill.destroy_all
 Skill.destroy_all
-FirstSkill.destroy_all
-SecondSkill.destroy_all
-ThirdSkill.destroy_all
 Position.destroy_all
 Project.destroy_all
 Group.destroy_all
@@ -40,44 +42,87 @@ PROJECT_NAMES = ["Long term contract", "Reccuring work", "Quick project", "Time 
   "Cutting edge technology", "No experience needed", "Redesign work", "Upgrades needed",
   "Migration job", "Legacy code maintenance", "Code review", "Systems integration"]
 
-COMPANY_NAMES = ["Le Wagon", "Ubisoft", "CGI", "Microsoft", "SAP", "Oracle", "Lightspeed",
-  "Busbud", "Milo", "Nestready", "Koolicar", "Chronogolf", "Shopify", "Tesla", "Autodesk",
-  "Github", "Matrox", "Cimpl", "ESignLive", "SurMesur", "SweetIQ", "Private project",
-  "Private project", "Private project", "Private project", "Private project", "Private project"]
+COMPANY_NAMES = {
+  "Le Wagon" => "lewagon.png",
+  "Ubisoft" => "ubisoft.svg",
+  "CGI" => "cgi.jpg",
+  "Microsoft" => "microsoft.svg",
+  "SAP" => "sap.svg",
+  "Oracle" => "oracle.svg",
+  "Lightspeed" => "lightspeed.svg",
+  "Busbud" => "Busbud.png",
+  "Mylo" => "mylo.jpeg",
+  "Nestready" => "nestready.png",
+  "Koolicar" => "koolicar.jpg",
+  "Chronogolf" => "chronogolf.png",
+  "Shopify" => "shopify.svg",
+  "Tesla" => "tesla.svg",
+  "Autodesk" => "autodesk.svg",
+  "Github" => "github.png",
+  "Matrox" => "matrox.svg",
+  "Cimpl" => "Cimpl.png",
+  "ESignLive" => "esignlive.png",
+  "SurMesur" => "surmesur.jpg",
+  "SweetIQ" => "sweetiq.png",
+  "Private project" => "computer.png",
+  "Private project1" => "computer.png",
+  "Private project2" => "computer.png",
+  "Private project3" => "computer.png",
+  "Private project4" => "computer.png",
+  "Private project5" => "computer.png"
+}
+
+def company_names
+  all_company_names = []
+  COMPANY_NAMES.each do |name, logo|
+    all_company_names += [name]
+  end
+  return all_company_names
+end
+
+def company_logos
+  all_company_logos = []
+  COMPANY_NAMES.each do |name, logo|
+    all_company_logos += [logo]
+  end
+  return all_company_logos
+end
 
 BACKEND_SKILLS = {
-  "Ruby" => "Ruby picture",
-  "Mongo DB" => "Mongo DB picture",
-  "PostGres"=> "PostGres picture",
-  "SQL" => "SQL picture",
-  "Node" => "Node picture",
-  "PHP" => "PHP picture",
-  "Python" => "Python picture",
-  "NoSQL" => "NoSQL picture",
-  ".NET" => ".NET picture",
-  "Perl" => "Perl picture",
-  "C" => "C picture",
-  "C++" => "C++ picture",
-  "C#" => "C# picture"
+  "Ruby" => "ruby.svg",
+  "Mongo DB" => "mongodb.svg",
+  "PostGres"=> "postgres.svg",
+  "SQL" => "mysql.svg",
+  "Node" => "nodejs.svg",
+  "PHP" => "php.svg",
+  "Python" => "python.svg",
+  "NoSQL" => "nosql.png",
+  ".NET" => "net.svg",
+  "Perl" => "perl.svg",
+  "C" => "c.svg",
+  "C++" => "c++.svg",
+  "C#" => "c#.png"
 }
 
 MOBILE_SKILLS = {
-  "Swift" => "Swift picture",
-  "React Native" => "React Native picture",
-  "Objective-C" => "Objective-C picture",
-  "Java" "C" => "Java picture",
-  "Kotlin" => "Kotlin picture",
-  "HTML" => "HTML picture",
+  "Swift" => "swift.svg",
+  "React Native" => "react.svg",
+  "Objective-C" => "objc.png",
+  "Java" "C" => "java.svg",
+  "Kotlin" => "kotlin.svg",
+  "HTML" => "html.svg",
+  "IOS" => "ios.svg"
 }
 
 FRONT_END_SKILLS = {
-  "Javascript" => "Javascript picture",
-  "React" => "React picture",
-  "JQuery" => "JQuery picture",
-  "AngularJS" => "AngularJS picture",
-  "HTML 5" => "HTML 5 picture",
-  "CSS" => "CSS picture",
-  "Sass" => "Sass picture"
+  "Javascript" => "javascript.svg",
+  "React" => "react.svg",
+  "JQuery" => "jquery.svg",
+  "AngularJS" => "angularjs.svg",
+  "HTML 5" => "html.svg",
+  "CSS" => "css.svg",
+  "Sass" => "sass.svg",
+  "Azure" => "azure-3.svg"
 }
 
 ALL_SKILLS = BACKEND_SKILLS.merge(FRONT_END_SKILLS).merge(MOBILE_SKILLS)
@@ -85,7 +130,7 @@ ALL_SKILLS = BACKEND_SKILLS.merge(FRONT_END_SKILLS).merge(MOBILE_SKILLS)
 JOBS_DESCRIPTIONS = ["Senior Programmer", "Team Leader", "Junior Programmer", "Intern",
   "Intermediate Programmer", "Ruby Programmer", "Front End Programmer", "Back End Programmer",
   "Database Expert", "SEO Expert", "Node Programmer", "Javascript Programmer", "React",
-  "Network Programmer", "Analyst Programmer", "Software Developper", ".Net Programmer",
+  "Network Programmer", "Analyst Programmer", "Software Developer", ".Net Programmer",
   "C++ Programmer", "Change Catalyst", "3D Programmer"]
 
 PROJECT_DESC1 = ["Database", "Front End", "MVP", "Rails Gem", "Legacy Code",
@@ -137,26 +182,24 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 
   # PROJECTS
 
-  urls = ["1.png", "2.png", "3.png", "4.png","5.png", "6.png",
-    "9.png", "10.png", "11.png"]
-
-    posn = 0
-
+  urls = company_logos
+  company_index_list = (0..(COMPANY_NAMES.count - 1)).to_a
 
   2.times do
+    company_index = company_index_list.sample
     statuses = ["Started", "Started", "Started", "Started","Completed"]
     deadline = rand(Date.today+21...Date.today+730)
     photos = [""]
     project = Project.create!(
     user_id: user.id,
     name: PROJECT_NAMES.sample,
-    company_name: COMPANY_NAMES.sample,
+    company_name: company_names[company_index],
     short_description: "Short description",
     deadline: deadline,
     # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
     start_date: deadline - 14,
     status: statuses.sample,
-    photo: get_path(urls.sample),
+    photo: get_path2(urls[company_index]),
     description: PROJECT_DESC1.sample + " " + PROJECT_DESC2.sample,
     )
 
@@ -185,7 +228,8 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
     end
 
     # POSITIONS
-    puts 'CREATING ON PROJECTS'
+
+    puts 'CREATING POSITIONS ON PROJECTS'
     (2..7).to_a.sample.times do
       status = ["Filled", "Open"]
 
@@ -199,8 +243,6 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
       skill_level: User::SKILL_LEVEL.sample
       )
       puts "position.name created"
-
-
     end
   end
 end
@@ -209,71 +251,49 @@ end
 
 puts "CREATING SKILLS"
 
+urls = skill_pictures
 
+FRONT_END_SKILLS.each do |name, logo|
+  skill = Skill.create(
+  skill: name,
+  photo: get_path(logo),
+    )
+    (3..5).to_a.sample.times do
+      PositionSkill.create(
+        position: Position.all.sample,
+        skill: skill,
+        skill_type: "frontend"
+        )
+    end
+end
 
+BACKEND_SKILLS.each do |name, logo|
+  skill = Skill.create(
+  skill: name,
+  photo: get_path(logo),
+    )
+    (3..5).to_a.sample.times do
+      PositionSkill.create(
+        position: Position.all.sample,
+        skill: skill,
+        skill_type: "backend"
+        )
+    end
+end
 
-  FRONT_END_SKILLS.each do |name, logo|
-    skill = Skill.create(
-    skill: name,
-    photo: logo
-      )
-      (3..5).to_a.sample do
-        FirstSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        SecondSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        ThirdSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-      end
-  end
-
-  BACKEND_SKILLS.each do |name, logo|
-    skill = Skill.create(
-    skill: name,
-    photo: logo
-      )
-      (3..5).to_a.sample do
-        FirstSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        SecondSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        ThirdSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-      end
-  end
-
-  MOBILE_SKILLS.each do |name, logo|
-    skill = Skill.create(
-    skill: name,
-    photo: logo
-      )
-      (3..5).to_a.sample do
-        FirstSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        SecondSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-        ThirdSkill.create(
-          position: Position.all.sample,
-          skill: skill
-          )
-      end
-  end
+MOBILE_SKILLS.each do |name, logo|
+  skill = Skill.create(
+  skill: name,
+  photo: get_path(logo),
+    )
+    (3..5).to_a.sample.times do
+      PositionSkill.create(
+        position: Position.all.sample,
+        skill: skill,
+        skill_type: "mobile"
+        )
+    end
+end
 
 puts "FINISHED CREATING SKILLS"
 
