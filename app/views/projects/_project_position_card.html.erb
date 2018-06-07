@@ -17,6 +17,7 @@
   </div>
   <div class="card-action">
     <% if @project.user == current_user %>
+
       <div class="icons">
         <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
         <%= link_to edit_project_position_path(@project, position) do %>
