@@ -25,3 +25,15 @@
 // .plus-button {
 //   align-self; flex-end;
 // }
+
+.flex-icons{
+  display: flex;
+  align-items: center;
+  p{
+    margin: 0;
+    margin-left: 10px;
+  }
+}
+p{
+    margin: 0;
+  }

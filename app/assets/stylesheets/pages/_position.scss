@@ -12,16 +12,18 @@
 .position-card-info {
   // flex-basis: 50%;
   // padding: 0px 130px 0px 0px;
+  flex-grow: 1;
 }
 
-.card-skill-level {
-  // flex-basis: 25%;
+.card-skill-level, .position-info {
+  width: 40%
 }
 
 .card-action {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 20%;
   justify-content: space-between;
   align-items: center;
   .icons{
@@ -85,4 +87,9 @@
     background-color: red;
     color: white;
   }
+}
+
+.logo img {
+  height: auto;
+  width: 100px;
 }

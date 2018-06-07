@@ -15,16 +15,19 @@
           <div class="card">
             <div class="project-card-header">
               <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
-              <% if t.status == "Refused" %>
-                <div class="request-status declined"><%= t.status %></div>
-              <% elsif t.status == "Accepted" %>
-                <div class="request-status accepted"><%= t.status %></div>
-              <% else %>
-                <div class="request-status pending"><%= t.status %></div>
-              <% end %>
+
             </div>
 
             <div class="text-center">
+
+              <%= link_to users_show_path(t.user) do %>
+                 <% if !t.user.linkedin_id.nil? %>
+                  <%= image_tag t.user.linkedin_photo , class: "avatar-profile" %>
+                <% elsif %>
+                  <%= cl_image_tag t.user.photo, class: "avatar-profile" %>
+                <% end %>
+              <% end %>
+
               <h3><%= t.user.full_name %></h3>
               <p><%= p.name %></p>
               <p><%= t.user.skill_level %></p>

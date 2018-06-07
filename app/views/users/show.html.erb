@@ -1,22 +1,21 @@
 <div class="container">
    <h3>My Profile</h3>
-  <%  if current_user.linkedin_id.nil? %>
-    <div><%= cl_image_tag current_user.photo, class: "navbar-wagon avatar" %></div>
+  <%  if @user.linkedin_id.nil? %>
+    <div><%= cl_image_tag @user.photo, class: "navbar-wagon avatar" %></div>
   <% else  %>
-    <div><%= image_tag  current_user.linkedin_photo, class: "avatar" %></div>
+    <div><%= image_tag  @user.linkedin_photo, class: "avatar" %></div>
   <% end %>
-  <h4>Name: <%=  current_user.first_name + " " + current_user.last_name %></h4>
-  <h4>Joined on: <%=  current_user.created_at %></h4>
-  <h4>Profile last modified: <%=  current_user.updated_at %></h4>
+  <h4>Name: <%=  @user.first_name + " " + @user.last_name %></h4>
+  <h4>Joined on: <%=  @user.created_at %></h4>
+  <h4>Profile Last Modified: <%=  @user.updated_at %></h4>
 
-  <h4>Address: <%=  current_user.address %></h4>
-  <h4>Phone contact: <%=  current_user.phone %></h4>
-  <h4>Asking rate: <%=  current_user.rate_cents %></h4>
-  <h4>Github ID: <%=  current_user.github_id %></h4>
-  <h4>Skill Level: <%=  current_user.skill_level %></h4>
-  <%= raise %>
-  <%  if !current_user.linkedin_id.nil? %>
-    <div><%= link_to "Linkedin Profile Page", current_user.linkedin_profile_url, target: "_blank", class: "btn btn-primary" %></div>
+  <h4>Address: <%=  @user.address %></h4>
+  <h4>Phone Contact: <%=  @user.phone %></h4>
+  <h4>Asking Rate: <%=  @user.rate_cents %></h4>
+  <h4>Github ID: <%=  @user.github_id %></h4>
+  <h4>Skill Level: <%=  @user.skill_level %></h4>
+  <%  if !@user.linkedin_id.nil? %>
+    <div><%= link_to "Linkedin Profile Page", @user.linkedin_profile_url, target: "_blank", class: "btn btn-primary" %></div>
   <% else  %>
 
   <% end %>
