@@ -18,7 +18,7 @@ class Project < ApplicationRecord
 
   include PgSearch
   pg_search_scope :global_search,
-    against: [ :name ],
+    against: [ :company_name, :description ],
     associated_against: {
       positions: [ :name, :skill_level ]
     },
@@ -28,5 +28,9 @@ class Project < ApplicationRecord
 
   def set_status
     self.status = "Started" if self.status.nil?
+  end
+
+  def first_three_skills
+    Skill.joins(position_skills: {position: :project}).where(projects: {id: self.id}).uniq(&:photo).first(3)
   end
 end
