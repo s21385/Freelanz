@@ -35,6 +35,7 @@
   <% elsif @project.user == @user %>
     <h2>You Have <%= @project.positions.count %> Open Positions</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
+        <% raise %>
         <div class="position-card">
           <div class="position-card-info">
             <h4><%= position.name %>
@@ -45,7 +46,7 @@
             <p>Skill Level<%= " " %><%= position.skill_level %></p>
             <p>Skills Required</p>
               <% position.skills do |skill| %>
-                <%= " " %><%= position.skill %>
+                <%= image_tag(skill.photo, width: 30) %>
               <% end %>
           </div>
           <div class="card-action">
@@ -60,7 +61,6 @@
     <h2>There Are <%= @project.positions.where(status: "Open").count %> Positions Open</h2>
 
     <% @project.positions.where(status: "Open").each do |position| %>
-
     <div class="position-card">
       <div class="position-card-info">
         <h4><%= position.name %></%></h4>
@@ -70,13 +70,8 @@
       <div class="card-skill-level">
         <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
         <p> <b>Skills Required</b> <br> <%= " " %>
-          <%= image_tag( "svg/#{position.skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
-          <%= position.first_skill %>
-          <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-            /<%= " " %><%= position.second_skill %>
-          <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-            /<%= " " %><%= position.second_skill %>
-            /<%= " " %><%= position.third_skill %>
+        <% position.skills.each do |skill| %>
+            <%= image_tag(skill.photo, width: 30) %>
           <% end %>
         </p>
       </div>

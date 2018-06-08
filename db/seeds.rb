@@ -3,15 +3,18 @@ require 'json'
 require 'open-uri'
 
 def get_path(logo)
-  File.new(Rails.root.join("app/assets/images/logos/#{logo}"))
+  "logos/#{logo}"
+  # File.new(Rails.root.join("app/assets/images/logos/#{logo}"))
 end
 
 def get_path1(image)
-  File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
+  "pictures/#{image}"
+  # File.new(Rails.root.join("app/assets/images/pictures/#{image}"))
 end
 
 def get_path2(logo)
-  File.new(Rails.root.join("app/assets/images/logos/comp_logos/#{logo}"))
+  "logos/comp_logos/#{logo}"
+  # File.new(Rails.root.join("app/assets/images/logos/comp_logos/#{logo}"))
 end
 
 PositionSkill.destroy_all
@@ -47,13 +50,13 @@ COMPANY_NAMES = {
   "Ubisoft" => "ubisoft.svg",
   "CGI" => "cgi.jpg",
   "Microsoft" => "microsoft.svg",
-  "SAP" => "sap.svg",
-  "Oracle" => "oracle.svg",
+  "SAP" => "sap.png",
+  "Oracle" => "oracle.png",
   "Lightspeed" => "lightspeed.svg",
   "Busbud" => "Busbud.png",
   "Mylo" => "mylo.jpeg",
   "Nestready" => "nestready.png",
-  "Koolicar" => "koolicar.jpg",
+  "Koolicar" => "koolicar.png",
   "Chronogolf" => "chronogolf.png",
   "Shopify" => "shopify.svg",
   "Tesla" => "tesla.svg",
@@ -157,11 +160,32 @@ end
 
 puts "STARTING SEEDING PROCEDURES"
 
-# USERS CREATING PROJECT
+puts "USERS SKILLS"
+
+FRONT_END_SKILLS.each do |name, logo|
+  skill = Skill.create!(
+    skill: name,
+    photo: get_path(logo)
+  )
+end
+
+BACKEND_SKILLS.each do |name, logo|
+  skill = Skill.create!(
+    skill: name,
+    photo: get_path(logo)
+  )
+end
+
+MOBILE_SKILLS.each do |name, logo|
+  skill = Skill.create!(
+    skill: name,
+    photo: get_path(logo)
+  )
+end
 
 puts 'CREATING USERS'
 
-urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
   "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
 
 10.times do
@@ -172,7 +196,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
     last_name: Faker::Name.last_name,
     skill_level: User::SKILL_LEVEL.sample,
     phone: Faker::PhoneNumber.cell_phone,
-    photo: get_path1(urls.sample),
+    photo: get_path1(persons_urls.sample),
     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
@@ -182,7 +206,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 
   # PROJECTS
 
-  urls = company_logos
+  company_logos_urls = company_logos
   company_index_list = (0..(COMPANY_NAMES.count - 1)).to_a
 
   2.times do
@@ -191,43 +215,17 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
     deadline = rand(Date.today+21...Date.today+730)
     photos = [""]
     project = Project.create!(
-    user_id: user.id,
-    name: PROJECT_NAMES.sample,
-    company_name: company_names[company_index],
-    short_description: "Short description",
-    deadline: deadline,
-    # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
-    start_date: deadline - 14,
-    status: statuses.sample,
-    photo: get_path2(urls[company_index]),
-    description: PROJECT_DESC1.sample + " " + PROJECT_DESC2.sample,
-    )
-
-    puts "Project project.name created"
-  # GROUPS
-  (1..5).to_a.sample.times do
-    group = Group.create!(
-    user_id: user.id,
-    name: Faker::Job.field,
-    description: Faker::ChuckNorris.fact
-    )
-    puts "Group: group.name created"
-
-    # GROUP MEMBERSHIPS
-    puts 'creating GROUP MEMBERSHIPS'
-    (3..5).to_a.sample.times do
-      statuses = ["Pending", "Approved", "Approved"]
-      category = "Member"
-      group_membership = GroupMembership.create!(
+      user_id: user.id,
+      name: PROJECT_NAMES.sample,
+      company_name: company_names[company_index],
+      short_description: "Short description",
+      deadline: deadline,
+      # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
+      start_date: deadline - 14,
       status: statuses.sample,
-      category: category,
-      user: User.all.sample,
-      group_id: group.id
-      )
-      puts " GROUP MEMBERSHIP created"
-    end
-
-    # POSITIONS
+      photo: get_path2(company_logos_urls[company_index]),
+      description: PROJECT_DESC1.sample + " " + PROJECT_DESC2.sample,
+    )
 
     puts 'CREATING POSITIONS ON PROJECTS'
     (2..7).to_a.sample.times do
@@ -236,64 +234,73 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
       position = Position.create!(
-      project: project,
-      name: JOBS_DESCRIPTIONS.sample,
-      rate_cents: rate_cents,
-      status: status.sample,
-      skill_level: User::SKILL_LEVEL.sample
+        project: project,
+        name: JOBS_DESCRIPTIONS.sample,
+        rate_cents: rate_cents,
+        status: status.sample,
+        skill_level: User::SKILL_LEVEL.sample
       )
       puts "position.name created"
+
+      urls = skill_pictures
+      # position_id = Project.first.id
+      # project_no = Project.count
+
+      (1..2).to_a.sample.times do
+        PositionSkill.create!(
+          position: position,
+          skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+          skill_type: "frontend"
+        )
+      end
+
+      (1..2).to_a.sample.times do
+        PositionSkill.create!(
+          position: position,
+          skill: Skill.where(skill: BACKEND_SKILLS.keys).to_a.sample,
+          skill_type: "backend"
+        )
+      end
+
+      (1..2).to_a.sample.times do
+        PositionSkill.create!(
+          position: position,
+          skill: Skill.where(skill: MOBILE_SKILLS.keys).to_a.sample,
+          skill_type: "mobile"
+        )
+      end
     end
   end
 end
+  #   puts "Project project.name created"
+  # # GROUPS
+  # (1..5).to_a.sample.times do
+  #   group = Group.create!(
+  #   user_id: user.id,
+  #   name: Faker::Job.field,
+  #   description: Faker::ChuckNorris.fact
+  #   )
+  #   puts "Group: group.name created"
+
+  #   # GROUP MEMBERSHIPS
+  #   puts 'creating GROUP MEMBERSHIPS'
+  #   (3..5).to_a.sample.times do
+  #     statuses = ["Pending", "Approved", "Approved"]
+  #     category = "Member"
+  #     group_membership = GroupMembership.create!(
+  #     status: statuses.sample,
+  #     category: category,
+  #     user: User.all.sample,
+  #     group_id: group.id
+  #     )
+  #     puts " GROUP MEMBERSHIP created"
+  #   end
+
+    # POSITIONS
 
 # CREATING SKILLS
 
 puts "CREATING SKILLS"
-
-urls = skill_pictures
-
-FRONT_END_SKILLS.each do |name, logo|
-  skill = Skill.create(
-  skill: name,
-  photo: get_path(logo),
-    )
-    (3..5).to_a.sample.times do
-      PositionSkill.create(
-        position: Position.all.sample,
-        skill: skill,
-        skill_type: "frontend"
-        )
-    end
-end
-
-BACKEND_SKILLS.each do |name, logo|
-  skill = Skill.create(
-  skill: name,
-  photo: get_path(logo),
-    )
-    (3..5).to_a.sample.times do
-      PositionSkill.create(
-        position: Position.all.sample,
-        skill: skill,
-        skill_type: "backend"
-        )
-    end
-end
-
-MOBILE_SKILLS.each do |name, logo|
-  skill = Skill.create(
-  skill: name,
-  photo: get_path(logo),
-    )
-    (3..5).to_a.sample.times do
-      PositionSkill.create(
-        position: Position.all.sample,
-        skill: skill,
-        skill_type: "mobile"
-        )
-    end
-end
 
 puts "FINISHED CREATING SKILLS"
 
@@ -318,17 +325,17 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 
   # USER_POSITION
   3.times do
-  status = ["Accepted", "Refused", "In review"]
-  puts "Creating User Positions"
-  rate_cents = rand(5...40) * 500/100
-  user_position = UserPosition.create!(
-    user_id: user.id,
-    position: Position.all.sample,
-    status: status.sample,
-    rate_cents: rate_cents
-  )
+    status = ["Accepted", "Refused", "In review"]
+    puts "Creating User Positions"
+    rate_cents = rand(5...40) * 500/100
+    user_position = UserPosition.create!(
+      user_id: user.id,
+      position: Position.all.sample,
+      status: status.sample,
+      rate_cents: rate_cents
+    )
   end
 end
-end
+
 
 puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
