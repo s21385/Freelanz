@@ -1,5 +1,34 @@
 #linkedin_signup {
-  padding-left: 0px;
-  padding-top: 300px;
-  text-align: center;
+  padding: 8px;
+  border: 1px solid #6ab4c4;
+  border-radius: 4px;
+  .fa-linkedin:before {
+    content: "\f08c";
+    font-size: 35px;
+  }
+  a {
+    color: #6ab4c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+    color: white;
+    }
+  }
+  p {
+    color: #6ab4c4;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+  &:hover{
+    background-color:  #6ab4c4;
+    p {
+    color: white ;
+    }
+    .fa-linkedin:before {
+    color:white;
+  }
+  }
+
 }
+

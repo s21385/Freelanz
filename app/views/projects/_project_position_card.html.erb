@@ -37,6 +37,6 @@
         <p>Already Applied</p>
       <% end %>
     <% end %>
-     <p><i class="fas fa-user-alt"></i> <%= position.user_positions.count %></p>
+     <p><i class="fas fa-user-alt"></i> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
   </div>
 </div>

@@ -1,20 +1,25 @@
 <div class="container">
   <div class="project-header" >
     <div class="project-info">
-
-    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
-    <div class="project-title">
-      <h1><%= @project.name %></h1>
+      <div class="flex-center">
+        <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+          <div class="project-title">
+            <h1><%= @project.name %></h1>
+          </div>
+      </div>
+      <div class="flex-icons">
+          <i class="fas fa-briefcase"></i>
+          <p><%= @project.positions.where(status: "Open").count %></p>
+      </div>
     </div>
-  </div>
-  <% if @project.user == current_user %>
+    <% if @project.user == current_user %>
       <div class="btn-add-position">
-        <%= link_to edit_project_path(@project) do %>
-          <i class="far fa-edit"></i>
-        <% end %>
-        <%= link_to new_project_position_path(@project) do %>
-          <i class="fas fa-plus-circle"></i>
-        <% end %>
+          <%= link_to edit_project_path(@project) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to new_project_position_path(@project) do %>
+            <i class="fas fa-plus-circle"></i>
+          <% end %>
       </div>
     <% end %>
   </div>
@@ -31,14 +36,13 @@
   <!-- If the the viewer is the owner of project AND there are positions created. -->
 
   <% elsif @project.user == @user %>
-    <h2>You Have <%= @project.positions.count %> Open Position(s)</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
         <%= render "project_position_card", position: position %>
       <% end %>
   <% else %>
-    <h2>There Are <%= @project.positions.where(status: "Open").count %> Position(s) Open</h2>
     <% @project.positions.where(status: "Open").each do |position| %>
       <%= render "project_position_card", position: position %>
     <% end %>
   <% end %>
+</div>
 </div>

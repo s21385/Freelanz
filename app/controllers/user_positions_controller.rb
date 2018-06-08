@@ -17,6 +17,7 @@ class UserPositionsController < ApplicationController
     @user_position = UserPosition.new
     @user_position.user = current_user
     @user_position.position = @position
+    @user_position.status = "pending"
     @user_position.save
   end
 

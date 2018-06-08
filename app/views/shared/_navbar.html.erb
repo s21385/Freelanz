@@ -4,6 +4,7 @@
     <%= link_to root_path do %>
       <%= image_tag "freelanz7.png", height: 70 %>
     <% end %>
+
   </div>
 
   <!-- Links when logged in -->
@@ -47,10 +48,14 @@
   </div>
       <% else %>
         <!-- Login link (when logged out) -->
-        <div class= "navbar-wagon-brand" >
-          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
-        </div>
+         <div id="linkedin_signup" class="navbar-wagon-brand">
+
+            <%= link_to "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=#{ENV['LINKEDIN_CLIENT_ID']}&redirect_uri=http://#{ENV['LINKED_IN_NEW']}/pages/linkedin_callback&state=987654321&scope=r_basicprofile r_emailaddress" do %>
+              <i class="fab fa-linkedin"></i>
+              <p>Connect with LinkedIn</p>
+           <% end %>
+
+          </div>
 
 
   <% end %>

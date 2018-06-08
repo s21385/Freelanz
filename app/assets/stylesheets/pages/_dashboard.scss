@@ -2,6 +2,9 @@
   .position-card {
     position: relative;
     padding-left: 100px;
+    box-shadow: 0.5px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: rgba(230, 230, 230, 0.1);
+    border-radius: 5px;
   }
 
   .logo {
@@ -15,10 +18,18 @@
     padding: 10px 20px;
   }
 
-  .request-status-dashboard {
+   a {
+    color: black !important;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+
+
+}
+ .request-status-dashboard {
     position: absolute;
     top: 0px;
-    left: 0px;
     font-size: 17px;
     padding: 4px 21px;
 
@@ -37,8 +48,25 @@
       color: white;
     }
   }
-}
-
+  .left{
+    left: 0px;
+  }
+  .right{
+    right: 0;
+    border-top-right-radius: 5px;
+  }
 .avatar-profile{
   border-radius: 50%;
+  width: 120px;
+  border-radius: 50%;
+  height: 120px;
+}
+
+.h2-designed{
+  font-size: 30px;
+  color: white;
+  background: #5dadbf;
+  padding: 16px;
+  text-align: center;
+  text-transform: uppercase;
 }

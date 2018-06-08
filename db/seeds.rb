@@ -158,7 +158,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 
   # USER_POSITION
   3.times do
-  status = ["Accepted", "Refused", "In review"]
+  status = ["accepted", "declined", "pending"]
   puts "Creating User Positions"
   rate_cents = rand(5...40) * 500/100
   user_position = UserPosition.create!(
