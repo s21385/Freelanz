@@ -13,8 +13,8 @@
     <h2 class="h2-designed">My Projects Applicants</h2>
    <% end %>
   <div class="row">
-    <% @projects.each do |p| %>
-      <% p.user_positions.each do |t| %>
+    <% @projects.each do |project| %>
+      <% project.user_positions.each do |t| %>
         <div class="col-xs-12 col-sm-4">
           <%= render "shared/project_card", project: project %>
         </div>

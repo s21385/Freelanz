@@ -2,7 +2,6 @@
   <div class="project-header" >
     <div class="project-info">
       <div class="flex-center">
-        <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
           <div class="project-title">
             <h1><%= @project.company_name %></h1>
           </div>
@@ -22,6 +21,7 @@
           <% end %>
       </div>
     <% end %>
+        <%= cl_image_tag @project.photo, width: 150, crop: :fill %>
   </div>
   <div class="project-details">
       <p class="short-description"><%= @project.user.first_name %><%= " " %><%= @project.user.last_name %></p>

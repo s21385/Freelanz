@@ -4,7 +4,7 @@
 
         <div class="text-center">
           <div class="project-card-header">
-            <p><%= project.created_at.strftime("%m/%d/%Y") %></p>
+            <p></p>
             <div class="flex-icons">
               <i class="fas fa-briefcase"></i>
               <p><%= project.positions.where(status: "Open").count %></p>
@@ -21,21 +21,13 @@
         </div>
 
         <div class="project-card-footer">
-            <% logos = [] %>
-            <% project.positions.where(status: "Open").first(3).each do |pos| %>
-
-              <% photo = pos.skills.to_a.uniq.sample.photo.to_s %>
-
-              <% if !logos.include?(photo) %>
-                <div>
-                  <%= image_tag("#{photo}", height: 30, crop: :fill) %>
-                </div>
-              <% logos += [photo] %>
-              <% end %>
-                <!-- <div>
-                  <p><%= pos.skills.sample.skill.capitalize %></p>
-                </div> -->
-            <% end %>
+          <% project.first_three_skills.each do |skill| %>
+            <div id="card-skill-level-logos">
+              <div>
+                <%= image_tag("#{skill.photo.to_s}", height: 30, crop: :fill) %>
+              </div>
+            </div>
+          <% end %>
         </div>
 
           <%# link_to "Details", project_path(t) %>

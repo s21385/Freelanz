@@ -54,7 +54,7 @@ COMPANY_NAMES = {
   "Oracle" => "oracle.png",
   "Lightspeed" => "lightspeed.svg",
   "Busbud" => "Busbud.png",
-  "Mylo" => "mylo.jpeg",
+  "Mylo" => "mylo.png",
   "Nestready" => "nestready.png",
   "Koolicar" => "koolicar.png",
   "Chronogolf" => "chronogolf.png",
@@ -65,11 +65,10 @@ COMPANY_NAMES = {
   "Matrox" => "matrox.svg",
   "Cimpl" => "Cimpl.png",
   "ESignLive" => "esignlive.png",
-  "SurMesur" => "surmesur.jpg",
+  "SurMesur" => "surmesur.png",
   "SweetIQ" => "sweetiq.png",
-  "weeda.com" => "computer.png",
-  "Vesper.net" => "computer.png",
-  "FeelingSorry.org" => "computer.png"
+  "Agape" => "computer.png",
+  "Feeling Filmy" => "computer.png",
   "MDC Housewares" => "mdchousewares.com.jpg",
 }
 
@@ -205,7 +204,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
   company_logos_urls = company_logos
   company_index_list = (0..(COMPANY_NAMES.count - 1)).to_a
 
-  2.times do
+  3.times do
     company_index = company_index_list.sample
     statuses = ["Started", "Started", "Started", "Started","Completed"]
     deadline = rand(Date.today+21...Date.today+730)
@@ -242,7 +241,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
       # position_id = Project.first.id
       # project_no = Project.count
 
-      (0..1).to_a.sample.times do
+      1.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
@@ -250,7 +249,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         )
       end
 
-      (0..1).to_a.sample.times do
+      1.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: BACKEND_SKILLS.keys).to_a.sample,
@@ -258,7 +257,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         )
       end
 
-      (0..1).to_a.sample.times do
+      1.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: MOBILE_SKILLS.keys).to_a.sample,
@@ -351,6 +350,22 @@ alex = User.create!({
   linkedin_id: "7qB2qqMVwy",
   github_id: nil,
   skill_level: "Intermediate Programmer",
+  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
+  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+})
+
+francis = User.create!({
+  email: "poitras.francis@gmail.com",
+  password: "123456",
+  first_name: "Francis",
+  last_name: "Poitras",
+  photo: nil,
+  address: nil,
+  phone: nil,
+  rate_cents: 1500,
+  linkedin_id: "rLovAv9Fdx",
+  github_id: nil,
+  skill_level: "Junior Programmer",
   linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
   linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
 })
@@ -474,20 +489,6 @@ user_position = UserPosition.create!(
   rate_cents: 234
 )
 
-francis = User.create!({
-  email: "poitras.francis@gmail.com",
-  password: "123456",
-  first_name: "Francis",
-  last_name: "Poitras",
-  photo: nil,
-  address: nil,
-  phone: nil,
-  rate_cents: 1500,
-  linkedin_id: "rLovAv9Fdx",
-  github_id: nil,
-  skill_level: "Junior Programmer",
-  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
-  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
-})
+
 
 
