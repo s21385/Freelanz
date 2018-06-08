@@ -9,17 +9,7 @@
       </div>
     <% end %>
   </div>
-  <% if @projects.any? %>
-    <h2 class="h2-designed">Projects Applicants</h2>
-   <% end %>
   <div class="row">
-    <% @projects.each do |project| %>
-      <% project.user_positions.each do |t| %>
-        <div class="col-xs-12 col-sm-4">
-          <%= render "shared/project_card", project: project %>
-        </div>
-      <% end %>
-    </div>
     <h2 class="h2-designed">Projects Applications</h2>
     <div class="row">
       <% @projects.each do |p| %>
