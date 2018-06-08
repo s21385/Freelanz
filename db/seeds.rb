@@ -373,7 +373,7 @@ francis = User.create!({
 alexs_project = Project.create!({
   user: alex,
   name: "Front-End Dev Wanted",
-  company_name: "Pizzaz",
+  company_name: "Pizazz",
   short_description: "Need React.JS Developer for short-term contract",
   deadline: Date.today + 14.day,
   # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
