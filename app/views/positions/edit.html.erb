@@ -1,5 +1,5 @@
 
-<h3 style="text-align: center">Create a New Position</h3>
+<h3 style="text-align: center">Update a New Position</h3>
 <div class="form_freelanz positions">
   <%= simple_form_for [@project, @position] do |f|  %>
     <%= f.input :name %>
@@ -10,7 +10,7 @@
     <%= f.input :third_skill %>
     <%= f.input :skill_level, collection: ["Junior Programmer", "Intermediate Programmer", "Senior Programmer"] %>
     <%= f.input :rate_cents %>
-     <%= f.submit "Create Position", class: "btn btn-primary" %>
+     <%= f.submit "Update Position", class: "btn btn-primary" %>
   <% end %>
 </div>
 

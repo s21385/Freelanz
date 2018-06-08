@@ -50,4 +50,13 @@ $border-radius-small: 2px;
   display: block;
 }
 
+a:hover, a:focus {
+    color: white;
+    text-decoration: none;
+}
+a:focus {
+  outline: none !important;
+  outline-offset: none !important;
+}
+
 // Override other variables below!

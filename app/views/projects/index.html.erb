@@ -1,19 +1,19 @@
 <div id="info-banner">
-  <h3>DEDICATED TO FREELANCER COLLABORATION</h3>
+  <h3>PROJECTS AT YOUR FINGERTIPS</h3>
 </div>
-  <div id="job-search">
-    <%= form_tag projects_path, method: :get do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        id: "query-freelanz",
-        placeholder: "SEARCH PROJECTS"
-      %>
-    <% end %>
-  </div>
 
 
 <div class="container" >
+  <div class="search-wrapper">
+    <div id="job-search">
+      <%= form_tag projects_path, method: :get do %>
+        <%= text_field_tag :query, params[:query],class: "form-control",
+          id: "query-freelanz",
+          placeholder: "FIND YOUR NEXT PROJECT"
+        %>
+      <% end %>
+    </div>
+  </div>
   <!-- NO USER SIGNED IN OR PARAMS ALL : SHOW ALL PROJECTS -->
   <% if !user_signed_in? || params[:all] %>
 
@@ -30,7 +30,7 @@
   <div style="padding-top: 30px">
     <div class="row">
       <% @projects.each do |project| %>
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6 col-md-4">
           <%= render "shared/project_card", project: project %>
         </div>
       <% end %>

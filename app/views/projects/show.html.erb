@@ -1,98 +1,48 @@
 <div class="container">
   <div class="project-header" >
     <div class="project-info">
-
-    <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
-    <div class="project-title">
-      <h1><b><%= @project.name %></b></h1>
-      <p><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
+      <div class="flex-center">
+        <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
+          <div class="project-title">
+            <h1><%= @project.name %></h1>
+          </div>
+      </div>
+      <div class="flex-icons">
+          <i class="fas fa-briefcase"></i>
+          <p><%= @project.positions.where(status: "Open").count %></p>
+      </div>
     </div>
-  </div>
-  <% if @project.user == current_user %>
+    <% if @project.user == current_user %>
       <div class="btn-add-position">
-        <%= link_to new_project_position_path(@project) do %>
-          <i class="fas fa-plus-circle"></i>
-        <% end %>
+          <%= link_to edit_project_path(@project) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to new_project_position_path(@project) do %>
+            <i class="fas fa-plus-circle"></i>
+          <% end %>
       </div>
     <% end %>
   </div>
+  <div class="project-details">
+      <p class="short-description"><%= @project.short_description %></p>
+      <p class="start-end-dates"><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
+    <p><%= @project.description %></p>
+  </div>
 
-  <p><%= @project.short_description %></p>
-  <p><%= @project.description %></p>
 
-  <!-- If the the viewer is the owner of project but no positions yet. -->
-
-  <% if @project.user == @user && @project.positions.count == 0 %>
-    <h2><%= link_to 'Add Position', new_project_position_path(@project.id) %></h2>
-
-  <!-- If the the viewer is NOT the owner of project AND no positions yet. -->
-
-  <% elsif @project.user != @user && @project.positions.count == 0 %>
+  <% if @project.positions.count == 0 %>
     <h2>There are no available positions for this project.</h2>
 
   <!-- If the the viewer is the owner of project AND there are positions created. -->
 
   <% elsif @project.user == @user %>
-    <h2>You Have <%= @project.positions.count %> Open Positions</h2>
       <% @project.positions.where(status: "Open").each do |position| %>
-        <% raise %>
-        <div class="position-card">
-          <div class="position-card-info">
-            <h4><%= position.name %>
-            </%></h4>
-            <p> <%= position.description %> </p>
-          </div>
-          <div class="card-skill-level">
-            <p>Skill Level<%= " " %><%= position.skill_level %></p>
-            <p>Skills Required</p>
-              <% position.skills do |skill| %>
-                <%= image_tag(skill.photo, width: 30) %>
-              <% end %>
-          </div>
-          <div class="card-action">
-            <p>Number of Applicants:<%= " " %> <span id="cpt-<%= position.id %>"><%= position.user_positions.count %></span></p>
-          </div>
-        </div>
+        <%= render "project_position_card", position: position %>
       <% end %>
-  <!-- If the the viewer is NOT the owner of THE project AND there are positions open. -->
-
   <% else %>
-
-    <h2>There Are <%= @project.positions.where(status: "Open").count %> Positions Open</h2>
-
     <% @project.positions.where(status: "Open").each do |position| %>
-    <div class="position-card">
-      <div class="position-card-info">
-        <h4><%= position.name %></%></h4>
-        <p> <%= position.description %> </p>
-        <p id="cpt-<%= position.id %>"> <%= position.user_positions.count %></p>
-      </div>
-      <div class="card-skill-level">
-        <p> <b>Experience</b> <br> <%= " " %><%= position.skill_level %></p>
-        <p> <b>Skills Required</b> <br> <%= " " %>
-        <% position.skills.each do |skill| %>
-            <%= image_tag(skill.photo, width: 30) %>
-          <% end %>
-        </p>
-      </div>
-      <div class="card-action">
-        <h5 class="position-rate"><%= position.rate_cents %>$/Day</h5>
-        <% if !user_signed_in? %>
-          <p>Please log in to apply.</p>
-        <% elsif position.user_positions.where(user_id: @current_user).count == 0 && position.project.user != @user %>
-            <div id="apply-<%= position.id %>">
-              <%= link_to "Apply", position_user_positions_path(position), method: :post, remote: :true, class: "btn-apply" %>
-            </div>
-          <% elsif position.project.user != @user %>
-            <p>Already Applied</p>
-        <% end %>
-      </div>
-    </div>
-
-
-
+      <%= render "project_position_card", position: position %>
     <% end %>
   <% end %>
-
- <!-- render 'showindex' -->
+</div>
 </div>

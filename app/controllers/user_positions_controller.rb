@@ -1,5 +1,6 @@
 class UserPositionsController < ApplicationController
   before_action :set_user_position, except: [:index, :create]
+  before_action :authenticate_user!, only: [:create]
 
   def show
   end
@@ -16,6 +17,7 @@ class UserPositionsController < ApplicationController
     @user_position = UserPosition.new
     @user_position.user = current_user
     @user_position.position = @position
+    @user_position.status = "pending"
     @user_position.save
   end
 

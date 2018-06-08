@@ -1,3 +1,4 @@
-document.getElementById("cpt-<%= @position.id %>").innerHTML = "<%= @position.user_positions.count %>"
-
-document.getElementById("apply-<%= @position.id %>").innerHTML = "Application Sent"
+<% if @position %>
+  document.getElementById("cpt-<%= @position.id %>").innerHTML = "<%= @position.user_positions.count %>"
+  document.getElementById("apply-<%= @position.id %>").innerHTML = "Application Sent"
+<% end %>

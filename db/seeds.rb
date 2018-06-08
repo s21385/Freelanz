@@ -311,7 +311,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 10.times do
   user = User.create!(
     email: Faker::Internet.email,
-    password: "password123",
+    password: "123456",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     photo: get_path1(urls.sample),
@@ -325,7 +325,7 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 
   # USER_POSITION
   3.times do
-    status = ["Accepted", "Refused", "In review"]
+    status = ["accepted", "declined", "pending"]
     puts "Creating User Positions"
     rate_cents = rand(5...40) * 500/100
     user_position = UserPosition.create!(
