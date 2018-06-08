@@ -60,7 +60,7 @@ COMPANY_NAMES = {
   "Chronogolf" => "chronogolf.png",
   "Shopify" => "shopify.svg",
   "Tesla" => "tesla.svg",
-  "Autodesk" => "autodesk.svg",
+  "Autodesk" => "autodesk.png",
   "Github" => "github.png",
   "Matrox" => "matrox.svg",
   "Cimpl" => "Cimpl.png",
@@ -70,6 +70,7 @@ COMPANY_NAMES = {
   "Agape" => "computer.png",
   "Feeling Filmy" => "computer.png",
   "MDC Housewares" => "mdchousewares.com.jpg",
+  "Pizazz"=> "Pizazz.png"
 }
 
 def company_names
@@ -379,7 +380,7 @@ alexs_project = Project.create!({
   # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
   start_date: Date.today,
   status: "Started",
-  photo: Rails.root.join("app/assets/images/logos/comp_logos/mdchousewares.com.jpg").open,
+  photo: Rails.root.join("app/assets/images/logos/comp_logos/Pizazz.png").open,
   description: "A long-term client wants to implement React.JS for dynamic webpages, and I struggle with that technology. Client is a growing housewares distributor in Ville St-Laurent",
 })
 
@@ -452,7 +453,7 @@ user_position = UserPosition.create!(
 position_2 = Position.create!(
   project: alexs_project,
   name: "Database Admin",
-  rate_cents: 170,
+  rate_cents: 210,
   status: "Open",
   skill_level: "Junior Programmer"
 )
