@@ -223,7 +223,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
       # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
       start_date: deadline - 14,
       status: statuses.sample,
-      photo: get_path2(company_logos_urls[company_index]),
+      photo: Rails.root.join("app/assets/images/", get_path2(company_logos_urls[company_index])).open,
       description: PROJECT_DESC1.sample + " " + PROJECT_DESC2.sample,
     )
 
