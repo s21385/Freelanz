@@ -428,7 +428,7 @@ user_position = UserPosition.create!(
   user: user_1,
   position: position_1,
   status: "pending",
-  rate_cents: 123
+  rate_cents: 180
 )
 
 user_2 = User.create!(
@@ -452,7 +452,7 @@ user_position = UserPosition.create!(
 position_2 = Position.create!(
   project: alexs_project,
   name: "Database Admin",
-  rate_cents: 234234,
+  rate_cents: 170,
   status: "Open",
   skill_level: "Junior Programmer"
 )
