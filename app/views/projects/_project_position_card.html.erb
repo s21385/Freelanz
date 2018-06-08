@@ -6,8 +6,10 @@
   <div class="card-skill-level">
     <p> <b>Experience</b> <br><%= position.skill_level %></p>
     <p> <b>Skills Required</b> <br>
-    <% position.skills do |skill| %>
+    <% position.skills.each do |skill| %>
+    <div id="card-skill-level-logos">
       <%= image_tag(skill.photo, width: 30) %>
+    </div>
     <% end %>
   </div>
   <div class="card-action">
