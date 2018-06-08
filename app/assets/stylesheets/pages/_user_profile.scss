@@ -1,0 +1,15 @@
+.user-profile-main {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.user-profile-image, .user-profile-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-image {
+  justify-content: space-between;
+  align-items: center;
+}
