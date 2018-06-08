@@ -6,12 +6,12 @@ before_action :set_user
 
   def index
     if params[:query].present?
-      @projects = Project.global_search(params[:query])
+      @projects = Project.global_search(params[:query]).limit(9)
     else
       if user_signed_in? || params[:all]
-        @projects = Project.where(status: "Started").where.not(user_id: current_user.id)
+        @projects = Project.where(status: "Started").where.not(user_id: current_user.id).limit(9)
       else
-        @projects = Project.where(status: "Started")
+        @projects = Project.where(status: "Started").limit(9)
       end
     end
   end
@@ -25,7 +25,6 @@ before_action :set_user
   end
 
   def show
-
   end
 
   def edit

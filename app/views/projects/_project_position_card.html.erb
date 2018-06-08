@@ -6,14 +6,9 @@
   <div class="card-skill-level">
     <p> <b>Experience</b> <br><%= position.skill_level %></p>
     <p> <b>Skills Required</b> <br>
-      <%# image_tag( "svg/#{position.first_skill}.svg", width: 30) if has_asset?("svg/#{position.first_skill}.svg") %>
-       <%= position.first_skill %>
-      <% if position.second_skill && position.second_skill != "" && position.third_skill == "" %>
-        / <%= position.second_skill %>
-      <% elsif position.third_skill && position.second_skill != "" && position.third_skill != "" %>
-        / <%= position.second_skill %>
-        / <%= position.third_skill %>
-      <% end %></p>
+    <% position.skills do |skill| %>
+      <%= image_tag(skill.photo, width: 30) %>
+    <% end %>
   </div>
   <div class="card-action">
     <% if @project.user == current_user %>

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_204227) do
+ActiveRecord::Schema.define(version: 2018_06_06_231953) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,14 +64,21 @@ ActiveRecord::Schema.define(version: 2018_06_06_204227) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
+  create_table "position_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "position_id"
+    t.string "skill_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_position_skills_on_position_id"
+    t.index ["skill_id"], name: "index_position_skills_on_skill_id"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.bigint "project_id"
     t.string "name"
     t.integer "rate_cents"
     t.string "status", default: "Pending"
-    t.string "first_skill"
-    t.string "second_skill"
-    t.string "third_skill"
     t.string "skill_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,6 +97,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_204227) do
     t.text "description"
     t.string "status", default: "Started"
     t.string "photo"
+    t.string "company_name"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -100,6 +109,13 @@ ActiveRecord::Schema.define(version: 2018_06_06_204227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "skill"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_positions", force: :cascade do |t|
@@ -145,6 +161,8 @@ ActiveRecord::Schema.define(version: 2018_06_06_204227) do
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "messages", "discussions"
+  add_foreign_key "position_skills", "positions"
+  add_foreign_key "position_skills", "skills"
   add_foreign_key "positions", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "ratings", "users"
