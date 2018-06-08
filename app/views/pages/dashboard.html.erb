@@ -1,5 +1,7 @@
 <div class="container">
-  <h2 class="h2-designed">My Projects</h2>
+  <% if @projects.any? %>
+    <h2 class="h2-designed">My Projects</h2>
+  <% end %>
   <div class="row">
     <% @projects.each do |project| %>
       <div class="col-xs-12 col-sm-4">
@@ -7,7 +9,9 @@
       </div>
     <% end %>
   </div>
-  <h2 class="h2-designed">My Projects Applicants</h2>
+  <% if @projects.any? %>
+    <h2 class="h2-designed">My Projects Applicants</h2>
+   <% end %>
   <div class="row">
     <% @projects.each do |p| %>
       <% p.user_positions.each do |t| %>
@@ -51,7 +55,9 @@
       <% end %>
     <% end %>
   </div>
-  <h2 class="h2-designed">My Applications</h2>
+  <% if @my_requests.any? %>
+    <h2 class="h2-designed">My Applications</h2>
+  <% end %>
   <div class="row dashboard-user-positions">
     <% @my_requests.each do |user_position| %>
       <%= render "myrequests_card", user_position: user_position %>

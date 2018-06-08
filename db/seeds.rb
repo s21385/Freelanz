@@ -67,7 +67,7 @@ COMPANY_NAMES = {
   "ESignLive" => "esignlive.png",
   "SurMesur" => "surmesur.jpg",
   "SweetIQ" => "sweetiq.png",
-  # "MDC Housewares" => "mdc.png"
+  "MDC Housewares" => "mdchousewares.com.jpg",
   "Private project" => "computer.png",
   "Private project1" => "computer.png",
   "Private project2" => "computer.png",
@@ -240,7 +240,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         status: status.sample,
         skill_level: User::SKILL_LEVEL.sample
       )
-      puts "position.name created"
+      puts "#{position.name} created"
 
       urls = skill_pictures
       # position_id = Project.first.id
@@ -359,7 +359,7 @@ alex = User.create!({
   linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
 })
 
-alexs_project = Project.create({
+alexs_project = Project.create!({
   user: alex,
   name: "Front-End Dev Wanted",
   company_name: "MDC Housewares",
@@ -367,8 +367,8 @@ alexs_project = Project.create({
   deadline: Date.today + 14.day,
   # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
   start_date: Date.today,
-  status: "Open",
-  photo: "",
+  status: "Started",
+  photo: Rails.root.join("app/assets/images/logos/comp_logos/mdchousewares.com.jpg").open,
   description: "A long-term client wants to implement React.JS for dynamic webpages, and I struggle with that technology. Client is a growing housewares distributor in Ville St-Laurent",
 })
 
@@ -405,12 +405,12 @@ PositionSkill.create!(
 # And two users applying to that position
 
 user_1 = User.create!(
-  email: "brad@johnson.com",
+  email: "mg@ayoub.com",
   password: "password123",
-  first_name: "Brad",
-  last_name: "Johnson",
+  first_name: "MG",
+  last_name: "Ayoub",
   skill_level: "Junior Programmer",
-  photo: get_path1(persons_urls.sample),
+  photo: Rails.root.join("app/assets/images/pictures/MG.jpg").open
 )
 
 user_position = UserPosition.create!(
@@ -421,12 +421,12 @@ user_position = UserPosition.create!(
 )
 
 user_2 = User.create!(
-  email: "james@smith.com",
+  email: "brett@middleton.com",
   password: "password123",
-  first_name: "Jim",
-  last_name: "Smith",
+  first_name: "Brett",
+  last_name: "Middleton",
   skill_level: "Junior Programmer",
-  photo: get_path1(persons_urls.sample),
+  photo: Rails.root.join("app/assets/images/pictures/Brett.jpg").open
 )
 
 user_position = UserPosition.create!(
@@ -463,16 +463,16 @@ PositionSkill.create!(
 # And only one user applying to it
 
 user_3 = User.create!(
-  email: "marc@jackson.com",
+  email: "jack@cookin.com",
   password: "password123",
-  first_name: "Marc",
-  last_name: "Jackson",
+  first_name: "Jack",
+  last_name: "Gaarkeuken",
   skill_level: "Junior Programmer",
-  photo: get_path1(persons_urls.sample),
+  photo: Rails.root.join("app/assets/images/pictures/Jack.jpg").open
 )
 
 user_position = UserPosition.create!(
-  user: user_2,
+  user: user_3,
   position: position_2,
   status: "pending",
   rate_cents: 234
