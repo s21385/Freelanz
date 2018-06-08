@@ -1,8 +1,20 @@
 <div class="container">
-  <% if @projects.count > 0 %>
+  <% if @projects.any? %>
     <h2 class="h2-designed">My Projects</h2>
-    <div class="row">
-      <% @projects.each do |project| %>
+  <% end %>
+  <div class="row">
+    <% @projects.each do |project| %>
+      <div class="col-xs-12 col-sm-4">
+        <%= render "shared/project_card", project: project %>
+      </div>
+    <% end %>
+  </div>
+  <% if @projects.any? %>
+    <h2 class="h2-designed">My Projects Applicants</h2>
+   <% end %>
+  <div class="row">
+    <% @projects.each do |p| %>
+      <% p.user_positions.each do |t| %>
         <div class="col-xs-12 col-sm-4">
           <%= render "shared/project_card", project: project %>
         </div>
@@ -51,9 +63,11 @@
           </div>
         <% end %>
       <% end %>
-    </div>
+    <% end %>
+  </div>
+  <% if @my_requests.any? %>
+    <h2 class="h2-designed">My Applications</h2>
   <% end %>
-  <h2 class="h2-designed">My Applications</h2>
   <div class="row dashboard-user-positions">
     <% @my_requests.each do |user_position| %>
       <%= render "myrequests_card", user_position: user_position %>

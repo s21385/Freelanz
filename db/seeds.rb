@@ -41,9 +41,9 @@ pro_langs = ["Android", "AngularJS", "AWS", "Backbone.js", "C", "C++", "C#", "Co
 "Shell", "SpringFramework", "Swift", "SQL", "Unreal Engine", "Vimscript", "Vue.js", "XML"]
 
 
-PROJECT_NAMES = ["Long term contract", "Reccuring work", "Quick project", "Time based contracts",
-  "Cutting edge technology", "No experience needed", "Redesign work", "Upgrades needed",
-  "Migration job", "Legacy code maintenance", "Code review", "Systems integration"]
+PROJECT_NAMES = ["Long-Term Contract", "Recurring Work", "Quick Project", "Time-Based Contracts",
+  "Cutting-Edge Technology", "No Experience Needed", "Redesign Work", "Upgrades Needed",
+  "Migration Job", "Legacy Code Maintenance", "Code Review", "Systems Integration"]
 
 COMPANY_NAMES = {
   "Le Wagon" => "lewagon.png",
@@ -70,6 +70,7 @@ COMPANY_NAMES = {
   "weeda.com" => "computer.png",
   "Vesper.net" => "computer.png",
   "FeelingSorry.org" => "computer.png"
+  "MDC Housewares" => "mdchousewares.com.jpg",
 }
 
 def company_names
@@ -196,7 +197,6 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
-  puts "CREATED user.first_name + " " + user.last_name"
 
   puts "CREATING PROJECTS"
 
@@ -236,7 +236,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         status: status.sample,
         skill_level: User::SKILL_LEVEL.sample
       )
-      puts "position.name created"
+      puts "#{position.name} created"
 
       urls = skill_pictures
       # position_id = Project.first.id
@@ -301,24 +301,24 @@ puts "CREATING SKILLS"
 puts "FINISHED CREATING SKILLS"
 
 # USERS APPLICATIONS
-puts 'CREATING 10 USERS...'
-urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
-  "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
-10.times do
-  user = User.create!(
-    email: Faker::Internet.email,
-    password: "123456",
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    photo: get_path1(urls.sample),
-    phone: Faker::PhoneNumber.cell_phone,
-    github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
-    skill_level: User::SKILL_LEVEL.sample,
-    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
-  )
-  puts "Created user: " + user.first_name + " " + user.last_name
+# puts 'CREATING 10 USERS...'
+# urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+#   "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
+# 10.times do
+#   user = User.create!(
+#     email: Faker::Internet.email,
+#     password: "123456",
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     photo: get_path1(urls.sample),
+#     phone: Faker::PhoneNumber.cell_phone,
+#     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+#     skill_level: User::SKILL_LEVEL.sample,
+#     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
+#   )
+#   puts "Created user: " + user.first_name + " " + user.last_name
 
-
+User.all.each do |user|
   # USER_POSITION
   3.times do
     status = ["accepted", "declined", "pending"]
@@ -334,4 +334,160 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 end
 
 
-puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
+###################################################################
+############          CUSTOM DATA FOR THE DEMO         ############
+###################################################################
+
+
+alex = User.create!({
+  email: "alex-corrado@hotmail.com",
+  password: "123456",
+  first_name: "Alex",
+  last_name: "Corrado",
+  photo: nil,
+  address: nil,
+  phone: nil,
+  rate_cents: 1500,
+  linkedin_id: "7qB2qqMVwy",
+  github_id: nil,
+  skill_level: "Intermediate Programmer",
+  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
+  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+})
+
+alexs_project = Project.create!({
+  user: alex,
+  name: "Front-End Dev Wanted",
+  company_name: "MDC Housewares",
+  short_description: "Need React.JS Developer for short-term contract",
+  deadline: Date.today + 14.day,
+  # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
+  start_date: Date.today,
+  status: "Started",
+  photo: Rails.root.join("app/assets/images/logos/comp_logos/mdchousewares.com.jpg").open,
+  description: "A long-term client wants to implement React.JS for dynamic webpages, and I struggle with that technology. Client is a growing housewares distributor in Ville St-Laurent",
+})
+
+# first position of alexs project
+
+position_1 = Position.create!(
+  project: alexs_project,
+  name: "React.JS Developer",
+  rate_cents: 150,
+  status: "Open",
+  skill_level: "Junior Programmer"
+)
+
+# three skills of that position
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.find_by(skill: "React"),
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.find_by(skill: "Javascript"),
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.find_by(skill: "HTML"),
+  skill_type: "frontend"
+)
+
+# And two users applying to that position
+
+user_1 = User.create!(
+  email: "mg@ayoub.com",
+  password: "password123",
+  first_name: "MG",
+  last_name: "Ayoub",
+  skill_level: "Junior Programmer",
+  photo: Rails.root.join("app/assets/images/pictures/MG.jpg").open
+)
+
+user_position = UserPosition.create!(
+  user: user_1,
+  position: position_1,
+  status: "pending",
+  rate_cents: 123
+)
+
+user_2 = User.create!(
+  email: "brett@middleton.com",
+  password: "password123",
+  first_name: "Brett",
+  last_name: "Middleton",
+  skill_level: "Junior Programmer",
+  photo: Rails.root.join("app/assets/images/pictures/Brett.jpg").open
+)
+
+user_position = UserPosition.create!(
+  user: user_2,
+  position: position_1,
+  status: "pending",
+  rate_cents: 234
+)
+
+# second position to alexs project
+
+position_2 = Position.create!(
+  project: alexs_project,
+  name: "Database Admin",
+  rate_cents: 234234,
+  status: "Open",
+  skill_level: "Junior Programmer"
+)
+
+# Two skills for the second position
+
+PositionSkill.create!(
+  position: position_2,
+  skill: Skill.find_by(skill: "PostGres"),
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_2,
+  skill: Skill.find_by(skill: "SQL"),
+  skill_type: "frontend"
+)
+
+# And only one user applying to it
+
+user_3 = User.create!(
+  email: "jack@cookin.com",
+  password: "password123",
+  first_name: "Jack",
+  last_name: "Gaarkeuken",
+  skill_level: "Junior Programmer",
+  photo: Rails.root.join("app/assets/images/pictures/Jack.jpg").open
+)
+
+user_position = UserPosition.create!(
+  user: user_3,
+  position: position_2,
+  status: "pending",
+  rate_cents: 234
+)
+
+francis = User.create!({
+  email: "poitras.francis@gmail.com",
+  password: "123456",
+  first_name: "Francis",
+  last_name: "Poitras",
+  photo: nil,
+  address: nil,
+  phone: nil,
+  rate_cents: 1500,
+  linkedin_id: "rLovAv9Fdx",
+  github_id: nil,
+  skill_level: "Junior Programmer",
+  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
+  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+})
+
+
