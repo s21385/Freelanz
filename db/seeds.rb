@@ -200,7 +200,6 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
   )
-  puts "CREATED user.first_name + " " + user.last_name"
 
   puts "CREATING PROJECTS"
 
@@ -305,24 +304,24 @@ puts "CREATING SKILLS"
 puts "FINISHED CREATING SKILLS"
 
 # USERS APPLICATIONS
-puts 'CREATING 10 USERS...'
-urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
-  "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
-10.times do
-  user = User.create!(
-    email: Faker::Internet.email,
-    password: "123456",
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    photo: get_path1(urls.sample),
-    phone: Faker::PhoneNumber.cell_phone,
-    github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
-    skill_level: User::SKILL_LEVEL.sample,
-    address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
-  )
-  puts "Created user: " + user.first_name + " " + user.last_name
+# puts 'CREATING 10 USERS...'
+# urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
+#   "prince.jpg", "putin.jpg", "seydou.jpg", "walken.jpg"]
+# 10.times do
+#   user = User.create!(
+#     email: Faker::Internet.email,
+#     password: "123456",
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     photo: get_path1(urls.sample),
+#     phone: Faker::PhoneNumber.cell_phone,
+#     github_id: "github.com/" + Faker::Superhero.prefix.gsub(/\s+/, "") + Faker::Superhero.power.gsub(/\s+/, "") + ((1..1000).to_a.sample.to_s),
+#     skill_level: User::SKILL_LEVEL.sample,
+#     address: "#{Faker::Address.street_address},#{Faker::Address.street_name+Faker::Address.city},#{Faker::Address.postcode}"
+#   )
+#   puts "Created user: " + user.first_name + " " + user.last_name
 
-
+User.all.each do |user|
   # USER_POSITION
   3.times do
     status = ["accepted", "declined", "pending"]
@@ -338,4 +337,166 @@ urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffman.jpg",
 end
 
 
-puts "SEED IS FINISHED AND FRANCIS POITRAS SAYS HI!!!"
+###################################################################
+############          CUSTOM DATA FOR THE DEMO         ############
+###################################################################
+
+
+alex = User.create!({
+  email: "alex-corrado@hotmail.com",
+  password: "123456",
+  first_name: "Alex",
+  last_name: "Corrado",
+  photo: nil,
+  address: nil,
+  phone: nil,
+  rate_cents: 1500,
+  linkedin_id: "7qB2qqMVwy",
+  github_id: nil,
+  skill_level: "Intermediate Programmer",
+  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
+  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+})
+
+alexs_project = Project.create({
+  user: alex,
+  name: "fsdfsd",
+  company_name: "sdf",
+  short_description: "Short description",
+  deadline: Date.today + 14.day,
+  # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
+  start_date: Date.today,
+  status: "",
+  photo: "",
+  description: "",
+})
+
+# first position of alexs project
+
+position_1 = Position.create!(
+  project: alexs_project,
+  name: JOBS_DESCRIPTIONS.sample,
+  rate_cents: rate_cents,
+  status: status.sample,
+  skill_level: User::SKILL_LEVEL.sample
+)
+
+# three skills of that position
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_1,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+# And two users applying to that position
+
+user_1 = User.create!(
+  email: "",
+  password: "password123",
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  skill_level: User::SKILL_LEVEL.sample,
+  photo: get_path1(persons_urls.sample),
+)
+
+user_position = UserPosition.create!(
+  user: user_1,
+  position: position_1,
+  status: status.sample,
+  rate_cents: 123
+)
+
+user_2 = User.create!(
+  email: "",
+  password: "password123",
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  skill_level: User::SKILL_LEVEL.sample,
+  photo: get_path1(persons_urls.sample),
+)
+
+user_position = UserPosition.create!(
+  user: user_2,
+  position: position_1,
+  status: status.sample,
+  rate_cents: 234
+)
+
+# second position to alexs project
+
+position_2 = Position.create!(
+  project: alexs_project,
+  name: JOBS_DESCRIPTIONS.sample,
+  rate_cents: 234234,
+  status: status.sample,
+  skill_level: User::SKILL_LEVEL.sample
+)
+
+# Three skills for the second position
+
+PositionSkill.create!(
+  position: position_2,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_2,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+PositionSkill.create!(
+  position: position_2,
+  skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
+  skill_type: "frontend"
+)
+
+# And only one user applying to it
+
+user_3 = User.create!(
+  email: "",
+  password: "password123",
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  skill_level: User::SKILL_LEVEL.sample,
+  photo: get_path1(persons_urls.sample),
+)
+
+user_position = UserPosition.create!(
+  user: user_2,
+  position: position_2,
+  status: status.sample,
+  rate_cents: 234
+)
+
+francis = User.create!({
+  email: "alex-corrado@hotmail.com",
+  password: "123456",
+  first_name: "Alex",
+  last_name: "Corrado",
+  photo: nil,
+  address: nil,
+  phone: nil,
+  rate_cents: 1500,
+  linkedin_id: "",
+  github_id: nil,
+  skill_level: "Intermediate Programmer",
+  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
+  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+})
+
+
