@@ -68,6 +68,7 @@ COMPANY_NAMES = {
   "SurMesur" => "surmesur.jpg",
   "SweetIQ" => "sweetiq.png",
   "MDC Housewares" => "mdchousewares.com.jpg",
+  "Pizazz"=> "Pizazz.png",
   "Private project" => "computer.png",
   "Private project1" => "computer.png",
   "Private project2" => "computer.png",
@@ -368,7 +369,7 @@ alexs_project = Project.create!({
   # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
   start_date: Date.today,
   status: "Started",
-  photo: Rails.root.join("app/assets/images/logos/comp_logos/mdchousewares.com.jpg").open,
+  photo: Rails.root.join("app/assets/images/logos/comp_logos/Pizazz.png").open,
   description: "A long-term client wants to implement React.JS for dynamic webpages, and I struggle with that technology. Client is a growing housewares distributor in Ville St-Laurent",
 })
 
@@ -441,7 +442,7 @@ user_position = UserPosition.create!(
 position_2 = Position.create!(
   project: alexs_project,
   name: "Database Admin",
-  rate_cents: 234234,
+  rate_cents: 210,
   status: "Open",
   skill_level: "Junior Programmer"
 )
