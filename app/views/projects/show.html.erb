@@ -4,7 +4,7 @@
       <div class="flex-center">
         <%= cl_image_tag @project.photo, height: 60, width: 60, crop: :fill %>
           <div class="project-title">
-            <h1><%= @project.name %></h1>
+            <h1><%= @project.company_name %></h1>
           </div>
       </div>
       <div class="flex-icons">
@@ -24,8 +24,9 @@
     <% end %>
   </div>
   <div class="project-details">
-      <p class="short-description"><%= @project.short_description %></p>
-      <p class="start-end-dates"><%= @project.start_date.strftime("%m/%d/%y") %> - <%= @project.deadline.strftime("%m/%d/%y") %></p>
+      <p class="short-description"><%= @project.user.first_name %><%= " " %><%= @project.user.last_name %></p>
+      <p class="start-end-dates">Start date: <%= " " %><%= @project.start_date.strftime("%m/%d/%y") %> -
+        Completion date:<%= " " %><%= @project.deadline.strftime("%m/%d/%y") %></p>
     <p><%= @project.description %></p>
   </div>
 

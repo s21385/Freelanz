@@ -1,34 +1,48 @@
   <%= link_to project_path(project) do %>
-    <div class="card">
+    <% if project.positions.where(status: "Open").count > 0 %>
+      <div class="card">
 
-      <div class="text-center">
-        <div class="project-card-header">
-          <p><%= project.created_at.strftime("%m/%d/%Y") %></p>
-          <div class="flex-icons">
-            <i class="fas fa-briefcase"></i>
-            <p><%= project.positions.count %></p>
+        <div class="text-center">
+          <div class="project-card-header">
+            <p><%= project.created_at.strftime("%m/%d/%Y") %></p>
+            <div class="flex-icons">
+              <i class="fas fa-briefcase"></i>
+              <p><%= project.positions.where(status: "Open").count %></p>
+            </div>
+          </div>
+          <div id="project_card_logo">
+            <%= cl_image_tag(project.photo, height: 60, crop: :fill) unless project.photo.file.nil? %>
           </div>
         </div>
-        <%= cl_image_tag(project.photo, height: 60, crop: :fill) unless project.photo.file.nil? %>
-      </div>
 
-      <div class="text-center">
-        <h4><%= project.name %></h4>
-        <p class="project-description"><%= truncate(project.description, length: 100) %></p>
-      </div>
-
-      <div class="project-card-footer">
-        <% project.positions.first(3).each do |pos| %>
-        <div>
-          <p><%= pos.name %></p>
+        <div class="text-center">
+          <h4><%= project.company_name %></h4>
+          <p class="project-description"><%= truncate(project.description, length: 100) %></p>
         </div>
-        <% end %>
-      </div>
 
-        <%# link_to "Details", project_path(t) %>
+        <div class="project-card-footer">
+            <% logos = [] %>
+            <% project.positions.where(status: "Open").first(3).each do |pos| %>
 
-      <div class="card-hover">
-        <h3 class="glitch">More Details</h3>
+              <% photo = pos.skills.to_a.uniq.sample.photo.to_s %>
+
+              <% if !logos.include?(photo) %>
+                <div>
+                  <%= image_tag("#{photo}", height: 30, crop: :fill) %>
+                </div>
+              <% logos += [photo] %>
+              <% end %>
+                <!-- <div>
+                  <p><%= pos.skills.sample.skill.capitalize %></p>
+                </div> -->
+            <% end %>
+        </div>
+
+          <%# link_to "Details", project_path(t) %>
+
+        <div class="card-hover">
+          <h3 class="glitch">More Details</h3>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>

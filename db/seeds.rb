@@ -67,12 +67,9 @@ COMPANY_NAMES = {
   "ESignLive" => "esignlive.png",
   "SurMesur" => "surmesur.jpg",
   "SweetIQ" => "sweetiq.png",
-  "Private project" => "computer.png",
-  "Private project1" => "computer.png",
-  "Private project2" => "computer.png",
-  "Private project3" => "computer.png",
-  "Private project4" => "computer.png",
-  "Private project5" => "computer.png"
+  "weeda.com" => "computer.png",
+  "Vesper.net" => "computer.png",
+  "FeelingSorry.org" => "computer.png"
 }
 
 def company_names
@@ -103,7 +100,6 @@ BACKEND_SKILLS = {
   ".NET" => "net.svg",
   "Perl" => "perl.svg",
   "C" => "c.svg",
-  "C++" => "c++.svg",
   "C#" => "c#.png"
 }
 
@@ -229,7 +225,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
 
     puts 'CREATING POSITIONS ON PROJECTS'
     (2..7).to_a.sample.times do
-      status = ["Filled", "Open"]
+      status = ["Filled", "Open", "Open"]
 
       # HAVE TO ADD $
       rate_cents = rand(5...40) * 500/100
@@ -246,7 +242,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
       # position_id = Project.first.id
       # project_no = Project.count
 
-      (1..2).to_a.sample.times do
+      (0..1).to_a.sample.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: FRONT_END_SKILLS.keys).to_a.sample,
@@ -254,7 +250,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         )
       end
 
-      (1..2).to_a.sample.times do
+      (0..1).to_a.sample.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: BACKEND_SKILLS.keys).to_a.sample,
@@ -262,7 +258,7 @@ persons_urls = ["adele.jpg", "buscemi.jpg", "deniro.jpg", "ergogan.jpg", "hoffma
         )
       end
 
-      (1..2).to_a.sample.times do
+      (0..1).to_a.sample.times do
         PositionSkill.create!(
           position: position,
           skill: Skill.where(skill: MOBILE_SKILLS.keys).to_a.sample,

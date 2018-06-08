@@ -70,6 +70,11 @@
   }
 }
 
+#card-skill-level-logos {
+  padding-right: 20px;
+  display: inline-block;
+}
+
 .project-card-header {
   display: flex;
   align-items: center;
@@ -80,7 +85,8 @@
 .project-card-footer {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 0px;
+  padding-bottom: 15px;
 
   p {
     text-align: center;
@@ -89,6 +95,11 @@
     flex: 1;
   }
 }
+
+#project_card_logo {
+  padding-top: 30px;
+}
+
 
 .glitch {
   font-size: 30px;
