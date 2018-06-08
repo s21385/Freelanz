@@ -366,14 +366,14 @@ francis = User.create!({
   linkedin_id: "rLovAv9Fdx",
   github_id: nil,
   skill_level: "Junior Programmer",
-  linkedin_photo: "https://media.licdn.com/dms/image/C5103AQGqYLtVyGZwRg/profile-displayphoto-shrink_100_100/0?e=1533772800&v=beta&t=ha34IXk2HFWdFVKBgKK7aS-VIdxmFpFMAOVR0A14ZQM",
-  linkedin_profile_url: "https://www.linkedin.com/in/alex-corrado-1602a65a"
+  linkedin_photo: "https://media.licdn.com/dms/image/C4E03AQGHVX3NFuFNww/profile-displayphoto-shrink_200_200/0?e=1533772800&v=beta&t=c3s6x2QKSsXIs09Y9kQyRSrsgXBLVVk3lsco4EKGgVk",
+  linkedin_profile_url: "https://www.linkedin.com/in/francis-poitras/"
 })
 
 alexs_project = Project.create!({
   user: alex,
   name: "Front-End Dev Wanted",
-  company_name: "MDC Housewares",
+  company_name: "Pizzaz",
   short_description: "Need React.JS Developer for short-term contract",
   deadline: Date.today + 14.day,
   # ADD IF STATEMENT BECAUSE ALL DATES ARE -14 days
