@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <% if @projects.any? %>
-    <h2 class="h2-designed">My Projects Applicants</h2>
+    <h2 class="h2-designed">Projects Applicants</h2>
    <% end %>
   <div class="row">
     <% @projects.each do |project| %>
@@ -20,7 +20,7 @@
         </div>
       <% end %>
     </div>
-    <h2 class="h2-designed">My Projects Applicants</h2>
+    <h2 class="h2-designed">Projects Applications</h2>
     <div class="row">
       <% @projects.each do |p| %>
         <% p.user_positions.each do |t| %>

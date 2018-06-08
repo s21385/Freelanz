@@ -69,7 +69,6 @@ COMPANY_NAMES = {
   "SweetIQ" => "sweetiq.png",
   "Agape" => "computer.png",
   "Feeling Filmy" => "computer.png",
-  "MDC Housewares" => "mdchousewares.com.jpg",
   "Pizazz"=> "Pizazz.png"
 }
 
