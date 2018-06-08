@@ -67,7 +67,7 @@
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
       <% if user_signed_in? %>
           <li>
-            <%= link_to users_show_path(current_user.id) do %>
+            <%= link_to current_user.linkedin_profile_url do %>
               <i class="fa fa-user"> Profile</i>
             <% end %>
           </li>
