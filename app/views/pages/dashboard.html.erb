@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>My Projects</h2>
+  <h2 class="h2-designed">My Projects</h2>
   <div class="row">
     <% @projects.each do |project| %>
       <div class="col-xs-12 col-sm-4">
@@ -7,20 +7,21 @@
       </div>
     <% end %>
   </div>
-  <h2>Requests To My Projects</h2>
+  <h2 class="h2-designed">My Projects Applicants</h2>
   <div class="row">
     <% @projects.each do |p| %>
       <% p.user_positions.each do |t| %>
         <div class="col-xs-12 col-sm-4">
           <div class="card">
+            <div class="request-status-dashboard <%= t.status %> right"> <%= t.status.capitalize %></div>
+
             <div class="project-card-header">
               <div><%= t.created_at.strftime("%m/%d/%Y") %></div>
 
             </div>
 
             <div class="text-center">
-
-              <%= link_to users_show_path(t.user) do %>
+              <%= link_to t.user.linkedin_profile_url, target: "_blank" do %>
                  <% if !t.user.linkedin_id.nil? %>
                   <%= image_tag t.user.linkedin_photo , class: "avatar-profile" %>
                 <% elsif %>
@@ -34,12 +35,12 @@
             </div>
 
             <div class="project-card-footer">
-              <% if t.status == "In review" %>
+              <% if t.status == "pending" %>
               <div class="btn btn-success">
-                  <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "Accepted" }), method: :patch %>
+                  <%= link_to "ACCEPT", user_position_path(t, user_position: { status: "accepted" }), method: :patch %>
                 </div>
                 <div class="btn btn-danger">
-                  <%= link_to "DECLINE", user_position_path(t, user_position: { status: "Refused" }), method: :patch %>
+                  <%= link_to "DECLINE", user_position_path(t, user_position: { status: "declined" }), method: :patch %>
                 </div>
               <% end %>
             </div>
@@ -50,7 +51,7 @@
       <% end %>
     <% end %>
   </div>
-  <h2>My Requests</h2>
+  <h2 class="h2-designed">My Applications</h2>
   <div class="row dashboard-user-positions">
     <% @my_requests.each do |user_position| %>
       <%= render "myrequests_card", user_position: user_position %>

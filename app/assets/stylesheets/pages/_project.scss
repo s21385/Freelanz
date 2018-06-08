@@ -7,6 +7,9 @@
   h1 {
     margin: 0;
   }
+  .flex-icons{
+    margin: 10px;
+  }
 }
 
 .project-info {
@@ -15,11 +18,11 @@
 }
 
 .project-details {
-  margin-left: 110px;
+  margin-left: 75px;
 }
 
 .short-description {
-  margin-bottom: 5PX;
+  margin-bottom: 5px;
   font-size: 20px;
   color: rgb(120, 120, 120);
 }
@@ -62,11 +65,11 @@
 }
 
 .btn-add-position {
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .project-title {
-  margin-left: 50px;
+  margin-left: 10px;
 }
 // .plus-button {
 //   align-self; flex-end;
@@ -78,8 +81,11 @@
   p{
     margin: 0;
     margin-left: 10px;
+    color: #48b0c1;
+    font-weight: 300;
   }
 }
 p{
     margin: 0;
+    font-weight: lighter;
   }
